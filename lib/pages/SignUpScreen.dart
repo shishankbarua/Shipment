@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:shipment/pages/LoginScreenClient.dart';
 import 'package:shipment/pages/SignupShipment.dart';
@@ -13,7 +15,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   bool monVal = false;
 
-  String radioItem = '';
+  String? radioItem = '';
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -264,7 +266,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         value: 'Item 1',
                         onChanged: (val) {
                           setState(() {
-                            radioItem = val;
+                            // radioItem = val;
                           });
                         },
                       ),

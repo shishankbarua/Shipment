@@ -1,28 +1,28 @@
+// ignore_for_file: file_names, prefer_const_constructors
+
 import 'package:flutter/material.dart';
-import 'package:shipment/pages/Dashboard.dart';
-import 'package:shipment/pages/DashboardD.dart';
 import 'package:shipment/pages/SignUpScreen.dart';
 
 class LoginScreenClient extends StatefulWidget {
-  const LoginScreenClient({Key key}) : super(key: key);
+  const LoginScreenClient({Key? key}) : super(key: key);
 
   @override
   _LoginScreenClientState createState() => _LoginScreenClientState();
 }
 
 class _LoginScreenClientState extends State<LoginScreenClient> {
-  GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  bool monVal = false;
-  bool monVal2 = false;
+  bool? monVal = false;
+  bool? monVal2 = false;
 
   @override
   Widget build(BuildContext context) {
-    return new WillPopScope(
+    return WillPopScope(
       onWillPop: () {
         Navigator.pop(context);
-        return new Future(() => true);
+        return Future(() => true);
       },
       child: MaterialApp(
           home: Container(
@@ -87,7 +87,7 @@ class _LoginScreenClientState extends State<LoginScreenClient> {
 
                           Row(children: <Widget>[
                             Expanded(
-                              child: new Container(
+                              child: Container(
                                   margin: const EdgeInsets.only(
                                       left: 10.0, right: 20.0),
                                   child: Divider(
@@ -101,7 +101,7 @@ class _LoginScreenClientState extends State<LoginScreenClient> {
                                     fontSize: 16,
                                     fontWeight: FontWeight.w400)),
                             Expanded(
-                              child: new Container(
+                              child: Container(
                                   margin: const EdgeInsets.only(
                                       left: 20.0, right: 10.0),
                                   child: Divider(
@@ -146,9 +146,8 @@ class _LoginScreenClientState extends State<LoginScreenClient> {
                                       color: Colors.white,
                                     ),
                                   ),
-                                  focusedBorder: new OutlineInputBorder(
-                                    borderRadius:
-                                        new BorderRadius.circular(50.0),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(50.0),
                                     borderSide: BorderSide(
                                       width: 1.2,
                                       color: Colors.white,
@@ -201,9 +200,8 @@ class _LoginScreenClientState extends State<LoginScreenClient> {
                                       color: Colors.white,
                                     ),
                                   ),
-                                  focusedBorder: new OutlineInputBorder(
-                                    borderRadius:
-                                        new BorderRadius.circular(50.0),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(50.0),
                                     borderSide: BorderSide(
                                       width: 1.2,
                                       color: Colors.white,
@@ -229,7 +227,7 @@ class _LoginScreenClientState extends State<LoginScreenClient> {
                           ),
                           Row(children: <Widget>[
                             Expanded(
-                              child: new Container(
+                              child: Container(
                                   margin: const EdgeInsets.only(left: 10.0),
                                   child: Divider(
                                     color: Color(0xffFFC107),
@@ -238,7 +236,7 @@ class _LoginScreenClientState extends State<LoginScreenClient> {
                                   )),
                             ),
                             Expanded(
-                              child: new Container(
+                              child: Container(
                                   margin: const EdgeInsets.only(right: 10.0),
                                   child: Divider(
                                     color: Colors.white,
@@ -272,7 +270,7 @@ class _LoginScreenClientState extends State<LoginScreenClient> {
                                   child: Checkbox(
                                     activeColor: Color(0xff43A047),
                                     value: monVal,
-                                    onChanged: (bool value) async {
+                                    onChanged: (bool? value) async {
                                       setState(() {
                                         monVal = value;
                                       });
@@ -298,7 +296,7 @@ class _LoginScreenClientState extends State<LoginScreenClient> {
                                   child: Checkbox(
                                     activeColor: Color(0xff43A047),
                                     value: monVal2,
-                                    onChanged: (bool value) async {
+                                    onChanged: (bool? value) async {
                                       setState(() {
                                         monVal2 = value;
                                       });
