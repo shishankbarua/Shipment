@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shipment/pages/LoginScreen.dart';
+import 'package:shipment/pages/Dashboard.dart';
+import 'package:shipment/pages/DashboardD.dart';
+import 'package:shipment/pages/LoginScreenClient.dart';
 import 'package:shipment/pages/SignUpScreen.dart';
 import 'package:shipment/pages/SignupShipment.dart';
 import 'package:shipment/pages/Splash.dart';

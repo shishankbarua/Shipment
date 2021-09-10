@@ -76,25 +76,12 @@ class _MainDrawerState extends State<MainDrawer> {
                   ),
                 ),
               ),
-              ListTile(
-                // selected: true,
-                tileColor: Colors.transparent,
-                selectedTileColor: Colors.white60,
-                selected: _selected == 0 ? true : false,
-
+              ExpansionTile(
                 leading: Icon(
                   Icons.list,
-                  color: Colors.white60,
                 ),
-                title: Text("Offering",
-                    style: TextStyle(
-                        color: Colors.white60,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold)),
-                onTap: () async {
-                  _selected = 0;
-                  setState(() {});
-                },
+                title: Text("Expansion Title"),
+                children: <Widget>[Text("children 1"), Text("children 2")],
               ),
               ListTile(
                 selected: _selected == 1 ? true : false,

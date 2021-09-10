@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shipment/pages/LoginScreen.dart';
+import 'package:shipment/pages/LoginScreenClient.dart';
+import 'package:shipment/pages/SignupShipment.dart';
 
 class SignupScreen extends StatefulWidget {
   @override
@@ -268,34 +269,42 @@ class _SignupScreenState extends State<SignupScreen> {
                         },
                       ),
 
-                      Container(
-                        margin: EdgeInsets.only(top: 40, left: 15, right: 15),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50.0),
-                            color: Color(0xff1F2326)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                                margin: EdgeInsets.all(15),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SignupShipment()));
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(top: 40, left: 15, right: 15),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50.0),
+                              color: Color(0xff1F2326)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                  margin: EdgeInsets.all(15),
 
-                                // width: MediaQuery.of(context).size.width * 0.8,
-                                // color: Colors.lime,
-                                child: Center(
-                                    child: Text("Register Account",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                        )))),
-                            Container(
-                              margin: EdgeInsets.only(top: 15, right: 10),
-                              height: 20,
-                              width: 20,
-                              child:
-                                  Image.asset('assets/images/arrow-right.png'),
-                            ),
-                          ],
+                                  // width: MediaQuery.of(context).size.width * 0.8,
+                                  // color: Colors.lime,
+                                  child: Center(
+                                      child: Text("Register Account",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                          )))),
+                              Container(
+                                margin: EdgeInsets.only(top: 15, right: 10),
+                                height: 20,
+                                width: 20,
+                                child: Image.asset(
+                                    'assets/images/arrow-right.png'),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       Row(
@@ -315,7 +324,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => LoginScreen()),
+                                    builder: (context) => LoginScreenClient()),
                               );
                             },
                             child: Container(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shipment/pages/LoginScreen.dart';
+import 'package:shipment/pages/LoginScreenClient.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -56,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => LoginScreen()));
+                              builder: (context) => LoginScreenClient()));
                     },
                     child: Container(
                       margin: EdgeInsets.only(top: 59),
