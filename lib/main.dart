@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:shipment/pages/Client/Homepage.dart';
 
-import 'package:shipment/pages/LoginScreenClient.dart';
-import 'package:shipment/pages/SignUpScreen.dart';
-import 'package:shipment/pages/SignupShipment.dart';
+import 'package:shipment/pages/Client/LoginScreenClient.dart';
+import 'package:shipment/pages/Client/SignupScreenClient.dart';
+import 'package:shipment/pages/Shipment/SignupShipment.dart';
 import 'package:shipment/pages/Splash.dart';
 
 void main() async {

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:shipment/pages/LoginScreenClient.dart';
+import 'package:shipment/pages/Client/LoginScreenClient.dart';
+import 'package:shipment/pages/Client/SignupScreenClient.dart';
+import 'package:shipment/pages/Shipment/SignupShipment.dart';
+import 'package:shipment/pages/Shipment/SignupShipmentfirst.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -56,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => LoginScreenClient()));
+                              builder: (context) => SignupScreenClient()));
                     },
                     child: Container(
                       margin: EdgeInsets.only(top: 59),
@@ -88,34 +91,42 @@ class _SplashScreenState extends State<SplashScreen> {
                       ),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 30),
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(50.0),
-                        color: Colors.transparent),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                            margin: EdgeInsets.all(15),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SignupScreenfirst()));
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(top: 30),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          borderRadius: BorderRadius.circular(50.0),
+                          color: Colors.transparent),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              margin: EdgeInsets.all(15),
 
-                            // width: MediaQuery.of(context).size.width * 0.8,
-                            // color: Colors.lime,
-                            child: Center(
-                                child: Text("Sign in as shipment",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                    )))),
-                        Container(
-                          margin: EdgeInsets.only(top: 15, right: 10),
-                          height: 20,
-                          width: 20,
-                          child: Image.asset('assets/images/arrow-right.png'),
-                        ),
-                      ],
+                              // width: MediaQuery.of(context).size.width * 0.8,
+                              // color: Colors.lime,
+                              child: Center(
+                                  child: Text("Sign in as shipment",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                      )))),
+                          Container(
+                            margin: EdgeInsets.only(top: 15, right: 10),
+                            height: 20,
+                            width: 20,
+                            child: Image.asset('assets/images/arrow-right.png'),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
