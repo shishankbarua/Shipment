@@ -56,6 +56,7 @@ class _HomeState extends State<Home> {
               ),
             ],
             onTap: (index) {
+              print(index);
               setState(() {
                 selectedIndex = index;
               });
