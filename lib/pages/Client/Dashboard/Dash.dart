@@ -16,6 +16,22 @@ class _DashState extends State<Dash> {
   var h, w;
   var exp = false, openSUBMENU = false;
   var exp2 = -1;
+
+  DateTime? selectedDate = DateTime.now();
+
+  _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate!, // Refer step 1
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2025),
+    );
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+      });
+  }
+
   @override
   Widget build(BuildContext context) {
     h = MediaQuery.of(context).size.height;
@@ -451,54 +467,6 @@ class _DashState extends State<Dash> {
                               Spacer(),
                               Container(
                                 margin: EdgeInsets.fromLTRB(15, 15, 10, 0),
-                                height: 52,
-                                width: MediaQuery.of(context).size.width *
-                                    (10 / 100),
-                                child: TextFormField(
-                                  initialValue: '',
-                                  onChanged: (value) {},
-                                  style: TextStyle(
-                                      color: Colors.black54, fontSize: 17),
-                                  decoration: InputDecoration(
-                                      fillColor: Color(0xffFFFFFF),
-                                      filled: true,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(14)),
-                                        borderSide: BorderSide(
-                                            width: 1.2,
-                                            color: Color(0xffFFFFFF)),
-                                      ),
-                                      focusedBorder: new OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(14)),
-                                        // borderRadius: new BorderRadius.circular(25.0),
-                                        borderSide: BorderSide(
-                                            width: 1.2,
-                                            color: Color(0xffFFFFFF)),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(14)),
-                                        borderSide: BorderSide(
-                                            width: 1.2,
-                                            color: Color(0xffFFFFFF)),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(14)),
-                                        borderSide: BorderSide(
-                                            width: 1.2,
-                                            color: Color(0xffFFFFFF)),
-                                      ),
-                                      // border: InputBorder.none,
-                                      hintText: "Search Here....",
-                                      hintStyle: TextStyle(
-                                          color: Colors.grey, fontSize: 15)),
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.fromLTRB(15, 15, 10, 0),
                                 height: 35,
                                 width: MediaQuery.of(context).size.width *
                                     (10 / 100),
@@ -541,6 +509,47 @@ class _DashState extends State<Dash> {
                                           color: Colors.grey, fontSize: 15)),
                                 ),
                               ),
+                              Container(
+                                  margin: EdgeInsets.only(top: 15, right: 10),
+                                  height: MediaQuery.of(context).size.height *
+                                      (5 / 100),
+                                  // height: 100,
+                                  width: MediaQuery.of(context).size.width *
+                                      (10 / 100),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    color: Color(0xffFFFFFF),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                          left: 10,
+                                        ),
+                                        child: Text(
+                                          "${selectedDate}".split(' ')[0],
+                                          style: TextStyle(fontSize: 15),
+                                        ),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          _selectDate(context);
+                                        },
+                                        child: Container(
+                                          height: 25,
+                                          width: 25,
+                                          margin: EdgeInsets.only(
+                                            right: 10,
+                                          ),
+                                          child: Image.asset(
+                                            'assets/images/Calendar.png',
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ))
                             ],
                           ),
                           Row(
@@ -1654,7 +1663,7 @@ class _DashState extends State<Dash> {
                                       builder: (context) => GoodsInfo()));
                             },
                             child: Container(
-                              margin: EdgeInsets.only(top: 15, bottom: 15),
+                              margin: EdgeInsets.only(top: 15, bottom: 70),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20.0),
                                   color: Colors.black),

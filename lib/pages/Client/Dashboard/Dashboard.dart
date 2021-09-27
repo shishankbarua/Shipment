@@ -14,6 +14,22 @@ class _DashboardState extends State<Dashboard> {
   var h, w;
   var exp = false, openSUBMENU = false;
   var exp2 = -1;
+
+  DateTime? selectedDate = DateTime.now();
+
+  _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate!, // Refer step 1
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2025),
+    );
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+      });
+  }
+
   @override
   Widget build(BuildContext context) {
     h = MediaQuery.of(context).size.height;
@@ -458,27 +474,23 @@ class _DashboardState extends State<Dashboard> {
                                   fillColor: Color(0xffFFFFFF),
                                   filled: true,
                                   enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(14)),
                                     borderSide: BorderSide(
                                         width: 1.2, color: Color(0xffFFFFFF)),
                                   ),
                                   focusedBorder: new OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(14)),
                                     // borderRadius: new BorderRadius.circular(25.0),
                                     borderSide: BorderSide(
                                         width: 1.2, color: Color(0xffFFFFFF)),
                                   ),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(14)),
+                                        BorderRadius.all(Radius.circular(10)),
                                     borderSide: BorderSide(
                                         width: 1.2, color: Color(0xffFFFFFF)),
                                   ),
                                   focusedErrorBorder: OutlineInputBorder(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(14)),
+                                        BorderRadius.all(Radius.circular(10)),
                                     borderSide: BorderSide(
                                         width: 1.2, color: Color(0xffFFFFFF)),
                                   ),
@@ -489,45 +501,46 @@ class _DashboardState extends State<Dashboard> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.fromLTRB(15, 15, 10, 0),
-                            height: 52,
-                            width:
-                                MediaQuery.of(context).size.width * (10 / 100),
-                            child: TextFormField(
-                              initialValue: '',
-                              onChanged: (value) {},
-                              style: TextStyle(
-                                  color: Colors.black54, fontSize: 17),
-                              decoration: InputDecoration(
-                                  fillColor: Color(0xffFFFFFF),
-                                  filled: true,
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 1.2, color: Color(0xffFFFFFF)),
+                              margin: EdgeInsets.only(top: 15, right: 10),
+                              height: MediaQuery.of(context).size.height *
+                                  (5 / 100),
+                              // height: 100,
+                              width: MediaQuery.of(context).size.width *
+                                  (10 / 100),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Color(0xffFFFFFF),
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                      left: 10,
+                                    ),
+                                    child: Text(
+                                      "${selectedDate}".split(' ')[0],
+                                      style: TextStyle(fontSize: 15),
+                                    ),
                                   ),
-                                  focusedBorder: new OutlineInputBorder(
-                                    // borderRadius: new BorderRadius.circular(25.0),
-                                    borderSide: BorderSide(
-                                        width: 1.2, color: Color(0xffFFFFFF)),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    borderSide: BorderSide(
-                                        width: 1.2, color: Color(0xffFFFFFF)),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    borderSide: BorderSide(
-                                        width: 1.2, color: Color(0xffFFFFFF)),
-                                  ),
-                                  // border: InputBorder.none,
-                                  hintText: "Search Here....",
-                                  hintStyle: TextStyle(
-                                      color: Colors.grey, fontSize: 15)),
-                            ),
-                          ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      _selectDate(context);
+                                    },
+                                    child: Container(
+                                      height: 25,
+                                      width: 25,
+                                      margin: EdgeInsets.only(
+                                        right: 10,
+                                      ),
+                                      child: Image.asset(
+                                        'assets/images/Calendar.png',
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ))
                         ],
                       ),
                       Row(
