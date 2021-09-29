@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:shipment/pages/Client/Dashboard/Dash.dart';
+import 'package:shipment/pages/Client/Dashboard/PickUp.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -12,7 +12,7 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   var h, w;
-  var exp = false, openSUBMENU = false;
+  var exp = true, openSUBMENU = false;
   var exp2 = -1;
 
   DateTime? selectedDate = DateTime.now();
@@ -55,9 +55,9 @@ class _DashboardState extends State<Dashboard> {
               children: [
                 InkWell(
                   onTap: () {
-                    setState(() {
-                      exp = !exp;
-                    });
+                    // setState(() {
+                    //   exp = !exp;
+                    // });
                   },
                   child: Container(
                     height: h,
@@ -231,7 +231,7 @@ class _DashboardState extends State<Dashboard> {
                                       Container(
                                         margin: EdgeInsets.only(left: 20),
                                         child: Text(
-                                          'Shipment Listing',
+                                          'Market Place',
                                           style: TextStyle(
                                               color: Color(0xff1A494F),
                                               fontSize: 14,
@@ -256,6 +256,61 @@ class _DashboardState extends State<Dashboard> {
                                       )
                                     ],
                                   ),
+                                ),
+                              ),
+
+                              Container(
+                                // margin: EdgeInsets.only(top: 15),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                    color: Color(0xffFFFFFF)),
+                                height: MediaQuery.of(context).size.height *
+                                    (8 / 100),
+                                width: MediaQuery.of(context).size.width * 0.8,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                        margin: EdgeInsets.only(left: 10),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            color: Color(0xffEEEEEE)),
+                                        height: 15,
+                                        width: 15,
+                                        child: ImageIcon(
+                                          AssetImage(
+                                            'assets/images/transicon.png',
+                                          ),
+                                          size: 10,
+                                        )),
+                                    Container(
+                                      margin: EdgeInsets.only(left: 20),
+                                      child: Text(
+                                        'Bookings',
+                                        style: TextStyle(
+                                            color: Color(0xff1A494F),
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                    Spacer(),
+                                    GestureDetector(
+                                      onTap: () {
+                                        // Navigator.push(context,
+                                        //     MaterialPageRoute(builder: (context) => Profile()));
+                                      },
+                                      child: Container(
+                                        margin: EdgeInsets.only(right: 10),
+                                        height: 15,
+                                        width: 15,
+                                        child: Image.asset(
+                                          'assets/images/arrow-right.png',
+                                          color: Color(0xff1A494F),
+                                        ),
+                                      ),
+                                    )
+                                  ],
                                 ),
                               ),
                               // openSUBMENU
@@ -462,7 +517,7 @@ class _DashboardState extends State<Dashboard> {
                           Spacer(),
                           Container(
                             margin: EdgeInsets.fromLTRB(15, 15, 10, 0),
-                            height: 52,
+                            height: 35,
                             width:
                                 MediaQuery.of(context).size.width * (10 / 100),
                             child: TextFormField(

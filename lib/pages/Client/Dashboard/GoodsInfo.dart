@@ -15,7 +15,7 @@ class _GoodsInfoState extends State<GoodsInfo> {
   List image = [];
   int? val = -1;
   var h, w;
-  var exp = false, openSUBMENU = false;
+  var exp = true, openSUBMENU = false;
   var exp2 = -1;
   List<Widget> _cardList = [];
 
@@ -108,9 +108,9 @@ class _GoodsInfoState extends State<GoodsInfo> {
               Row(children: [
                 InkWell(
                   onTap: () {
-                    setState(() {
-                      exp = !exp;
-                    });
+                    // setState(() {
+                    //   exp = !exp;
+                    // });
                   },
                   child: Container(
                     height: h,
