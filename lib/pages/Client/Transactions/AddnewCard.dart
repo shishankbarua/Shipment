@@ -1,37 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:shipment/Element/TextStyle.dart';
 import 'package:shipment/pages/Client/Dashboard/Dashboard.dart';
 import 'package:shipment/pages/Client/MarketPlace/MarketPlace.dart';
 import 'package:shipment/pages/Client/Profile.dart';
 import 'package:shipment/pages/Client/Transactions/Transactions.dart';
 
-class CheckoutPayment extends StatefulWidget {
-  const CheckoutPayment({Key? key}) : super(key: key);
+class AddNewCard extends StatefulWidget {
+  const AddNewCard({Key? key}) : super(key: key);
 
   @override
-  _CheckoutPaymentState createState() => _CheckoutPaymentState();
+  _AddNewCardState createState() => _AddNewCardState();
 }
 
-class _CheckoutPaymentState extends State<CheckoutPayment> {
-  bool _value = false;
-  int? val = -1;
+class _AddNewCardState extends State<AddNewCard> {
   var h, w;
   var exp = true, openSUBMENU = false;
-  int? _radioValue = 0;
-
-  void _handleRadioValueChange(value) {
-    setState(() {
-      _radioValue = value;
-
-      switch (_radioValue) {
-        case 0:
-          break;
-        case 1:
-          break;
-        case 2:
-          break;
-      }
-    });
-  }
 
   Widget sideBar() {
     return Container(
@@ -522,7 +505,7 @@ class _CheckoutPaymentState extends State<CheckoutPayment> {
                               child: Container(
                                 margin: EdgeInsets.fromLTRB(20, 20, 5, 0),
                                 child: Text(
-                                  ' < CheckOut',
+                                  'Save Card',
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 22,
@@ -533,62 +516,11 @@ class _CheckoutPaymentState extends State<CheckoutPayment> {
                             Align(
                               alignment: Alignment.topLeft,
                               child: Container(
-                                height: MediaQuery.of(context).size.height *
-                                    (10 / 100),
-                                // height: 100,
-                                width: MediaQuery.of(context).size.width *
-                                    (30 / 100),
-                                margin: EdgeInsets.all(15),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  color: Color(0xffFFFFFF),
-                                ),
-
-                                child: Row(
-                                  children: [
-                                    new Radio(
-                                      value: 0,
-                                      groupValue: _radioValue,
-                                      onChanged: _handleRadioValueChange,
-                                    ),
-                                    new Text(
-                                      'Stripe',
-                                      style: new TextStyle(
-                                          fontSize: 16.0,
-                                          color: Color(0xff6461FC)),
-                                    ),
-                                    new Radio(
-                                      value: 1,
-                                      groupValue: _radioValue,
-                                      onChanged: _handleRadioValueChange,
-                                    ),
-                                    new Text(
-                                      'PayPal',
-                                      style: new TextStyle(
-                                        fontSize: 16.0,
-                                      ),
-                                    ),
-                                    new Radio(
-                                      value: 2,
-                                      groupValue: _radioValue,
-                                      onChanged: _handleRadioValueChange,
-                                    ),
-                                    new Text(
-                                      'Cash',
-                                      style: new TextStyle(fontSize: 16.0),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Container(
                                   height: MediaQuery.of(context).size.height *
-                                      (45 / 100),
+                                      (57 / 100),
                                   // height: 100,
                                   width: MediaQuery.of(context).size.width *
-                                      (30 / 100),
+                                      (32 / 100),
                                   margin: EdgeInsets.all(15),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10.0),
@@ -598,7 +530,7 @@ class _CheckoutPaymentState extends State<CheckoutPayment> {
                                     children: [
                                       Container(
                                         margin: EdgeInsets.only(
-                                            top: 5, right: 10, left: 15),
+                                            top: 20, right: 10, left: 15),
                                         child: Align(
                                             alignment: Alignment.topLeft,
                                             child: Text(
@@ -826,8 +758,7 @@ class _CheckoutPaymentState extends State<CheckoutPayment> {
                                           ),
                                           Container(
                                             margin: EdgeInsets.only(
-                                              top: 10,
-                                            ),
+                                                top: 10, left: 20),
                                             child: Align(
                                                 child: Text(
                                               "/",
@@ -963,27 +894,56 @@ class _CheckoutPaymentState extends State<CheckoutPayment> {
                               alignment: Alignment.topLeft,
                               child: InkWell(
                                 onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              CheckoutPayment()));
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) =>
+                                  //             CheckoutPayment()));
                                 },
                                 child: Container(
                                   margin: EdgeInsets.only(
-                                      left: 15, top: 15, bottom: 30),
+                                      top: 15, left: 15, right: 20, bottom: 50),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20.0),
                                       color: Colors.black),
-                                  height: 45,
-                                  width: 300,
-                                  child: Center(
-                                    child: Text("Payment",
-                                        style: TextStyle(color: Colors.white)),
+                                  height: MediaQuery.of(context).size.height *
+                                      (7 / 100),
+                                  width: 250,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(left: 20),
+                                        child: Text(
+                                          "Save Card",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      GestureDetector(
+                                        onTap: () {
+                                          // Navigator.push(
+                                          //     context,
+                                          //     MaterialPageRoute(
+                                          //         builder: (context) =>
+                                          //             PaymentDash()));
+                                        },
+                                        child: Container(
+                                          margin: EdgeInsets.only(right: 10),
+                                          height: 20,
+                                          width: 20,
+                                          child: Image.asset(
+                                              'assets/images/arrow-right.png'),
+                                        ),
+                                      )
+                                    ],
                                   ),
                                 ),
                               ),
-                            ),
+                            )
                           ],
                         ),
                       ],

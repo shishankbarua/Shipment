@@ -2,6 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shipment/component/SideDrawer.dart';
 import 'package:shipment/pages/Client/Dashboard/CheckoutDash.dart';
+import 'package:shipment/pages/Client/Dashboard/Dashboard.dart';
+import 'package:shipment/pages/Client/MarketPlace/MarketPlace.dart';
+import 'package:shipment/pages/Client/Profile.dart';
+import 'package:shipment/pages/Client/Transactions/Transactions.dart';
 
 class PaymentDash extends StatefulWidget {
   const PaymentDash({Key? key}) : super(key: key);
@@ -40,60 +44,69 @@ class _PaymentDashState extends State<PaymentDash> {
       child: exp
           ? Column(
               children: [
-                Container(
-                    margin: EdgeInsets.only(top: 20),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        color: Color(0xffFFFFFF)),
-                    // height: MediaQuery.of(context).size.height * 0.12,
-                    height: 97,
-                    width: 373,
-                    // width: MediaQuery.of(context).size.width * 0.9,
-                    // color: Colors.lime,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                              margin: EdgeInsets.only(left: 10, right: 10),
-                              child: Image.asset('assets/images/Ellipse7.png'),
-                              height: 48,
-                              width: 48),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(0.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(top: 15),
-                                    child: Text("Shishank",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 14,
-                                        )),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(right: 10),
-                                    child: Text("Shishank.barua@gmail.com",
-                                        style: TextStyle(
-                                          color: Colors.grey,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 10,
-                                        )),
-                                  ),
-                                ],
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Profile()));
+                  },
+                  child: Container(
+                      margin: EdgeInsets.only(top: 20),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.0),
+                          color: Color(0xffFFFFFF)),
+                      // height: MediaQuery.of(context).size.height * 0.12,
+                      height: 97,
+                      width: 373,
+                      // width: MediaQuery.of(context).size.width * 0.9,
+                      // color: Colors.lime,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                                margin: EdgeInsets.only(left: 10, right: 10),
+                                child:
+                                    Image.asset('assets/images/Ellipse7.png'),
+                                height: 48,
+                                width: 48),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(0.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(top: 15),
+                                      child: Text("Shishank",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 14,
+                                          )),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(right: 10),
+                                      child: Text("Shishank.barua@gmail.com",
+                                          style: TextStyle(
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 10,
+                                          )),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    )),
+                          ],
+                        ),
+                      )),
+                ),
                 InkWell(
                   onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Dashboard()));
                     // setState(() {
                     //   openSUBMENU = !openSUBMENU;
                     // });
@@ -160,9 +173,11 @@ class _PaymentDashState extends State<PaymentDash> {
                 //     : Container(),
                 InkWell(
                   onTap: () {
-                    setState(() {
-                      openSUBMENU = !openSUBMENU;
-                    });
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MarketPlace()));
+                    // setState(() {
+                    //   openSUBMENU = !openSUBMENU;
+                    // });
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -189,7 +204,7 @@ class _PaymentDashState extends State<PaymentDash> {
                         Container(
                           margin: EdgeInsets.only(left: 20),
                           child: Text(
-                            'Shipment Listing',
+                            'Market Place',
                             style: TextStyle(
                                 color: Color(0xff1A494F),
                                 fontSize: 14,
@@ -216,6 +231,66 @@ class _PaymentDashState extends State<PaymentDash> {
                     ),
                   ),
                 ),
+
+                InkWell(
+                  onTap: () {
+                    // setState(() {
+                    //   openSUBMENU = !openSUBMENU;
+                    // });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        color: Color(0xffFFFFFF)),
+                    height: MediaQuery.of(context).size.height * (8 / 100),
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                            margin: EdgeInsets.only(left: 10),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Color(0xffEEEEEE)),
+                            height: 15,
+                            width: 15,
+                            child: ImageIcon(
+                              AssetImage(
+                                'assets/images/shipmentlistingicon.png',
+                              ),
+                              size: 10,
+                            )),
+                        Container(
+                          margin: EdgeInsets.only(left: 20),
+                          child: Text(
+                            'Booking',
+                            style: TextStyle(
+                                color: Color(0xff1A494F),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            // Navigator.push(context,
+                            //     MaterialPageRoute(builder: (context) => Profile()));
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(right: 10),
+                            height: 15,
+                            width: 15,
+                            child: Image.asset(
+                              'assets/images/arrow-right.png',
+                              color: Color(0xff1A494F),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+
                 // openSUBMENU
                 //     ? Container(
                 //         height: 150,
@@ -229,56 +304,66 @@ class _PaymentDashState extends State<PaymentDash> {
                 //         ),
                 //       )
                 //     : Container(),
-                Container(
-                  // margin: EdgeInsets.only(top: 15),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15.0),
-                      color: Color(0xffFFFFFF)),
-                  height: MediaQuery.of(context).size.height * (8 / 100),
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                          margin: EdgeInsets.only(left: 10),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),
-                              color: Color(0xffEEEEEE)),
-                          height: 15,
-                          width: 15,
-                          child: ImageIcon(
-                            AssetImage(
-                              'assets/images/transicon.png',
-                            ),
-                            size: 10,
-                          )),
-                      Container(
-                        margin: EdgeInsets.only(left: 20),
-                        child: Text(
-                          'Transactions',
-                          style: TextStyle(
-                              color: Color(0xff1A494F),
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                      Spacer(),
-                      GestureDetector(
-                        onTap: () {
-                          // Navigator.push(context,
-                          //     MaterialPageRoute(builder: (context) => Profile()));
-                        },
-                        child: Container(
-                          margin: EdgeInsets.only(right: 10),
-                          height: 15,
-                          width: 15,
-                          child: Image.asset(
-                            'assets/images/arrow-right.png',
-                            color: Color(0xff1A494F),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Transactions()));
+                  },
+                  child: Container(
+                    // margin: EdgeInsets.only(top: 15),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        color: Color(0xffFFFFFF)),
+                    height: MediaQuery.of(context).size.height * (8 / 100),
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                            margin: EdgeInsets.only(left: 10),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Color(0xffEEEEEE)),
+                            height: 15,
+                            width: 15,
+                            child: ImageIcon(
+                              AssetImage(
+                                'assets/images/transicon.png',
+                              ),
+                              size: 10,
+                            )),
+                        Container(
+                          margin: EdgeInsets.only(left: 20),
+                          child: Text(
+                            'Transactions',
+                            style: TextStyle(
+                                color: Color(0xff1A494F),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600),
                           ),
                         ),
-                      )
-                    ],
+                        Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Transactions()));
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(right: 10),
+                            height: 15,
+                            width: 15,
+                            child: Image.asset(
+                              'assets/images/arrow-right.png',
+                              color: Color(0xff1A494F),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 Container(
@@ -816,12 +901,12 @@ class _PaymentDashState extends State<PaymentDash> {
                                     color: Color(0xffFFFFFF),
                                   ),
                                   height: MediaQuery.of(context).size.height *
-                                      (78 / 100),
+                                      (80 / 100),
                                   // height: 100,
                                   width: MediaQuery.of(context).size.width *
                                       (38 / 100),
 
-                                  child: Column(
+                                  child: ListView(
                                     children: [
                                       Container(
                                         margin: EdgeInsets.only(
@@ -1271,20 +1356,67 @@ class _PaymentDashState extends State<PaymentDash> {
                                                 CheckoutPayment()));
                                   },
                                   child: Container(
-                                    margin:
-                                        EdgeInsets.only(top: 15, bottom: 70),
+                                    margin: EdgeInsets.only(
+                                        top: 15,
+                                        left: 15,
+                                        right: 20,
+                                        bottom: 50),
                                     decoration: BoxDecoration(
                                         borderRadius:
-                                            BorderRadius.circular(20.0),
+                                            BorderRadius.circular(15.0),
                                         color: Colors.black),
-                                    height: 45,
-                                    width: 300,
-                                    child: Center(
-                                      child: Text("Check out",
-                                          style:
-                                              TextStyle(color: Colors.white)),
+                                    height: MediaQuery.of(context).size.height *
+                                        (7 / 100),
+                                    width: 250,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(left: 20),
+                                          child: Text(
+                                            "Check Out",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                        ),
+                                        GestureDetector(
+                                          onTap: () {
+                                            // Navigator.push(
+                                            //     context,
+                                            //     MaterialPageRoute(
+                                            //         builder: (context) =>
+                                            //             PaymentDash()));
+                                          },
+                                          child: Container(
+                                            margin: EdgeInsets.only(right: 10),
+                                            height: 20,
+                                            width: 20,
+                                            child: Image.asset(
+                                                'assets/images/arrow-right.png'),
+                                          ),
+                                        )
+                                      ],
                                     ),
                                   ),
+
+                                  // Container(
+                                  //   margin:
+                                  //       EdgeInsets.only(top: 15, bottom: 70),
+                                  //   decoration: BoxDecoration(
+                                  //       borderRadius:
+                                  //           BorderRadius.circular(20.0),
+                                  //       color: Colors.black),
+                                  //   height: 45,
+                                  //   width: 300,
+                                  //   child: Center(
+                                  //     child: Text("Check out",
+                                  //         style:
+                                  //             TextStyle(color: Colors.white)),
+                                  //   ),
+                                  // ),
                                 ),
                               ],
                             ),

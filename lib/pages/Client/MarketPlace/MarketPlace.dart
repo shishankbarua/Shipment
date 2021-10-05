@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shipment/Element/TextStyle.dart';
+import 'package:shipment/pages/Client/Dashboard/Dashboard.dart';
+import 'package:shipment/pages/Client/Profile.dart';
+import 'package:shipment/pages/Client/Transactions/Transactions.dart';
 
 class MarketPlace extends StatefulWidget {
   const MarketPlace({Key? key}) : super(key: key);
@@ -21,60 +25,69 @@ class _MarketPlaceState extends State<MarketPlace> {
       child: exp
           ? Column(
               children: [
-                Container(
-                    margin: EdgeInsets.only(top: 20),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        color: Color(0xffFFFFFF)),
-                    // height: MediaQuery.of(context).size.height * 0.12,
-                    height: 97,
-                    width: 373,
-                    // width: MediaQuery.of(context).size.width * 0.9,
-                    // color: Colors.lime,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                              margin: EdgeInsets.only(left: 10, right: 10),
-                              child: Image.asset('assets/images/Ellipse7.png'),
-                              height: 48,
-                              width: 48),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(0.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(top: 15),
-                                    child: Text("Shishank",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 14,
-                                        )),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(right: 10),
-                                    child: Text("Shishank.barua@gmail.com",
-                                        style: TextStyle(
-                                          color: Colors.grey,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 10,
-                                        )),
-                                  ),
-                                ],
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Profile()));
+                  },
+                  child: Container(
+                      margin: EdgeInsets.only(top: 20),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.0),
+                          color: Color(0xffFFFFFF)),
+                      // height: MediaQuery.of(context).size.height * 0.12,
+                      height: 97,
+                      width: 373,
+                      // width: MediaQuery.of(context).size.width * 0.9,
+                      // color: Colors.lime,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                                margin: EdgeInsets.only(left: 10, right: 10),
+                                child:
+                                    Image.asset('assets/images/Ellipse7.png'),
+                                height: 48,
+                                width: 48),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(0.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(top: 15),
+                                      child: Text("Shishank",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 14,
+                                          )),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(right: 10),
+                                      child: Text("Shishank.barua@gmail.com",
+                                          style: TextStyle(
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 10,
+                                          )),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    )),
+                          ],
+                        ),
+                      )),
+                ),
                 InkWell(
                   onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Dashboard()));
                     // setState(() {
                     //   openSUBMENU = !openSUBMENU;
                     // });
@@ -141,9 +154,11 @@ class _MarketPlaceState extends State<MarketPlace> {
                 //     : Container(),
                 InkWell(
                   onTap: () {
-                    setState(() {
-                      openSUBMENU = !openSUBMENU;
-                    });
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MarketPlace()));
+                    // setState(() {
+                    //   openSUBMENU = !openSUBMENU;
+                    // });
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -170,7 +185,7 @@ class _MarketPlaceState extends State<MarketPlace> {
                         Container(
                           margin: EdgeInsets.only(left: 20),
                           child: Text(
-                            'Shipment Listing',
+                            'Market Place',
                             style: TextStyle(
                                 color: Color(0xff1A494F),
                                 fontSize: 14,
@@ -197,6 +212,66 @@ class _MarketPlaceState extends State<MarketPlace> {
                     ),
                   ),
                 ),
+
+                InkWell(
+                  onTap: () {
+                    // setState(() {
+                    //   openSUBMENU = !openSUBMENU;
+                    // });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        color: Color(0xffFFFFFF)),
+                    height: MediaQuery.of(context).size.height * (8 / 100),
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                            margin: EdgeInsets.only(left: 10),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Color(0xffEEEEEE)),
+                            height: 15,
+                            width: 15,
+                            child: ImageIcon(
+                              AssetImage(
+                                'assets/images/shipmentlistingicon.png',
+                              ),
+                              size: 10,
+                            )),
+                        Container(
+                          margin: EdgeInsets.only(left: 20),
+                          child: Text(
+                            'Booking',
+                            style: TextStyle(
+                                color: Color(0xff1A494F),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            // Navigator.push(context,
+                            //     MaterialPageRoute(builder: (context) => Profile()));
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(right: 10),
+                            height: 15,
+                            width: 15,
+                            child: Image.asset(
+                              'assets/images/arrow-right.png',
+                              color: Color(0xff1A494F),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+
                 // openSUBMENU
                 //     ? Container(
                 //         height: 150,
@@ -210,56 +285,66 @@ class _MarketPlaceState extends State<MarketPlace> {
                 //         ),
                 //       )
                 //     : Container(),
-                Container(
-                  // margin: EdgeInsets.only(top: 15),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15.0),
-                      color: Color(0xffFFFFFF)),
-                  height: MediaQuery.of(context).size.height * (8 / 100),
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                          margin: EdgeInsets.only(left: 10),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),
-                              color: Color(0xffEEEEEE)),
-                          height: 15,
-                          width: 15,
-                          child: ImageIcon(
-                            AssetImage(
-                              'assets/images/transicon.png',
-                            ),
-                            size: 10,
-                          )),
-                      Container(
-                        margin: EdgeInsets.only(left: 20),
-                        child: Text(
-                          'Transactions',
-                          style: TextStyle(
-                              color: Color(0xff1A494F),
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                      Spacer(),
-                      GestureDetector(
-                        onTap: () {
-                          // Navigator.push(context,
-                          //     MaterialPageRoute(builder: (context) => Profile()));
-                        },
-                        child: Container(
-                          margin: EdgeInsets.only(right: 10),
-                          height: 15,
-                          width: 15,
-                          child: Image.asset(
-                            'assets/images/arrow-right.png',
-                            color: Color(0xff1A494F),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Transactions()));
+                  },
+                  child: Container(
+                    // margin: EdgeInsets.only(top: 15),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        color: Color(0xffFFFFFF)),
+                    height: MediaQuery.of(context).size.height * (8 / 100),
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                            margin: EdgeInsets.only(left: 10),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Color(0xffEEEEEE)),
+                            height: 15,
+                            width: 15,
+                            child: ImageIcon(
+                              AssetImage(
+                                'assets/images/transicon.png',
+                              ),
+                              size: 10,
+                            )),
+                        Container(
+                          margin: EdgeInsets.only(left: 20),
+                          child: Text(
+                            'Transactions',
+                            style: TextStyle(
+                                color: Color(0xff1A494F),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600),
                           ),
                         ),
-                      )
-                    ],
+                        Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Transactions()));
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(right: 10),
+                            height: 15,
+                            width: 15,
+                            child: Image.asset(
+                              'assets/images/arrow-right.png',
+                              color: Color(0xff1A494F),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 Container(
@@ -400,9 +485,9 @@ class _MarketPlaceState extends State<MarketPlace> {
               Row(children: [
                 InkWell(
                     onTap: () {
-                      setState(() {
-                        exp = !exp;
-                      });
+                      // setState(() {
+                      //   exp = !exp;
+                      // });
                     },
                     child: sideBar()),
                 Container(
@@ -429,422 +514,158 @@ class _MarketPlaceState extends State<MarketPlace> {
                                 ),
                               ),
                             ),
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Container(
-                                  height: MediaQuery.of(context).size.height *
-                                      (45 / 100),
-                                  // height: 100,
-                                  width: MediaQuery.of(context).size.width *
-                                      (80 / 100),
-                                  margin: EdgeInsets.all(15),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    color: Color(0xffFFFFFF),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                                top: 15, right: 10, left: 15),
-                                            child: Align(
-                                                alignment: Alignment.topLeft,
-                                                child: Text(
-                                                  "Booking",
-                                                  style: TextStyle(
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )),
-                                          ),
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                                top: 15, right: 10, left: 15),
-                                            height: 80,
-                                            width: 80,
-                                            child: Image.asset(
-                                                'assets/images/Pickup.png'),
-                                          ),
-                                        ],
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                            top: 15, right: 10, left: 15),
-                                        child: Align(
-                                            alignment: Alignment.topLeft,
-                                            child: Text("Name on Card",
+                            Container(
+                                height: MediaQuery.of(context).size.height *
+                                    (45 / 100),
+                                // height: 100,
+                                width: MediaQuery.of(context).size.width *
+                                    (80 / 100),
+                                margin: EdgeInsets.all(15),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  color: Color(0xffFFFFFF),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              top: 15, right: 10, left: 15),
+                                          child: Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Text(
+                                                "Booking",
                                                 style: TextStyle(
                                                     fontSize: 14,
-                                                    color: Colors.grey))),
-                                      ),
-                                      Container(
-                                        margin:
-                                            EdgeInsets.fromLTRB(15, 10, 15, 10),
-                                        child: TextFormField(
-                                          initialValue: "",
-                                          onChanged: (v) {
-                                            setState(() {
-                                              // userEmail = v.toLowerCase();
-                                            });
-                                          },
-                                          style: TextStyle(
-                                              color: Colors.black54,
-                                              fontSize: 17),
-                                          decoration: InputDecoration(
-                                              fillColor: Color(0xffF5F6FA),
-                                              filled: true,
-                                              enabledBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    width: 1.2,
-                                                    color: Color(0xffF5F6FA)),
-                                              ),
-                                              focusedBorder:
-                                                  new OutlineInputBorder(
-                                                // borderRadius: new BorderRadius.circular(25.0),
-                                                borderSide: BorderSide(
-                                                    width: 1.2,
-                                                    color: Color(0xffF5F6FA)),
-                                              ),
-                                              errorBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(4)),
-                                                borderSide: BorderSide(
-                                                    width: 1.2,
-                                                    color: Color(0xffF5F6FA)),
-                                              ),
-                                              focusedErrorBorder:
-                                                  OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(4)),
-                                                borderSide: BorderSide(
-                                                    width: 1.2,
-                                                    color: Color(0xffF5F6FA)),
-                                              ),
-                                              // border: InputBorder.none,
-                                              hintText: "Shishank Barua",
-                                              hintStyle: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 15)),
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
                                         ),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                            top: 5, right: 10, left: 15),
-                                        child: Align(
-                                            alignment: Alignment.topLeft,
-                                            child: Text(
-                                              "Card Number",
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: Colors.grey),
+                                        Spacer(),
+                                        Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(5.0),
+                                                color: Color(0xff1A494F)),
+                                            margin: EdgeInsets.only(
+                                                top: 15, right: 15),
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                (6 / 100),
+                                            // width: MediaQuery.of(context)
+                                            //         .size
+                                            //         .width *
+                                            //     (11 / 100),
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  margin: EdgeInsets.fromLTRB(
+                                                      10, 0, 0, 0),
+                                                  child: Text(
+                                                    "Create Booking",
+                                                    style:
+                                                        headingStylewhite14(),
+                                                  ),
+                                                ),
+                                                Container(
+                                                  margin: EdgeInsets.fromLTRB(
+                                                      5, 0, 5, 0),
+                                                  child: Icon(
+                                                    Icons.add_box,
+                                                    color: Colors.white,
+                                                    size: 20,
+                                                  ),
+                                                )
+                                              ],
                                             )),
-                                      ),
-                                      Container(
-                                        margin:
-                                            EdgeInsets.fromLTRB(15, 10, 15, 10),
-                                        child: TextFormField(
-                                          initialValue: "",
-                                          onChanged: (v) {
-                                            setState(() {
-                                              // userEmail = v.toLowerCase();
-                                            });
-                                          },
-                                          style: TextStyle(
-                                              color: Colors.black54,
-                                              fontSize: 17),
-                                          decoration: InputDecoration(
-                                              fillColor: Color(0xffF5F6FA),
-                                              filled: true,
-                                              enabledBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    width: 1.2,
-                                                    color: Color(0xffF5F6FA)),
-                                              ),
-                                              focusedBorder:
-                                                  new OutlineInputBorder(
-                                                // borderRadius: new BorderRadius.circular(25.0),
-                                                borderSide: BorderSide(
-                                                    width: 1.2,
-                                                    color: Color(0xffF5F6FA)),
-                                              ),
-                                              errorBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(4)),
-                                                borderSide: BorderSide(
-                                                    width: 1.2,
-                                                    color: Color(0xffF5F6FA)),
-                                              ),
-                                              focusedErrorBorder:
-                                                  OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(4)),
-                                                borderSide: BorderSide(
-                                                    width: 1.2,
-                                                    color: Color(0xffF5F6FA)),
-                                              ),
-                                              // border: InputBorder.none,
-                                              hintText:
-                                                  "4601 -1256- 7896 -****",
-                                              hintStyle: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 15)),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              top: 15, right: 10, left: 15),
+                                          child: Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Text("Approved (0)",
+                                                  style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: Colors.grey))),
                                         ),
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              top: 15, right: 10, left: 15),
+                                          child: Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Text("Under Review (0)",
+                                                  style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: Colors.grey))),
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              top: 15, right: 10, left: 15),
+                                          child: Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Text("Draft (0)",
+                                                  style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: Colors.grey))),
+                                        ),
+                                      ],
+                                    ),
+                                    Container(
+                                      margin:
+                                          EdgeInsets.only(left: 10, right: 10),
+                                      child: Divider(
+                                        height: 30,
+                                        color: Colors.black,
+                                        thickness: 2,
                                       ),
-                                      Row(
-                                        // mainAxisAlignment:
-                                        //     MainAxisAlignment.spaceAround,
-                                        // crossAxisAlignment:
-                                        //     CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                                top: 10, right: 10, left: 15),
-                                            child: Align(
-                                                alignment: Alignment.topLeft,
-                                                child: Text(
-                                                  "Expire",
-                                                  style:
-                                                      TextStyle(fontSize: 14),
-                                                )),
-                                          ),
-                                          // Spacer(),
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                              top: 10,
-                                              left: 150,
-                                            ),
-                                            child: Align(
-                                                child: Text(
-                                              "CVV",
-                                              style: TextStyle(fontSize: 14),
-                                            )),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.fromLTRB(
-                                                15, 10, 0, 10),
-                                            width: 70,
-                                            height: 40,
-                                            child: TextFormField(
-                                              initialValue: "",
-                                              onChanged: (v) {
-                                                setState(() {
-                                                  // userEmail = v.toLowerCase();
-                                                });
-                                              },
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                          top: 15, right: 50, left: 50),
+                                      child: Align(
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                              "Create a new project today to start promoting your services",
                                               style: TextStyle(
-                                                  color: Colors.black54,
-                                                  fontSize: 17),
-                                              decoration: InputDecoration(
-                                                  fillColor: Color(0xffF5F6FA),
-                                                  filled: true,
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        width: 1.2,
-                                                        color:
-                                                            Color(0xffF5F6FA)),
-                                                  ),
-                                                  focusedBorder:
-                                                      new OutlineInputBorder(
-                                                    // borderRadius: new BorderRadius.circular(25.0),
-                                                    borderSide: BorderSide(
-                                                        width: 1.2,
-                                                        color:
-                                                            Color(0xffF5F6FA)),
-                                                  ),
-                                                  errorBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(4)),
-                                                    borderSide: BorderSide(
-                                                        width: 1.2,
-                                                        color:
-                                                            Color(0xffF5F6FA)),
-                                                  ),
-                                                  focusedErrorBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(4)),
-                                                    borderSide: BorderSide(
-                                                        width: 1.2,
-                                                        color:
-                                                            Color(0xffF5F6FA)),
-                                                  ),
-                                                  // border: InputBorder.none,
-                                                  hintText: "",
-                                                  hintStyle: TextStyle(
-                                                      color: Colors.grey,
-                                                      fontSize: 15)),
-                                            ),
+                                                  fontSize: 28,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Color(0xff1A494F)))),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              left: 15, top: 15, bottom: 30),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20.0),
+                                              color: Colors.black),
+                                          height: 45,
+                                          width: 300,
+                                          child: Center(
+                                            child: Text("Create your booking",
+                                                style: TextStyle(
+                                                    color: Colors.white)),
                                           ),
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                              top: 10,
-                                            ),
-                                            child: Align(
-                                                child: Text(
-                                              "/",
-                                              style: TextStyle(fontSize: 20),
-                                            )),
-                                          ),
-                                          Container(
-                                            margin: EdgeInsets.fromLTRB(
-                                                15, 10, 15, 10),
-                                            height: 40,
-                                            width: 70,
-                                            child: TextFormField(
-                                              initialValue: "",
-                                              onChanged: (v) {
-                                                setState(() {
-                                                  // userEmail = v.toLowerCase();
-                                                });
-                                              },
-                                              style: TextStyle(
-                                                  color: Colors.black54,
-                                                  fontSize: 17),
-                                              decoration: InputDecoration(
-                                                  fillColor: Color(0xffF5F6FA),
-                                                  filled: true,
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        width: 1.2,
-                                                        color:
-                                                            Color(0xffF5F6FA)),
-                                                  ),
-                                                  focusedBorder:
-                                                      new OutlineInputBorder(
-                                                    // borderRadius: new BorderRadius.circular(25.0),
-                                                    borderSide: BorderSide(
-                                                        width: 1.2,
-                                                        color:
-                                                            Color(0xffF5F6FA)),
-                                                  ),
-                                                  errorBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(4)),
-                                                    borderSide: BorderSide(
-                                                        width: 1.2,
-                                                        color:
-                                                            Color(0xffF5F6FA)),
-                                                  ),
-                                                  focusedErrorBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(4)),
-                                                    borderSide: BorderSide(
-                                                        width: 1.2,
-                                                        color:
-                                                            Color(0xffF5F6FA)),
-                                                  ),
-                                                  // border: InputBorder.none,
-                                                  hintText: "",
-                                                  hintStyle: TextStyle(
-                                                      color: Colors.grey,
-                                                      fontSize: 15)),
-                                            ),
-                                          ),
-                                          Container(
-                                            margin: EdgeInsets.fromLTRB(
-                                                15, 10, 15, 10),
-                                            height: 40,
-                                            width: 100,
-                                            child: TextFormField(
-                                              initialValue: "",
-                                              onChanged: (v) {
-                                                setState(() {
-                                                  // userEmail = v.toLowerCase();
-                                                });
-                                              },
-                                              style: TextStyle(
-                                                  color: Colors.black54,
-                                                  fontSize: 17),
-                                              decoration: InputDecoration(
-                                                  fillColor: Color(0xffF5F6FA),
-                                                  filled: true,
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        width: 1.2,
-                                                        color:
-                                                            Color(0xffF5F6FA)),
-                                                  ),
-                                                  focusedBorder:
-                                                      new OutlineInputBorder(
-                                                    // borderRadius: new BorderRadius.circular(25.0),
-                                                    borderSide: BorderSide(
-                                                        width: 1.2,
-                                                        color:
-                                                            Color(0xffF5F6FA)),
-                                                  ),
-                                                  errorBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(4)),
-                                                    borderSide: BorderSide(
-                                                        width: 1.2,
-                                                        color:
-                                                            Color(0xffF5F6FA)),
-                                                  ),
-                                                  focusedErrorBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(4)),
-                                                    borderSide: BorderSide(
-                                                        width: 1.2,
-                                                        color:
-                                                            Color(0xffF5F6FA)),
-                                                  ),
-                                                  // border: InputBorder.none,
-                                                  hintText: "",
-                                                  hintStyle: TextStyle(
-                                                      color: Colors.grey,
-                                                      fontSize: 15)),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  )),
-                            ),
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: InkWell(
-                                onTap: () {
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) =>
-                                  //             CheckoutPayment()));
-                                },
-                                child: Container(
-                                  margin: EdgeInsets.only(
-                                      left: 15, top: 15, bottom: 30),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20.0),
-                                      color: Colors.black),
-                                  height: 45,
-                                  width: 300,
-                                  child: Center(
-                                    child: Text("Payment",
-                                        style: TextStyle(color: Colors.white)),
-                                  ),
-                                ),
-                              ),
-                            ),
+                                        ),
+                                        Container(
+                                            margin: EdgeInsets.only(right: 10),
+                                            height: 20,
+                                            width: 20,
+                                            child: Icon(Icons.arrow_right,
+                                                color: Colors.white)),
+                                      ],
+                                    ),
+                                  ],
+                                )),
                           ],
                         ),
                       ],

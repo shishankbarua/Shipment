@@ -1,7 +1,11 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:shipment/pages/Client/Dashboard/Dashboard.dart';
 import 'package:shipment/pages/Client/Dashboard/GoodsInfo.dart';
+import 'package:shipment/pages/Client/MarketPlace/MarketPlace.dart';
+import 'package:shipment/pages/Client/Profile.dart';
+import 'package:shipment/pages/Client/Transactions/Transactions.dart';
 
 class Dash extends StatefulWidget {
   const Dash({Key? key}) : super(key: key);
@@ -32,6 +36,451 @@ class _DashState extends State<Dash> {
       });
   }
 
+  Widget sideBar() {
+    return Container(
+      height: h,
+      width: exp ? w * 0.2 : w * 0.1,
+      color: Color(0xffFFFFFF),
+      child: exp
+          ? Column(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Profile()));
+                  },
+                  child: Container(
+                      margin: EdgeInsets.only(top: 20),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.0),
+                          color: Color(0xffFFFFFF)),
+                      // height: MediaQuery.of(context).size.height * 0.12,
+                      height: 97,
+                      width: 373,
+                      // width: MediaQuery.of(context).size.width * 0.9,
+                      // color: Colors.lime,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                                margin: EdgeInsets.only(left: 10, right: 10),
+                                child:
+                                    Image.asset('assets/images/Ellipse7.png'),
+                                height: 48,
+                                width: 48),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(0.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(top: 15),
+                                      child: Text("Shishank",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 14,
+                                          )),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(right: 10),
+                                      child: Text("Shishank.barua@gmail.com",
+                                          style: TextStyle(
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 10,
+                                          )),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Dashboard()));
+                    // setState(() {
+                    //   openSUBMENU = !openSUBMENU;
+                    // });
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(top: 15),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        color: Color(0xffFFFFFF)),
+                    height: MediaQuery.of(context).size.height * (8 / 100),
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                            margin: EdgeInsets.only(left: 10),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Color(0xffEEEEEE)),
+                            height: 15,
+                            width: 15,
+                            child: ImageIcon(
+                              AssetImage(
+                                'assets/images/dashboard.png',
+                              ),
+                              size: 10,
+                            )),
+                        Container(
+                          margin: EdgeInsets.only(left: 20),
+                          child: Text(
+                            'Dashboard',
+                            style: TextStyle(
+                                color: Color(0xff1A494F),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            // Navigator.push(context,
+                            //     MaterialPageRoute(builder: (context) => Profile()));
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(right: 10),
+                            height: 15,
+                            width: 15,
+                            child: Image.asset(
+                              'assets/images/arrow-right.png',
+                              color: Color(0xff1A494F),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                // openSUBMENU
+                //     ? Container(
+                //         height: 250,
+                //         width: w * 0.2,
+                //         color: Color(0xffE5E5E5),
+                //       )
+                //     : Container(),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MarketPlace()));
+                    // setState(() {
+                    //   openSUBMENU = !openSUBMENU;
+                    // });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        color: Color(0xffFFFFFF)),
+                    height: MediaQuery.of(context).size.height * (8 / 100),
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                            margin: EdgeInsets.only(left: 10),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Color(0xffEEEEEE)),
+                            height: 15,
+                            width: 15,
+                            child: ImageIcon(
+                              AssetImage(
+                                'assets/images/shipmentlistingicon.png',
+                              ),
+                              size: 10,
+                            )),
+                        Container(
+                          margin: EdgeInsets.only(left: 20),
+                          child: Text(
+                            'Market Place',
+                            style: TextStyle(
+                                color: Color(0xff1A494F),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            // Navigator.push(context,
+                            //     MaterialPageRoute(builder: (context) => Profile()));
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(right: 10),
+                            height: 15,
+                            width: 15,
+                            child: Image.asset(
+                              'assets/images/arrow-right.png',
+                              color: Color(0xff1A494F),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+
+                InkWell(
+                  onTap: () {
+                    // setState(() {
+                    //   openSUBMENU = !openSUBMENU;
+                    // });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        color: Color(0xffFFFFFF)),
+                    height: MediaQuery.of(context).size.height * (8 / 100),
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                            margin: EdgeInsets.only(left: 10),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Color(0xffEEEEEE)),
+                            height: 15,
+                            width: 15,
+                            child: ImageIcon(
+                              AssetImage(
+                                'assets/images/shipmentlistingicon.png',
+                              ),
+                              size: 10,
+                            )),
+                        Container(
+                          margin: EdgeInsets.only(left: 20),
+                          child: Text(
+                            'Booking',
+                            style: TextStyle(
+                                color: Color(0xff1A494F),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            // Navigator.push(context,
+                            //     MaterialPageRoute(builder: (context) => Profile()));
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(right: 10),
+                            height: 15,
+                            width: 15,
+                            child: Image.asset(
+                              'assets/images/arrow-right.png',
+                              color: Color(0xff1A494F),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+
+                // openSUBMENU
+                //     ? Container(
+                //         height: 150,
+                //         width: w * 0.2,
+                //         color: Color(0xffE5E5E5),
+
+                //         child: Column(
+                //           children: [
+
+                //           ],
+                //         ),
+                //       )
+                //     : Container(),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Transactions()));
+                  },
+                  child: Container(
+                    // margin: EdgeInsets.only(top: 15),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        color: Color(0xffFFFFFF)),
+                    height: MediaQuery.of(context).size.height * (8 / 100),
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                            margin: EdgeInsets.only(left: 10),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Color(0xffEEEEEE)),
+                            height: 15,
+                            width: 15,
+                            child: ImageIcon(
+                              AssetImage(
+                                'assets/images/transicon.png',
+                              ),
+                              size: 10,
+                            )),
+                        Container(
+                          margin: EdgeInsets.only(left: 20),
+                          child: Text(
+                            'Transactions',
+                            style: TextStyle(
+                                color: Color(0xff1A494F),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Transactions()));
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(right: 10),
+                            height: 15,
+                            width: 15,
+                            child: Image.asset(
+                              'assets/images/arrow-right.png',
+                              color: Color(0xff1A494F),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  // margin: EdgeInsets.only(top: 15),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.0),
+                      color: Color(0xffFFFFFF)),
+                  height: MediaQuery.of(context).size.height * (8 / 100),
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                          margin: EdgeInsets.only(left: 10),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              color: Color(0xffEEEEEE)),
+                          height: 15,
+                          width: 15,
+                          child: ImageIcon(
+                            AssetImage(
+                              'assets/images/dashboard.png',
+                            ),
+                            size: 10,
+                          )),
+                      Container(
+                        margin: EdgeInsets.only(left: 20),
+                        child: Text(
+                          'Messages',
+                          style: TextStyle(
+                              color: Color(0xff1A494F),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                      Spacer(),
+                      GestureDetector(
+                        onTap: () {
+                          // Navigator.push(context,
+                          //     MaterialPageRoute(builder: (context) => Profile()));
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(right: 10),
+                          height: 15,
+                          width: 15,
+                          child: Image.asset(
+                            'assets/images/arrow-right.png',
+                            color: Color(0xff1A494F),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            )
+          : Column(
+              children: [
+                Container(
+                    margin: EdgeInsets.only(
+                      top: 15,
+                    ),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: Color(0xffEEEEEE)),
+                    height: 20,
+                    width: 20,
+                    child: ImageIcon(
+                      AssetImage(
+                        'assets/images/dashboard.png',
+                      ),
+                      size: 10,
+                    )),
+                Container(
+                    margin: EdgeInsets.only(top: 8),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: Color(0xffEEEEEE)),
+                    height: 20,
+                    width: 20,
+                    child: ImageIcon(
+                      AssetImage(
+                        'assets/images/shipmentlistingicon.png',
+                      ),
+                      size: 10,
+                    )),
+                Container(
+                    margin: EdgeInsets.only(top: 8),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: Color(0xffEEEEEE)),
+                    height: 20,
+                    width: 20,
+                    child: ImageIcon(
+                      AssetImage(
+                        'assets/images/transicon.png',
+                      ),
+                      size: 10,
+                    )),
+                Container(
+                    margin: EdgeInsets.only(top: 8),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: Color(0xffEEEEEE)),
+                    height: 20,
+                    width: 20,
+                    child: ImageIcon(
+                      AssetImage(
+                        'assets/images/dashboard.png',
+                      ),
+                      size: 10,
+                    )),
+              ],
+            ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     h = MediaQuery.of(context).size.height;
@@ -56,397 +505,16 @@ class _DashState extends State<Dash> {
             Row(
               children: [
                 InkWell(
-                  onTap: () {
-                    // setState(() {
-                    //   exp = !exp;
-                    // });
-                  },
-                  child: Container(
-                    height: h,
-                    width: exp ? w * 0.2 : w * 0.1,
-                    color: Color(0xffFFFFFF),
-                    child: exp
-                        ? Column(
-                            children: [
-                              Container(
-                                  margin: EdgeInsets.only(top: 20),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15.0),
-                                      color: Color(0xffFFFFFF)),
-                                  // height: MediaQuery.of(context).size.height * 0.12,
-                                  height: 97,
-                                  width: 373,
-                                  // width: MediaQuery.of(context).size.width * 0.9,
-                                  // color: Colors.lime,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                            margin: EdgeInsets.only(
-                                                left: 10, right: 10),
-                                            child: Image.asset(
-                                                'assets/images/Ellipse7.png'),
-                                            height: 48,
-                                            width: 48),
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(0.0),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                  margin:
-                                                      EdgeInsets.only(top: 15),
-                                                  child: Text("Shishank",
-                                                      style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 14,
-                                                      )),
-                                                ),
-                                                Container(
-                                                  margin: EdgeInsets.only(
-                                                      right: 10),
-                                                  child: Text(
-                                                      "Shishank.barua@gmail.com",
-                                                      style: TextStyle(
-                                                        color: Colors.grey,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 10,
-                                                      )),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )),
-                              InkWell(
-                                onTap: () {
-                                  // setState(() {
-                                  //   openSUBMENU = !openSUBMENU;
-                                  // });
-                                },
-                                child: Container(
-                                  margin: EdgeInsets.only(top: 15),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15.0),
-                                      color: Color(0xffFFFFFF)),
-                                  height: MediaQuery.of(context).size.height *
-                                      (8 / 100),
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.8,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                          margin: EdgeInsets.only(left: 10),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                              color: Color(0xffEEEEEE)),
-                                          height: 15,
-                                          width: 15,
-                                          child: ImageIcon(
-                                            AssetImage(
-                                              'assets/images/dashboard.png',
-                                            ),
-                                            size: 10,
-                                          )),
-                                      Container(
-                                        margin: EdgeInsets.only(left: 20),
-                                        child: Text(
-                                          'Dashboard',
-                                          style: TextStyle(
-                                              color: Color(0xff1A494F),
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                      ),
-                                      Spacer(),
-                                      GestureDetector(
-                                        onTap: () {
-                                          // Navigator.push(context,
-                                          //     MaterialPageRoute(builder: (context) => Profile()));
-                                        },
-                                        child: Container(
-                                          margin: EdgeInsets.only(right: 10),
-                                          height: 15,
-                                          width: 15,
-                                          child: Image.asset(
-                                            'assets/images/arrow-right.png',
-                                            color: Color(0xff1A494F),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              // openSUBMENU
-                              //     ? Container(
-                              //         height: 250,
-                              //         width: w * 0.2,
-                              //         color: Color(0xffE5E5E5),
-                              //       )
-                              //     : Container(),
-                              InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    openSUBMENU = !openSUBMENU;
-                                  });
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15.0),
-                                      color: Color(0xffFFFFFF)),
-                                  height: MediaQuery.of(context).size.height *
-                                      (8 / 100),
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.8,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                          margin: EdgeInsets.only(left: 10),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                              color: Color(0xffEEEEEE)),
-                                          height: 15,
-                                          width: 15,
-                                          child: ImageIcon(
-                                            AssetImage(
-                                              'assets/images/shipmentlistingicon.png',
-                                            ),
-                                            size: 10,
-                                          )),
-                                      Container(
-                                        margin: EdgeInsets.only(left: 20),
-                                        child: Text(
-                                          'Shipment Listing',
-                                          style: TextStyle(
-                                              color: Color(0xff1A494F),
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                      ),
-                                      Spacer(),
-                                      GestureDetector(
-                                        onTap: () {
-                                          // Navigator.push(context,
-                                          //     MaterialPageRoute(builder: (context) => Profile()));
-                                        },
-                                        child: Container(
-                                          margin: EdgeInsets.only(right: 10),
-                                          height: 15,
-                                          width: 15,
-                                          child: Image.asset(
-                                            'assets/images/arrow-right.png',
-                                            color: Color(0xff1A494F),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              // openSUBMENU
-                              //     ? Container(
-                              //         height: 150,
-                              //         width: w * 0.2,
-                              //         color: Color(0xffE5E5E5),
-
-                              //         child: Column(
-                              //           children: [
-
-                              //           ],
-                              //         ),
-                              //       )
-                              //     : Container(),
-                              Container(
-                                // margin: EdgeInsets.only(top: 15),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                    color: Color(0xffFFFFFF)),
-                                height: MediaQuery.of(context).size.height *
-                                    (8 / 100),
-                                width: MediaQuery.of(context).size.width * 0.8,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                        margin: EdgeInsets.only(left: 10),
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                            color: Color(0xffEEEEEE)),
-                                        height: 15,
-                                        width: 15,
-                                        child: ImageIcon(
-                                          AssetImage(
-                                            'assets/images/transicon.png',
-                                          ),
-                                          size: 10,
-                                        )),
-                                    Container(
-                                      margin: EdgeInsets.only(left: 20),
-                                      child: Text(
-                                        'Transactions',
-                                        style: TextStyle(
-                                            color: Color(0xff1A494F),
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                    Spacer(),
-                                    GestureDetector(
-                                      onTap: () {
-                                        // Navigator.push(context,
-                                        //     MaterialPageRoute(builder: (context) => Profile()));
-                                      },
-                                      child: Container(
-                                        margin: EdgeInsets.only(right: 10),
-                                        height: 15,
-                                        width: 15,
-                                        child: Image.asset(
-                                          'assets/images/arrow-right.png',
-                                          color: Color(0xff1A494F),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                // margin: EdgeInsets.only(top: 15),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                    color: Color(0xffFFFFFF)),
-                                height: MediaQuery.of(context).size.height *
-                                    (8 / 100),
-                                width: MediaQuery.of(context).size.width * 0.8,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                        margin: EdgeInsets.only(left: 10),
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                            color: Color(0xffEEEEEE)),
-                                        height: 15,
-                                        width: 15,
-                                        child: ImageIcon(
-                                          AssetImage(
-                                            'assets/images/dashboard.png',
-                                          ),
-                                          size: 10,
-                                        )),
-                                    Container(
-                                      margin: EdgeInsets.only(left: 20),
-                                      child: Text(
-                                        'Messages',
-                                        style: TextStyle(
-                                            color: Color(0xff1A494F),
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                    Spacer(),
-                                    GestureDetector(
-                                      onTap: () {
-                                        // Navigator.push(context,
-                                        //     MaterialPageRoute(builder: (context) => Profile()));
-                                      },
-                                      child: Container(
-                                        margin: EdgeInsets.only(right: 10),
-                                        height: 15,
-                                        width: 15,
-                                        child: Image.asset(
-                                          'assets/images/arrow-right.png',
-                                          color: Color(0xff1A494F),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ],
-                          )
-                        : Column(
-                            children: [
-                              Container(
-                                  margin: EdgeInsets.only(
-                                    top: 15,
-                                  ),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      color: Color(0xffEEEEEE)),
-                                  height: 20,
-                                  width: 20,
-                                  child: ImageIcon(
-                                    AssetImage(
-                                      'assets/images/dashboard.png',
-                                    ),
-                                    size: 10,
-                                  )),
-                              Container(
-                                  margin: EdgeInsets.only(top: 8),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      color: Color(0xffEEEEEE)),
-                                  height: 20,
-                                  width: 20,
-                                  child: ImageIcon(
-                                    AssetImage(
-                                      'assets/images/shipmentlistingicon.png',
-                                    ),
-                                    size: 10,
-                                  )),
-                              Container(
-                                  margin: EdgeInsets.only(top: 8),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      color: Color(0xffEEEEEE)),
-                                  height: 20,
-                                  width: 20,
-                                  child: ImageIcon(
-                                    AssetImage(
-                                      'assets/images/transicon.png',
-                                    ),
-                                    size: 10,
-                                  )),
-                              Container(
-                                  margin: EdgeInsets.only(top: 8),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      color: Color(0xffEEEEEE)),
-                                  height: 20,
-                                  width: 20,
-                                  child: ImageIcon(
-                                    AssetImage(
-                                      'assets/images/dashboard.png',
-                                    ),
-                                    size: 10,
-                                  )),
-                            ],
-                          ),
-                  ),
-                ),
+                    onTap: () {
+                      // setState(() {
+                      //   exp = !exp;
+                      // });
+                    },
+                    child: sideBar()),
                 Container(
                   height: h,
                   width: exp ? w * 0.8 : w * 0.8,
-                  color: Color(0xffE5E5E5),
+                  color: Color(0xffF5F6F8),
                   child: ListView(
                     children: [
                       Column(
@@ -561,12 +629,12 @@ class _DashState extends State<Dash> {
                                   color: Color(0xffFFFFFF),
                                 ),
                                 height: MediaQuery.of(context).size.height *
-                                    (60 / 100),
+                                    (65 / 100),
                                 // height: 100,
                                 width: MediaQuery.of(context).size.width *
                                     (32 / 100),
 
-                                child: Column(
+                                child: ListView(
                                   children: [
                                     Container(
                                       margin: EdgeInsets.only(
@@ -844,12 +912,12 @@ class _DashState extends State<Dash> {
                                   color: Color(0xffFFFFFF),
                                 ),
                                 height: MediaQuery.of(context).size.height *
-                                    (60 / 100),
+                                    (65 / 100),
                                 // height: 100,
                                 width: MediaQuery.of(context).size.width *
                                     (32 / 100),
 
-                                child: Column(
+                                child: ListView(
                                   children: [
                                     Row(
                                       // mainAxisAlignment:
@@ -964,289 +1032,542 @@ class _DashState extends State<Dash> {
                                                 fontSize: 15)),
                                       ),
                                     ),
+                                    // Container(
+                                    //   width: MediaQuery.of(context).size.width *
+                                    //       (32 / 100),
+                                    //   child: Row(
+                                    //     crossAxisAlignment:
+                                    //         CrossAxisAlignment.start,
+                                    //     mainAxisAlignment:
+                                    //         MainAxisAlignment.spaceBetween,
+                                    //     children: [
+                                    //       Container(
+                                    //         margin: EdgeInsets.only(
+                                    //             top: 10, right: 10, left: 15),
+                                    //         child: Align(
+                                    //             alignment: Alignment.topLeft,
+                                    //             child: Text(
+                                    //               "Date to pick-up",
+                                    //               style:
+                                    //                   TextStyle(fontSize: 14),
+                                    //             )),
+                                    //       ),
+
+                                    //       Spacer(),
+                                    //       // SizedBox(
+                                    //       //   width: MediaQuery.of(context)
+                                    //       //           .size
+                                    //       //           .width *
+                                    //       //       (5 / 100),
+                                    //       // ),
+                                    //       Container(
+                                    //         margin: EdgeInsets.only(
+                                    //           top: 10,
+                                    //           right: 120,
+                                    //         ),
+                                    //         child: Align(
+                                    //             child: Text(
+                                    //           "Time to pick-up",
+                                    //           style: TextStyle(fontSize: 14),
+                                    //         )),
+                                    //       ),
+                                    //     ],
+                                    //   ),
+                                    // ),
+
                                     Row(
-                                      // mainAxisAlignment:
-                                      //     MainAxisAlignment.spaceAround,
-                                      // crossAxisAlignment:
-                                      //     CrossAxisAlignment.start,
                                       children: [
                                         Container(
-                                          margin: EdgeInsets.only(
-                                              top: 10, right: 10, left: 15),
-                                          child: Align(
-                                              alignment: Alignment.topLeft,
-                                              child: Text(
-                                                "Date to pick-up",
-                                                style: TextStyle(fontSize: 14),
-                                              )),
-                                        ),
-                                        // Spacer(),
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                            top: 10,
-                                            left: 130,
-                                          ),
-                                          child: Align(
-                                              child: Text(
-                                            "Time to pick-up",
-                                            style: TextStyle(fontSize: 14),
-                                          )),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.fromLTRB(
-                                              15, 10, 15, 10),
-                                          width: 200,
-                                          child: TextFormField(
-                                            initialValue: "",
-                                            onChanged: (v) {
-                                              setState(() {
-                                                // userEmail = v.toLowerCase();
-                                              });
-                                            },
-                                            style: TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 17),
-                                            decoration: InputDecoration(
-                                                fillColor: Color(0xffF5F6FA),
-                                                filled: true,
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      width: 1.2,
-                                                      color: Color(0xffF5F6FA)),
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              (15 / 100),
+                                          child: Column(
+                                            // crossAxisAlignment:
+                                            //     CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Container(
+                                                margin: EdgeInsets.only(
+                                                    top: 10, left: 15),
+                                                child: Align(
+                                                    alignment:
+                                                        Alignment.topLeft,
+                                                    child: Text(
+                                                      "Date to pick-up",
+                                                      style: TextStyle(
+                                                          fontSize: 14),
+                                                    )),
+                                              ),
+                                              Container(
+                                                margin: EdgeInsets.only(
+                                                    top: 10,
+                                                    right: 10,
+                                                    left: 15),
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    (15 / 100),
+                                                child: TextFormField(
+                                                  initialValue: "",
+                                                  onChanged: (v) {
+                                                    setState(() {
+                                                      // userEmail = v.toLowerCase();
+                                                    });
+                                                  },
+                                                  style: TextStyle(
+                                                      color: Colors.black54,
+                                                      fontSize: 17),
+                                                  decoration: InputDecoration(
+                                                      fillColor:
+                                                          Color(0xffF5F6FA),
+                                                      filled: true,
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            width: 1.2,
+                                                            color: Color(
+                                                                0xffF5F6FA)),
+                                                      ),
+                                                      focusedBorder:
+                                                          new OutlineInputBorder(
+                                                        // borderRadius: new BorderRadius.circular(25.0),
+                                                        borderSide: BorderSide(
+                                                            width: 1.2,
+                                                            color: Color(
+                                                                0xffF5F6FA)),
+                                                      ),
+                                                      errorBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    4)),
+                                                        borderSide: BorderSide(
+                                                            width: 1.2,
+                                                            color: Color(
+                                                                0xffF5F6FA)),
+                                                      ),
+                                                      focusedErrorBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    4)),
+                                                        borderSide: BorderSide(
+                                                            width: 1.2,
+                                                            color: Color(
+                                                                0xffF5F6FA)),
+                                                      ),
+                                                      // border: InputBorder.none,
+                                                      hintText: "10.08.2021",
+                                                      hintStyle: TextStyle(
+                                                          color: Colors.grey,
+                                                          fontSize: 15)),
                                                 ),
-                                                focusedBorder:
-                                                    new OutlineInputBorder(
-                                                  // borderRadius: new BorderRadius.circular(25.0),
-                                                  borderSide: BorderSide(
-                                                      width: 1.2,
-                                                      color: Color(0xffF5F6FA)),
-                                                ),
-                                                errorBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(4)),
-                                                  borderSide: BorderSide(
-                                                      width: 1.2,
-                                                      color: Color(0xffF5F6FA)),
-                                                ),
-                                                focusedErrorBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(4)),
-                                                  borderSide: BorderSide(
-                                                      width: 1.2,
-                                                      color: Color(0xffF5F6FA)),
-                                                ),
-                                                // border: InputBorder.none,
-                                                hintText: "10.08.2021",
-                                                hintStyle: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 15)),
-                                          ),
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.fromLTRB(
-                                              15, 10, 15, 10),
-                                          width: 200,
-                                          child: TextFormField(
-                                            initialValue: "",
-                                            onChanged: (v) {
-                                              setState(() {
-                                                // userEmail = v.toLowerCase();
-                                              });
-                                            },
-                                            style: TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 17),
-                                            decoration: InputDecoration(
-                                                fillColor: Color(0xffF5F6FA),
-                                                filled: true,
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      width: 1.2,
-                                                      color: Color(0xffF5F6FA)),
-                                                ),
-                                                focusedBorder:
-                                                    new OutlineInputBorder(
-                                                  // borderRadius: new BorderRadius.circular(25.0),
-                                                  borderSide: BorderSide(
-                                                      width: 1.2,
-                                                      color: Color(0xffF5F6FA)),
-                                                ),
-                                                errorBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(4)),
-                                                  borderSide: BorderSide(
-                                                      width: 1.2,
-                                                      color: Color(0xffF5F6FA)),
-                                                ),
-                                                focusedErrorBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(4)),
-                                                  borderSide: BorderSide(
-                                                      width: 1.2,
-                                                      color: Color(0xffF5F6FA)),
-                                                ),
-                                                // border: InputBorder.none,
-                                                hintText: "10 AM",
-                                                hintStyle: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 15)),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                    Row(
-                                      // mainAxisAlignment:
-                                      //     MainAxisAlignment.spaceAround,
-                                      // crossAxisAlignment:
-                                      //     CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                              top: 10, right: 10, left: 15),
-                                          child: Align(
-                                              alignment: Alignment.topLeft,
-                                              child: Text(
-                                                "Total Miles difference",
-                                                style: TextStyle(fontSize: 14),
-                                              )),
-                                        ),
-                                        // Spacer(),
                                         Container(
                                           margin: EdgeInsets.only(
                                             top: 10,
-                                            left: 95,
+                                            right: 10,
                                           ),
-                                          child: Align(
-                                              child: Text(
-                                            "Estimate",
-                                            style: TextStyle(fontSize: 14),
-                                          )),
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              (15 / 100),
+                                          child: Column(
+                                            // crossAxisAlignment:
+                                            //     CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Container(
+                                                margin: EdgeInsets.only(
+                                                  top: 10,
+                                                ),
+                                                child: Align(
+                                                    child: Text(
+                                                  "Time to pick-up",
+                                                  style:
+                                                      TextStyle(fontSize: 14),
+                                                )),
+                                              ),
+                                              Container(
+                                                margin: EdgeInsets.only(
+                                                    top: 10,
+                                                    right: 10,
+                                                    left: 15),
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    (15 / 100),
+                                                child: TextFormField(
+                                                  initialValue: "",
+                                                  onChanged: (v) {
+                                                    setState(() {
+                                                      // userEmail = v.toLowerCase();
+                                                    });
+                                                  },
+                                                  style: TextStyle(
+                                                      color: Colors.black54,
+                                                      fontSize: 17),
+                                                  decoration: InputDecoration(
+                                                      fillColor:
+                                                          Color(0xffF5F6FA),
+                                                      filled: true,
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            width: 1.2,
+                                                            color: Color(
+                                                                0xffF5F6FA)),
+                                                      ),
+                                                      focusedBorder:
+                                                          new OutlineInputBorder(
+                                                        // borderRadius: new BorderRadius.circular(25.0),
+                                                        borderSide: BorderSide(
+                                                            width: 1.2,
+                                                            color: Color(
+                                                                0xffF5F6FA)),
+                                                      ),
+                                                      errorBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    4)),
+                                                        borderSide: BorderSide(
+                                                            width: 1.2,
+                                                            color: Color(
+                                                                0xffF5F6FA)),
+                                                      ),
+                                                      focusedErrorBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    4)),
+                                                        borderSide: BorderSide(
+                                                            width: 1.2,
+                                                            color: Color(
+                                                                0xffF5F6FA)),
+                                                      ),
+                                                      // border: InputBorder.none,
+                                                      hintText: "10 AM",
+                                                      hintStyle: TextStyle(
+                                                          color: Colors.grey,
+                                                          fontSize: 15)),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ],
                                     ),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.fromLTRB(
-                                              15, 10, 15, 10),
-                                          width: 200,
-                                          child: TextFormField(
-                                            initialValue: "",
-                                            onChanged: (v) {
-                                              setState(() {
-                                                // userEmail = v.toLowerCase();
-                                              });
-                                            },
-                                            style: TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 17),
-                                            decoration: InputDecoration(
-                                                fillColor: Color(0xffF5F6FA),
-                                                filled: true,
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      width: 1.2,
-                                                      color: Color(0xffF5F6FA)),
-                                                ),
-                                                focusedBorder:
-                                                    new OutlineInputBorder(
-                                                  // borderRadius: new BorderRadius.circular(25.0),
-                                                  borderSide: BorderSide(
-                                                      width: 1.2,
-                                                      color: Color(0xffF5F6FA)),
-                                                ),
-                                                errorBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(4)),
-                                                  borderSide: BorderSide(
-                                                      width: 1.2,
-                                                      color: Color(0xffF5F6FA)),
-                                                ),
-                                                focusedErrorBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(4)),
-                                                  borderSide: BorderSide(
-                                                      width: 1.2,
-                                                      color: Color(0xffF5F6FA)),
-                                                ),
-                                                // border: InputBorder.none,
-                                                hintText: "7 Miles",
-                                                hintStyle: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 15)),
+
+                                    // Container(
+                                    //   width: MediaQuery.of(context).size.width *
+                                    //       (32 / 100),
+                                    //   child: Row(
+                                    //     children: [
+                                    //       Container(
+                                    //         margin: EdgeInsets.fromLTRB(
+                                    //             15, 10, 15, 10),
+                                    //         width: MediaQuery.of(context)
+                                    //                 .size
+                                    //                 .width *
+                                    //             (10 / 100),
+                                    //         child: TextFormField(
+                                    //           initialValue: "",
+                                    //           onChanged: (v) {
+                                    //             setState(() {
+                                    //               // userEmail = v.toLowerCase();
+                                    //             });
+                                    //           },
+                                    //           style: TextStyle(
+                                    //               color: Colors.black54,
+                                    //               fontSize: 17),
+                                    //           decoration: InputDecoration(
+                                    //               fillColor: Color(0xffF5F6FA),
+                                    //               filled: true,
+                                    //               enabledBorder:
+                                    //                   OutlineInputBorder(
+                                    //                 borderSide: BorderSide(
+                                    //                     width: 1.2,
+                                    //                     color:
+                                    //                         Color(0xffF5F6FA)),
+                                    //               ),
+                                    //               focusedBorder:
+                                    //                   new OutlineInputBorder(
+                                    //                 // borderRadius: new BorderRadius.circular(25.0),
+                                    //                 borderSide: BorderSide(
+                                    //                     width: 1.2,
+                                    //                     color:
+                                    //                         Color(0xffF5F6FA)),
+                                    //               ),
+                                    //               errorBorder:
+                                    //                   OutlineInputBorder(
+                                    //                 borderRadius:
+                                    //                     BorderRadius.all(
+                                    //                         Radius.circular(4)),
+                                    //                 borderSide: BorderSide(
+                                    //                     width: 1.2,
+                                    //                     color:
+                                    //                         Color(0xffF5F6FA)),
+                                    //               ),
+                                    //               focusedErrorBorder:
+                                    //                   OutlineInputBorder(
+                                    //                 borderRadius:
+                                    //                     BorderRadius.all(
+                                    //                         Radius.circular(4)),
+                                    //                 borderSide: BorderSide(
+                                    //                     width: 1.2,
+                                    //                     color:
+                                    //                         Color(0xffF5F6FA)),
+                                    //               ),
+                                    //               // border: InputBorder.none,
+                                    //               hintText: "10.08.2021",
+                                    //               hintStyle: TextStyle(
+                                    //                   color: Colors.grey,
+                                    //                   fontSize: 15)),
+                                    //         ),
+                                    //       ),
+                                    //       // Spacer(),
+                                    //       Container(
+                                    //         margin: EdgeInsets.fromLTRB(
+                                    //             70, 10, 15, 10),
+                                    //         width: MediaQuery.of(context)
+                                    //                 .size
+                                    //                 .width *
+                                    //             (10 / 100),
+                                    //         child: TextFormField(
+                                    //           initialValue: "",
+                                    //           onChanged: (v) {
+                                    //             setState(() {
+                                    //               // userEmail = v.toLowerCase();
+                                    //             });
+                                    //           },
+                                    //           style: TextStyle(
+                                    //               color: Colors.black54,
+                                    //               fontSize: 17),
+                                    //           decoration: InputDecoration(
+                                    //               fillColor: Color(0xffF5F6FA),
+                                    //               filled: true,
+                                    //               enabledBorder:
+                                    //                   OutlineInputBorder(
+                                    //                 borderSide: BorderSide(
+                                    //                     width: 1.2,
+                                    //                     color:
+                                    //                         Color(0xffF5F6FA)),
+                                    //               ),
+                                    //               focusedBorder:
+                                    //                   new OutlineInputBorder(
+                                    //                 // borderRadius: new BorderRadius.circular(25.0),
+                                    //                 borderSide: BorderSide(
+                                    //                     width: 1.2,
+                                    //                     color:
+                                    //                         Color(0xffF5F6FA)),
+                                    //               ),
+                                    //               errorBorder:
+                                    //                   OutlineInputBorder(
+                                    //                 borderRadius:
+                                    //                     BorderRadius.all(
+                                    //                         Radius.circular(4)),
+                                    //                 borderSide: BorderSide(
+                                    //                     width: 1.2,
+                                    //                     color:
+                                    //                         Color(0xffF5F6FA)),
+                                    //               ),
+                                    //               focusedErrorBorder:
+                                    //                   OutlineInputBorder(
+                                    //                 borderRadius:
+                                    //                     BorderRadius.all(
+                                    //                         Radius.circular(4)),
+                                    //                 borderSide: BorderSide(
+                                    //                     width: 1.2,
+                                    //                     color:
+                                    //                         Color(0xffF5F6FA)),
+                                    //               ),
+                                    //               // border: InputBorder.none,
+                                    //               hintText: "10 AM",
+                                    //               hintStyle: TextStyle(
+                                    //                   color: Colors.grey,
+                                    //                   fontSize: 15)),
+                                    //         ),
+                                    //       ),
+                                    //     ],
+                                    //   ),
+                                    // ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          (32 / 100),
+                                      child: Row(
+                                        // mainAxisAlignment:
+                                        //     MainAxisAlignment.spaceAround,
+                                        // crossAxisAlignment:
+                                        //     CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            margin: EdgeInsets.only(
+                                                top: 10, right: 10, left: 15),
+                                            child: Align(
+                                                alignment: Alignment.topLeft,
+                                                child: Text(
+                                                  "Total Miles difference",
+                                                  style:
+                                                      TextStyle(fontSize: 14),
+                                                )),
                                           ),
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.fromLTRB(
-                                              15, 10, 15, 10),
-                                          width: 200,
-                                          child: TextFormField(
-                                            initialValue: "",
-                                            onChanged: (v) {
-                                              setState(() {
-                                                // userEmail = v.toLowerCase();
-                                              });
-                                            },
-                                            style: TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 17),
-                                            decoration: InputDecoration(
-                                                fillColor: Color(0xffF5F6FA),
-                                                filled: true,
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      width: 1.2,
-                                                      color: Color(0xffF5F6FA)),
-                                                ),
-                                                focusedBorder:
-                                                    new OutlineInputBorder(
-                                                  // borderRadius: new BorderRadius.circular(25.0),
-                                                  borderSide: BorderSide(
-                                                      width: 1.2,
-                                                      color: Color(0xffF5F6FA)),
-                                                ),
-                                                errorBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(4)),
-                                                  borderSide: BorderSide(
-                                                      width: 1.2,
-                                                      color: Color(0xffF5F6FA)),
-                                                ),
-                                                focusedErrorBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(4)),
-                                                  borderSide: BorderSide(
-                                                      width: 1.2,
-                                                      color: Color(0xffF5F6FA)),
-                                                ),
-                                                // border: InputBorder.none,
-                                                hintText: "17.00",
-                                                hintStyle: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 15)),
+                                          // Spacer(),
+                                          Container(
+                                            margin: EdgeInsets.only(
+                                              top: 10,
+                                              left: 95,
+                                            ),
+                                            child: Align(
+                                                child: Text(
+                                              "Estimate",
+                                              style: TextStyle(fontSize: 14),
+                                            )),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          (32 / 100),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            margin: EdgeInsets.fromLTRB(
+                                                15, 10, 15, 10),
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                (12 / 100),
+                                            child: TextFormField(
+                                              initialValue: "",
+                                              onChanged: (v) {
+                                                setState(() {
+                                                  // userEmail = v.toLowerCase();
+                                                });
+                                              },
+                                              style: TextStyle(
+                                                  color: Colors.black54,
+                                                  fontSize: 17),
+                                              decoration: InputDecoration(
+                                                  fillColor: Color(0xffF5F6FA),
+                                                  filled: true,
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        width: 1.2,
+                                                        color:
+                                                            Color(0xffF5F6FA)),
+                                                  ),
+                                                  focusedBorder:
+                                                      new OutlineInputBorder(
+                                                    // borderRadius: new BorderRadius.circular(25.0),
+                                                    borderSide: BorderSide(
+                                                        width: 1.2,
+                                                        color:
+                                                            Color(0xffF5F6FA)),
+                                                  ),
+                                                  errorBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(4)),
+                                                    borderSide: BorderSide(
+                                                        width: 1.2,
+                                                        color:
+                                                            Color(0xffF5F6FA)),
+                                                  ),
+                                                  focusedErrorBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(4)),
+                                                    borderSide: BorderSide(
+                                                        width: 1.2,
+                                                        color:
+                                                            Color(0xffF5F6FA)),
+                                                  ),
+                                                  // border: InputBorder.none,
+                                                  hintText: "7 Miles",
+                                                  hintStyle: TextStyle(
+                                                      color: Colors.grey,
+                                                      fontSize: 15)),
+                                            ),
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.fromLTRB(
+                                                40, 10, 15, 10),
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                (12 / 100),
+                                            child: TextFormField(
+                                              initialValue: "",
+                                              onChanged: (v) {
+                                                setState(() {
+                                                  // userEmail = v.toLowerCase();
+                                                });
+                                              },
+                                              style: TextStyle(
+                                                  color: Colors.black54,
+                                                  fontSize: 17),
+                                              decoration: InputDecoration(
+                                                  fillColor: Color(0xffF5F6FA),
+                                                  filled: true,
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        width: 1.2,
+                                                        color:
+                                                            Color(0xffF5F6FA)),
+                                                  ),
+                                                  focusedBorder:
+                                                      new OutlineInputBorder(
+                                                    // borderRadius: new BorderRadius.circular(25.0),
+                                                    borderSide: BorderSide(
+                                                        width: 1.2,
+                                                        color:
+                                                            Color(0xffF5F6FA)),
+                                                  ),
+                                                  errorBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(4)),
+                                                    borderSide: BorderSide(
+                                                        width: 1.2,
+                                                        color:
+                                                            Color(0xffF5F6FA)),
+                                                  ),
+                                                  focusedErrorBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(4)),
+                                                    borderSide: BorderSide(
+                                                        width: 1.2,
+                                                        color:
+                                                            Color(0xffF5F6FA)),
+                                                  ),
+                                                  // border: InputBorder.none,
+                                                  hintText: "17.00",
+                                                  hintStyle: TextStyle(
+                                                      color: Colors.grey,
+                                                      fontSize: 15)),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -1267,7 +1588,7 @@ class _DashState extends State<Dash> {
                               width: MediaQuery.of(context).size.width *
                                   (32 / 100),
 
-                              child: Column(
+                              child: ListView(
                                 children: [
                                   Row(
                                     // mainAxisAlignment:
@@ -1379,278 +1700,312 @@ class _DashState extends State<Dash> {
                                               fontSize: 15)),
                                     ),
                                   ),
-                                  Row(
-                                    // mainAxisAlignment:
-                                    //     MainAxisAlignment.spaceAround,
-                                    // crossAxisAlignment:
-                                    //     CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                            top: 10, right: 10, left: 15),
-                                        child: Align(
-                                            alignment: Alignment.topLeft,
-                                            child: Text(
-                                              "Date to pick-up",
-                                              style: TextStyle(fontSize: 14),
-                                            )),
-                                      ),
-                                      // Spacer(),
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                          top: 10,
-                                          left: 130,
+                                  Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        (32 / 100),
+                                    child: Row(
+                                      // mainAxisAlignment:
+                                      //     MainAxisAlignment.spaceAround,
+                                      // crossAxisAlignment:
+                                      //     CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              top: 10, right: 10, left: 15),
+                                          child: Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Text(
+                                                "Date to pick-up",
+                                                style: TextStyle(fontSize: 14),
+                                              )),
                                         ),
-                                        child: Align(
-                                            child: Text(
-                                          "Time to pick-up",
-                                          style: TextStyle(fontSize: 14),
-                                        )),
-                                      ),
-                                    ],
+                                        // Spacer(),
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                            top: 10,
+                                            left: 70,
+                                          ),
+                                          child: Align(
+                                              child: Text(
+                                            "Time to pick-up",
+                                            style: TextStyle(fontSize: 14),
+                                          )),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        margin:
-                                            EdgeInsets.fromLTRB(15, 10, 15, 10),
-                                        width: 200,
-                                        child: TextFormField(
-                                          initialValue: "",
-                                          onChanged: (v) {
-                                            setState(() {
-                                              // userEmail = v.toLowerCase();
-                                            });
-                                          },
-                                          style: TextStyle(
-                                              color: Colors.black54,
-                                              fontSize: 17),
-                                          decoration: InputDecoration(
-                                              fillColor: Color(0xffF5F6FA),
-                                              filled: true,
-                                              enabledBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    width: 1.2,
-                                                    color: Color(0xffF5F6FA)),
-                                              ),
-                                              focusedBorder:
-                                                  new OutlineInputBorder(
-                                                // borderRadius: new BorderRadius.circular(25.0),
-                                                borderSide: BorderSide(
-                                                    width: 1.2,
-                                                    color: Color(0xffF5F6FA)),
-                                              ),
-                                              errorBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(4)),
-                                                borderSide: BorderSide(
-                                                    width: 1.2,
-                                                    color: Color(0xffF5F6FA)),
-                                              ),
-                                              focusedErrorBorder:
-                                                  OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(4)),
-                                                borderSide: BorderSide(
-                                                    width: 1.2,
-                                                    color: Color(0xffF5F6FA)),
-                                              ),
-                                              // border: InputBorder.none,
-                                              hintText: "10.08.2021",
-                                              hintStyle: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 15)),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        (32 / 100),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.fromLTRB(
+                                              15, 10, 15, 10),
+                                          width: 200,
+                                          child: TextFormField(
+                                            initialValue: "",
+                                            onChanged: (v) {
+                                              setState(() {
+                                                // userEmail = v.toLowerCase();
+                                              });
+                                            },
+                                            style: TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 17),
+                                            decoration: InputDecoration(
+                                                fillColor: Color(0xffF5F6FA),
+                                                filled: true,
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      width: 1.2,
+                                                      color: Color(0xffF5F6FA)),
+                                                ),
+                                                focusedBorder:
+                                                    new OutlineInputBorder(
+                                                  // borderRadius: new BorderRadius.circular(25.0),
+                                                  borderSide: BorderSide(
+                                                      width: 1.2,
+                                                      color: Color(0xffF5F6FA)),
+                                                ),
+                                                errorBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(4)),
+                                                  borderSide: BorderSide(
+                                                      width: 1.2,
+                                                      color: Color(0xffF5F6FA)),
+                                                ),
+                                                focusedErrorBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(4)),
+                                                  borderSide: BorderSide(
+                                                      width: 1.2,
+                                                      color: Color(0xffF5F6FA)),
+                                                ),
+                                                // border: InputBorder.none,
+                                                hintText: "10.08.2021",
+                                                hintStyle: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 15)),
+                                          ),
                                         ),
-                                      ),
-                                      Container(
-                                        margin:
-                                            EdgeInsets.fromLTRB(15, 10, 15, 10),
-                                        width: 200,
-                                        child: TextFormField(
-                                          initialValue: "",
-                                          onChanged: (v) {
-                                            setState(() {
-                                              // userEmail = v.toLowerCase();
-                                            });
-                                          },
-                                          style: TextStyle(
-                                              color: Colors.black54,
-                                              fontSize: 17),
-                                          decoration: InputDecoration(
-                                              fillColor: Color(0xffF5F6FA),
-                                              filled: true,
-                                              enabledBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    width: 1.2,
-                                                    color: Color(0xffF5F6FA)),
-                                              ),
-                                              focusedBorder:
-                                                  new OutlineInputBorder(
-                                                // borderRadius: new BorderRadius.circular(25.0),
-                                                borderSide: BorderSide(
-                                                    width: 1.2,
-                                                    color: Color(0xffF5F6FA)),
-                                              ),
-                                              errorBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(4)),
-                                                borderSide: BorderSide(
-                                                    width: 1.2,
-                                                    color: Color(0xffF5F6FA)),
-                                              ),
-                                              focusedErrorBorder:
-                                                  OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(4)),
-                                                borderSide: BorderSide(
-                                                    width: 1.2,
-                                                    color: Color(0xffF5F6FA)),
-                                              ),
-                                              // border: InputBorder.none,
-                                              hintText: "10 AM",
-                                              hintStyle: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 15)),
+                                        Container(
+                                          margin: EdgeInsets.fromLTRB(
+                                              15, 10, 15, 10),
+                                          width: 200,
+                                          child: TextFormField(
+                                            initialValue: "",
+                                            onChanged: (v) {
+                                              setState(() {
+                                                // userEmail = v.toLowerCase();
+                                              });
+                                            },
+                                            style: TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 17),
+                                            decoration: InputDecoration(
+                                                fillColor: Color(0xffF5F6FA),
+                                                filled: true,
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      width: 1.2,
+                                                      color: Color(0xffF5F6FA)),
+                                                ),
+                                                focusedBorder:
+                                                    new OutlineInputBorder(
+                                                  // borderRadius: new BorderRadius.circular(25.0),
+                                                  borderSide: BorderSide(
+                                                      width: 1.2,
+                                                      color: Color(0xffF5F6FA)),
+                                                ),
+                                                errorBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(4)),
+                                                  borderSide: BorderSide(
+                                                      width: 1.2,
+                                                      color: Color(0xffF5F6FA)),
+                                                ),
+                                                focusedErrorBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(4)),
+                                                  borderSide: BorderSide(
+                                                      width: 1.2,
+                                                      color: Color(0xffF5F6FA)),
+                                                ),
+                                                // border: InputBorder.none,
+                                                hintText: "10 AM",
+                                                hintStyle: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 15)),
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                  Row(
-                                    // mainAxisAlignment:
-                                    //     MainAxisAlignment.spaceAround,
-                                    // crossAxisAlignment:
-                                    //     CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                            top: 10, right: 10, left: 15),
-                                        child: Align(
-                                            alignment: Alignment.topLeft,
-                                            child: Text(
-                                              "Total Miles difference",
-                                              style: TextStyle(fontSize: 14),
-                                            )),
-                                      ),
-                                      // Spacer(),
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                          top: 10,
-                                          left: 95,
+                                  Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        (32 / 100),
+                                    child: Row(
+                                      // mainAxisAlignment:
+                                      //     MainAxisAlignment.spaceAround,
+                                      // crossAxisAlignment:
+                                      //     CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              top: 10, right: 10, left: 15),
+                                          child: Align(
+                                              alignment: Alignment.topLeft,
+                                              child: Text(
+                                                "Total Miles difference",
+                                                style: TextStyle(fontSize: 14),
+                                              )),
                                         ),
-                                        child: Align(
-                                            child: Text(
-                                          "Estimate",
-                                          style: TextStyle(fontSize: 14),
-                                        )),
-                                      ),
-                                    ],
+                                        // Spacer(),
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                            top: 10,
+                                            left: 95,
+                                          ),
+                                          child: Align(
+                                              child: Text(
+                                            "Estimate",
+                                            style: TextStyle(fontSize: 14),
+                                          )),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        margin:
-                                            EdgeInsets.fromLTRB(15, 10, 15, 10),
-                                        width: 200,
-                                        child: TextFormField(
-                                          initialValue: "",
-                                          onChanged: (v) {
-                                            setState(() {
-                                              // userEmail = v.toLowerCase();
-                                            });
-                                          },
-                                          style: TextStyle(
-                                              color: Colors.black54,
-                                              fontSize: 17),
-                                          decoration: InputDecoration(
-                                              fillColor: Color(0xffF5F6FA),
-                                              filled: true,
-                                              enabledBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    width: 1.2,
-                                                    color: Color(0xffF5F6FA)),
-                                              ),
-                                              focusedBorder:
-                                                  new OutlineInputBorder(
-                                                // borderRadius: new BorderRadius.circular(25.0),
-                                                borderSide: BorderSide(
-                                                    width: 1.2,
-                                                    color: Color(0xffF5F6FA)),
-                                              ),
-                                              errorBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(4)),
-                                                borderSide: BorderSide(
-                                                    width: 1.2,
-                                                    color: Color(0xffF5F6FA)),
-                                              ),
-                                              focusedErrorBorder:
-                                                  OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(4)),
-                                                borderSide: BorderSide(
-                                                    width: 1.2,
-                                                    color: Color(0xffF5F6FA)),
-                                              ),
-                                              // border: InputBorder.none,
-                                              hintText: "7 Miles",
-                                              hintStyle: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 15)),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        (32 / 100),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.fromLTRB(
+                                              15, 10, 15, 10),
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              (12 / 100),
+                                          child: TextFormField(
+                                            initialValue: "",
+                                            onChanged: (v) {
+                                              setState(() {
+                                                // userEmail = v.toLowerCase();
+                                              });
+                                            },
+                                            style: TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 17),
+                                            decoration: InputDecoration(
+                                                fillColor: Color(0xffF5F6FA),
+                                                filled: true,
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      width: 1.2,
+                                                      color: Color(0xffF5F6FA)),
+                                                ),
+                                                focusedBorder:
+                                                    new OutlineInputBorder(
+                                                  // borderRadius: new BorderRadius.circular(25.0),
+                                                  borderSide: BorderSide(
+                                                      width: 1.2,
+                                                      color: Color(0xffF5F6FA)),
+                                                ),
+                                                errorBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(4)),
+                                                  borderSide: BorderSide(
+                                                      width: 1.2,
+                                                      color: Color(0xffF5F6FA)),
+                                                ),
+                                                focusedErrorBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(4)),
+                                                  borderSide: BorderSide(
+                                                      width: 1.2,
+                                                      color: Color(0xffF5F6FA)),
+                                                ),
+                                                // border: InputBorder.none,
+                                                hintText: "7 Miles",
+                                                hintStyle: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 15)),
+                                          ),
                                         ),
-                                      ),
-                                      Container(
-                                        margin:
-                                            EdgeInsets.fromLTRB(15, 10, 15, 10),
-                                        width: 200,
-                                        child: TextFormField(
-                                          initialValue: "",
-                                          onChanged: (v) {
-                                            setState(() {
-                                              // userEmail = v.toLowerCase();
-                                            });
-                                          },
-                                          style: TextStyle(
-                                              color: Colors.black54,
-                                              fontSize: 17),
-                                          decoration: InputDecoration(
-                                              fillColor: Color(0xffF5F6FA),
-                                              filled: true,
-                                              enabledBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    width: 1.2,
-                                                    color: Color(0xffF5F6FA)),
-                                              ),
-                                              focusedBorder:
-                                                  new OutlineInputBorder(
-                                                // borderRadius: new BorderRadius.circular(25.0),
-                                                borderSide: BorderSide(
-                                                    width: 1.2,
-                                                    color: Color(0xffF5F6FA)),
-                                              ),
-                                              errorBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(4)),
-                                                borderSide: BorderSide(
-                                                    width: 1.2,
-                                                    color: Color(0xffF5F6FA)),
-                                              ),
-                                              focusedErrorBorder:
-                                                  OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(4)),
-                                                borderSide: BorderSide(
-                                                    width: 1.2,
-                                                    color: Color(0xffF5F6FA)),
-                                              ),
-                                              // border: InputBorder.none,
-                                              hintText: "17.00",
-                                              hintStyle: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 15)),
+                                        Container(
+                                          margin: EdgeInsets.fromLTRB(
+                                              40, 10, 15, 10),
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              (12 / 100),
+                                          child: TextFormField(
+                                            initialValue: "",
+                                            onChanged: (v) {
+                                              setState(() {
+                                                // userEmail = v.toLowerCase();
+                                              });
+                                            },
+                                            style: TextStyle(
+                                                color: Colors.black54,
+                                                fontSize: 17),
+                                            decoration: InputDecoration(
+                                                fillColor: Color(0xffF5F6FA),
+                                                filled: true,
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      width: 1.2,
+                                                      color: Color(0xffF5F6FA)),
+                                                ),
+                                                focusedBorder:
+                                                    new OutlineInputBorder(
+                                                  // borderRadius: new BorderRadius.circular(25.0),
+                                                  borderSide: BorderSide(
+                                                      width: 1.2,
+                                                      color: Color(0xffF5F6FA)),
+                                                ),
+                                                errorBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(4)),
+                                                  borderSide: BorderSide(
+                                                      width: 1.2,
+                                                      color: Color(0xffF5F6FA)),
+                                                ),
+                                                focusedErrorBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(4)),
+                                                  borderSide: BorderSide(
+                                                      width: 1.2,
+                                                      color: Color(0xffF5F6FA)),
+                                                ),
+                                                // border: InputBorder.none,
+                                                hintText: "17.00",
+                                                hintStyle: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 15)),
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
+                                      ],
+                                    ),
+                                  )
                                 ],
                               ),
                             ),
