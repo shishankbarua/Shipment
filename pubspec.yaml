@@ -40,6 +40,7 @@ dependencies:
   timelines: ^0.1.0
   fl_chart: ^0.40.0
   flutter_svg: ^0.22.0
+  responsive_scaffold_nullsafe: ^1.0.1
 
 dev_dependencies:
   flutter_test:

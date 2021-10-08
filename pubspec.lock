@@ -296,6 +296,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.3"
+  responsive_scaffold_nullsafe:
+    dependency: "direct main"
+    description:
+      name: responsive_scaffold_nullsafe
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
+  scroll_to_index:
+    dependency: transitive
+    description:
+      name: scroll_to_index
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
   side_navigation:
     dependency: "direct main"
     description:

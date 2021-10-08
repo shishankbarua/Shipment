@@ -5,6 +5,7 @@ import 'package:shipment/pages/Client/Dashboard/PickUp.dart';
 import 'package:shipment/pages/Client/Dashboard/Dashboard.dart';
 import 'package:shipment/pages/Client/Dashboard/GoodsInfo.dart';
 import 'package:shipment/pages/Client/Dashboard/Payment.dart';
+import 'package:shipment/pages/Client/Dashboard/multi.dart';
 import 'package:shipment/pages/Client/Home.dart';
 import 'package:shipment/pages/Client/Homepage.dart';
 
