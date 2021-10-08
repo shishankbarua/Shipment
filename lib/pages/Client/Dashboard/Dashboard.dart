@@ -701,7 +701,7 @@ class _DashboardState extends State<Dashboard> {
                               ),
                               margin:
                                   EdgeInsets.only(left: 24, top: 15, right: 10),
-                              height: exp2 == index ? h * 0.35 : h * 0.15,
+                              height: exp2 == index ? h * 0.38 : h * 0.15,
                               width: w,
                               child: Column(
                                 children: [
