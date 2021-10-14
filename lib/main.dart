@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:shipment/Element/demo.dart';
+import 'package:shipment/component/Select_Pickup_Dropoff.dart';
 import 'package:shipment/pages/Client/Dashboard/CheckoutDash.dart';
-import 'package:shipment/pages/Client/Dashboard/PickUp.dart';
-import 'package:shipment/pages/Client/Dashboard/Dashboard.dart';
-import 'package:shipment/pages/Client/Dashboard/GoodsInfo.dart';
+import 'package:shipment/component/DashboardHome.dart';
 import 'package:shipment/pages/Client/Dashboard/Payment.dart';
-import 'package:shipment/pages/Client/Dashboard/multi.dart';
 import 'package:shipment/pages/Client/Home.dart';
 import 'package:shipment/pages/Client/Homepage.dart';
 

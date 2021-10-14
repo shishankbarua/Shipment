@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shipment/Element/TextStyle.dart';
-import 'package:shipment/pages/Client/Dashboard/Dashboard.dart';
 import 'package:shipment/pages/Client/MarketPlace/MarketPlace.dart';
 import 'package:shipment/pages/Client/Profile.dart';
 import 'package:shipment/pages/Client/Transactions/Transactions.dart';
@@ -85,8 +84,8 @@ class _AddNewCardState extends State<AddNewCard> {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Dashboard()));
+                    // Navigator.push(context,
+                    //     MaterialPageRoute(builder: (context) => Dashboard()));
                     // setState(() {
                     //   openSUBMENU = !openSUBMENU;
                     // });

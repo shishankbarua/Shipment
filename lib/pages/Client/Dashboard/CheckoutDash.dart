@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shipment/pages/Client/Dashboard/Dashboard.dart';
 import 'package:shipment/pages/Client/MarketPlace/MarketPlace.dart';
 import 'package:shipment/pages/Client/Profile.dart';
 import 'package:shipment/pages/Client/Transactions/Transactions.dart';
@@ -102,8 +101,8 @@ class _CheckoutPaymentState extends State<CheckoutPayment> {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Dashboard()));
+                    // Navigator.push(context,
+                    //     MaterialPageRoute(builder: (context) => Dashboard()));
                     // setState(() {
                     //   openSUBMENU = !openSUBMENU;
                     // });

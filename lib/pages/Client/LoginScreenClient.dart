@@ -1,7 +1,7 @@
 // ignore_for_file: file_names, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:shipment/pages/Client/Dashboard/Dashboard.dart';
+import 'package:shipment/component/DashboardHome.dart';
 import 'package:shipment/pages/Client/Homepage.dart';
 import 'package:shipment/pages/Client/SignupScreenClient.dart';
 
@@ -320,7 +320,7 @@ class _LoginScreenClientState extends State<LoginScreenClient> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Dashboard()));
+                                      builder: (context) => DashboardHome()));
                             },
                             child: Container(
                               margin: EdgeInsets.only(top: 40),

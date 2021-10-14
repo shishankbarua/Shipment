@@ -1,26 +1,28 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shipment/Element/TextStyle.dart';
-// import 'package:shipment/pages/Client/Dashboard/Dashboard.dart';
+import 'package:shipment/component/DashboardHome.dart';
+import 'package:shipment/pages/Client/MarketPlace/MarketPlace.dart';
 import 'package:shipment/pages/Client/Profile.dart';
 import 'package:shipment/pages/Client/Transactions/Transactions.dart';
 
-class MarketPlace extends StatefulWidget {
-  const MarketPlace({Key? key}) : super(key: key);
+class SideBar extends StatefulWidget {
+  const SideBar({Key? key}) : super(key: key);
 
   @override
-  _MarketPlaceState createState() => _MarketPlaceState();
+  _SideBarState createState() => _SideBarState();
 }
 
-class _MarketPlaceState extends State<MarketPlace> {
-  bool _value = false;
-  int? val = -1;
+class _SideBarState extends State<SideBar> {
   var h, w;
   var exp = true, openSUBMENU = false;
+  var exp2 = -1;
+  int _selectedIndex = 0;
 
-  Widget sideBar() {
+  @override
+  Widget build(BuildContext context) {
     return Container(
-      height: h,
-      width: exp ? w * 0.2 : w * 0.1,
+      // height: h,
+      // width: exp ? w * 0.2 : w * 0.1,
       color: Color(0xffFFFFFF),
       child: exp
           ? Column(
@@ -86,8 +88,10 @@ class _MarketPlaceState extends State<MarketPlace> {
                 ),
                 InkWell(
                   onTap: () {
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => Dashboard()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DashboardHome()));
                     // setState(() {
                     //   openSUBMENU = !openSUBMENU;
                     // });
@@ -460,277 +464,5 @@ class _MarketPlaceState extends State<MarketPlace> {
               ],
             ),
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    h = MediaQuery.of(context).size.height;
-    w = MediaQuery.of(context).size.width;
-    return Scaffold(
-        body: Container(
-            height: h,
-            width: w,
-            child: Column(children: [
-              Container(
-                margin: EdgeInsets.only(left: 24, top: 15),
-                height: 30,
-                width: w,
-                color: Color(0xffFFFFFF),
-                child: Text("Shipment",
-                    style: TextStyle(
-                        color: Color(0xff1A494F),
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold)),
-              ),
-              Row(children: [
-                InkWell(
-                    onTap: () {
-                      // setState(() {
-                      //   exp = !exp;
-                      // });
-                    },
-                    child: sideBar()),
-                Container(
-                    height: h,
-                    width: exp ? w * 0.8 : w * 0.8,
-                    color: Color(0xffE5E5E5),
-                    // color: Colors.amber,
-                    child: ListView(
-                      shrinkWrap: true,
-                      // physics: NeverScrollableScrollPhysics(),
-                      children: [
-                        Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Container(
-                                margin: EdgeInsets.fromLTRB(20, 20, 5, 0),
-                                child: Text(
-                                  'Market Place',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                            Container(
-                                height: MediaQuery.of(context).size.height *
-                                    (45 / 100),
-                                // height: 100,
-                                width: MediaQuery.of(context).size.width *
-                                    (80 / 100),
-                                margin: EdgeInsets.all(15),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  color: Color(0xffFFFFFF),
-                                ),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                              top: 15, right: 10, left: 15),
-                                          child: Align(
-                                              alignment: Alignment.topLeft,
-                                              child: Text(
-                                                "Booking",
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              )),
-                                        ),
-                                        Spacer(),
-                                        Container(
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
-                                                color: Color(0xff1A494F)),
-                                            margin: EdgeInsets.only(
-                                                top: 15, right: 15),
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                (6 / 100),
-                                            // width: MediaQuery.of(context)
-                                            //         .size
-                                            //         .width *
-                                            //     (11 / 100),
-                                            child: Row(
-                                              children: [
-                                                Container(
-                                                  margin: EdgeInsets.fromLTRB(
-                                                      10, 0, 0, 0),
-                                                  child: Text(
-                                                    "Create Booking",
-                                                    style:
-                                                        headingStylewhite14(),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  margin: EdgeInsets.fromLTRB(
-                                                      5, 0, 5, 0),
-                                                  child: Icon(
-                                                    Icons.add_box,
-                                                    color: Colors.white,
-                                                    size: 20,
-                                                  ),
-                                                )
-                                              ],
-                                            )),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                              top: 15, right: 10, left: 15),
-                                          child: Align(
-                                              alignment: Alignment.topLeft,
-                                              child: Text("Approved (0)",
-                                                  style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: Colors.grey))),
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                              top: 15, right: 10, left: 15),
-                                          child: Align(
-                                              alignment: Alignment.topLeft,
-                                              child: Text("Under Review (0)",
-                                                  style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: Colors.grey))),
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                              top: 15, right: 10, left: 15),
-                                          child: Align(
-                                              alignment: Alignment.topLeft,
-                                              child: Text("Draft (0)",
-                                                  style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: Colors.grey))),
-                                        ),
-                                      ],
-                                    ),
-                                    Container(
-                                      margin:
-                                          EdgeInsets.only(left: 10, right: 10),
-                                      child: Divider(
-                                        height: 30,
-                                        color: Colors.black,
-                                        thickness: 2,
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                          top: 15, right: 50, left: 50),
-                                      child: Align(
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                              "Create a new project today to start promoting your services",
-                                              style: TextStyle(
-                                                  fontSize: 28,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Color(0xff1A494F)))),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                              left: 15, top: 15, bottom: 30),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(20.0),
-                                              color: Colors.black),
-                                          height: 45,
-                                          width: 300,
-                                          child: Center(
-                                            child: Text("Create your booking",
-                                                style: TextStyle(
-                                                    color: Colors.white)),
-                                          ),
-                                        ),
-                                        Container(
-                                            margin: EdgeInsets.only(right: 10),
-                                            height: 20,
-                                            width: 20,
-                                            child: Icon(Icons.arrow_right,
-                                                color: Colors.white)),
-                                      ],
-                                    ),
-                                  ],
-                                )),
-                            Container(
-                                height: MediaQuery.of(context).size.height *
-                                    (45 / 100),
-                                // height: 100,
-                                width: MediaQuery.of(context).size.width *
-                                    (80 / 100),
-                                margin: EdgeInsets.fromLTRB(15, 15, 15, 30),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  color: Color(0xffFFFFFF),
-                                ),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                          top: 15, right: 10, left: 15),
-                                      child: Align(
-                                          alignment: Alignment.topLeft,
-                                          child: Text(
-                                            "How Booking Market Place worksg",
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                    ),
-                                    Container(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              (7 / 100),
-                                      width: MediaQuery.of(context).size.width *
-                                          (7 / 100),
-                                      margin:
-                                          EdgeInsets.only(left: 10, right: 10),
-                                      child: Divider(
-                                        height: 30,
-                                        color: Colors.black,
-                                        thickness: 2,
-                                      ),
-                                    ),
-                                    Container(
-                                        child: Column(
-                                      children: [
-                                        Container(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              (5 / 100),
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              (5 / 100),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(15.0),
-                                              color: Color(0xffA9CCD0)),
-                                        )
-                                      ],
-                                    ))
-                                  ],
-                                ))
-                          ],
-                        ),
-                      ],
-                    ))
-              ]),
-            ])));
   }
 }
