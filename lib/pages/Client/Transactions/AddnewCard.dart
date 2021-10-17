@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shipment/Element/TextStyle.dart';
-import 'package:shipment/pages/Client/Transactions/Transactions.dart';
 
 class AddNewCard extends StatefulWidget {
   const AddNewCard({Key? key}) : super(key: key);
