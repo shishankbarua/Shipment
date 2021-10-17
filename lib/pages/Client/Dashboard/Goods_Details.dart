@@ -108,12 +108,12 @@ class _GoodsDetailsState extends State<GoodsDetails> {
                           ),
                         // if (Responsive.isDesktop(context)) SizedBox(width: 5),
                         Container(
-                          margin: EdgeInsets.fromLTRB(20, 20, 5, 0),
+                          margin: EdgeInsets.fromLTRB(10, 5, 5, 0),
                           child: Text(
                             'Dashboard > Cosco >Pickup / Drop Off > Goods info',
                             style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 22,
+                                fontSize: 12,
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -128,87 +128,273 @@ class _GoodsDetailsState extends State<GoodsDetails> {
                       return _cardList[index];
                     },
                   ),
-                  Row(children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PaymentSummary()));
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(
-                            top: 15, left: 15, right: 20, bottom: 50),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50.0),
-                            color: Color(0xff1F2326)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                                margin: EdgeInsets.all(15),
+                  if (Responsive.isDesktop(context))
+                    Row(children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PaymentSummary()));
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(
+                              top: 15, left: 15, right: 20, bottom: 50),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50.0),
+                              color: Color(0xff1F2326)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                  margin: EdgeInsets.all(15),
 
-                                // width: MediaQuery.of(context).size.width * 0.8,
-                                // color: Colors.lime,
-                                child: Center(
-                                    child: Text("Proceed to Payment",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                        )))),
-                            Container(
-                              margin:
-                                  EdgeInsets.only(top: 15, right: 10, left: 30),
-                              height: 30,
-                              // width: 300,
-                              child:
-                                  Image.asset('assets/images/arrow-right.png'),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Spacer(),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _cardList.add(_card());
-                        });
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(
-                            top: 15, left: 15, right: 20, bottom: 50),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.0),
-                            color: Color(0xff1A494F)),
-                        height: MediaQuery.of(context).size.height * (7 / 100),
-                        width: 160,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(left: 20),
-                              child: Text(
-                                "Add More Item",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600),
+                                  // width: MediaQuery.of(context).size.width * 0.8,
+                                  // color: Colors.lime,
+                                  child: Center(
+                                      child: Text("Proceed to Payment",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                          )))),
+                              Container(
+                                margin: EdgeInsets.only(
+                                    top: 15, right: 10, left: 30),
+                                height: 30,
+                                // width: 300,
+                                child: Image.asset(
+                                    'assets/images/arrow-right.png'),
                               ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(right: 10),
-                              height: 20,
-                              width: 20,
-                              child:
-                                  Image.asset('assets/images/arrow-right.png'),
-                            )
-                          ],
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ]),
+                      Spacer(),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _cardList.add(_card());
+                          });
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(
+                              top: 15, left: 15, right: 20, bottom: 50),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15.0),
+                              color: Color(0xff1A494F)),
+                          height:
+                              MediaQuery.of(context).size.height * (7 / 100),
+                          width: 160,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(left: 20),
+                                child: Text(
+                                  "Add More Item",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(right: 10),
+                                height: 20,
+                                width: 20,
+                                child: Image.asset(
+                                    'assets/images/arrow-right.png'),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ]),
+                  if (Responsive.isMobile(context))
+                    Column(children: [
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _cardList.add(_card());
+                          });
+                        },
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Container(
+                            margin: EdgeInsets.only(
+                              top: 15,
+                              left: 15,
+                              right: 20,
+                            ),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                color: Color(0xff1A494F)),
+                            height:
+                                MediaQuery.of(context).size.height * (7 / 100),
+                            width: 160,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(left: 20),
+                                  child: Text(
+                                    "Add More Item",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(right: 10),
+                                  height: 20,
+                                  width: 20,
+                                  child: Image.asset(
+                                      'assets/images/arrow-right.png'),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PaymentSummary()));
+                        },
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Container(
+                            margin: EdgeInsets.only(
+                                top: 15, left: 15, right: 20, bottom: 50),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50.0),
+                                color: Color(0xff1F2326)),
+                            width: MediaQuery.of(context).size.width * (0.75),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                    margin: EdgeInsets.all(15),
+
+                                    // width: MediaQuery.of(context).size.width * 0.8,
+                                    // color: Colors.lime,
+                                    child: Center(
+                                        child: Text("Proceed to Payment",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                            )))),
+                                Container(
+                                  margin: EdgeInsets.only(
+                                      top: 15, right: 10, left: 30),
+                                  height: 30,
+                                  // width: 300,
+                                  child: Image.asset(
+                                      'assets/images/arrow-right.png'),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ]),
+                  if (Responsive.isTablet(context))
+                    Column(children: [
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _cardList.add(_card());
+                          });
+                        },
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Container(
+                            margin: EdgeInsets.only(
+                              top: 15,
+                              left: 15,
+                              right: 20,
+                            ),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                color: Color(0xff1A494F)),
+                            height:
+                                MediaQuery.of(context).size.height * (7 / 100),
+                            width: 160,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(left: 20),
+                                  child: Text(
+                                    "Add More Item",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(right: 10),
+                                  height: 20,
+                                  width: 20,
+                                  child: Image.asset(
+                                      'assets/images/arrow-right.png'),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PaymentSummary()));
+                        },
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Container(
+                            margin: EdgeInsets.only(
+                                top: 15, left: 15, right: 20, bottom: 50),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50.0),
+                                color: Color(0xff1F2326)),
+                            width: MediaQuery.of(context).size.width * (0.75),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                    margin: EdgeInsets.all(15),
+
+                                    // width: MediaQuery.of(context).size.width * 0.8,
+                                    // color: Colors.lime,
+                                    child: Center(
+                                        child: Text("Proceed to Payment",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                            )))),
+                                Container(
+                                  margin: EdgeInsets.only(
+                                      top: 15, right: 10, left: 30),
+                                  height: 30,
+                                  // width: 300,
+                                  child: Image.asset(
+                                      'assets/images/arrow-right.png'),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ]),
                 ],
               ))),
     );
@@ -217,7 +403,7 @@ class _GoodsDetailsState extends State<GoodsDetails> {
   Widget _card() {
     return Card(
         child: Container(
-      margin: EdgeInsets.all(15),
+      margin: EdgeInsets.all(25),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
         color: Color(0xffFFFFFF),

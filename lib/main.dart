@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:shipment/component/Select_Pickup_Dropoff.dart';
-import 'package:shipment/pages/Client/Dashboard/CheckoutDash.dart';
 import 'package:shipment/component/DashboardHome.dart';
-import 'package:shipment/pages/Client/Dashboard/Payment.dart';
 import 'package:shipment/pages/Client/Home.dart';
 import 'package:shipment/pages/Client/Homepage.dart';
 
 import 'package:shipment/pages/Client/LoginScreenClient.dart';
 import 'package:shipment/pages/Client/MarketPlace/CreateBooking.dart';
-import 'package:shipment/pages/Client/MarketPlace/MarketPlace.dart';
 import 'package:shipment/pages/Client/Profile.dart';
 import 'package:shipment/pages/Client/SignupScreenClient.dart';
 import 'package:shipment/pages/Client/Transactions/AddnewCard.dart';

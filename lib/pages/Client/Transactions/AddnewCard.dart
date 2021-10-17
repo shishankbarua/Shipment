@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shipment/Element/TextStyle.dart';
-import 'package:shipment/pages/Client/MarketPlace/MarketPlace.dart';
-import 'package:shipment/pages/Client/Profile.dart';
 import 'package:shipment/pages/Client/Transactions/Transactions.dart';
 
 class AddNewCard extends StatefulWidget {
@@ -25,8 +23,8 @@ class _AddNewCardState extends State<AddNewCard> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Profile()));
+                    // Navigator.push(context,
+                    //     MaterialPageRoute(builder: (context) => Profile()));
                   },
                   child: Container(
                       margin: EdgeInsets.only(top: 20),
@@ -152,8 +150,10 @@ class _AddNewCardState extends State<AddNewCard> {
                 //     : Container(),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MarketPlace()));
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => MarketPlace2()));
                     // setState(() {
                     //   openSUBMENU = !openSUBMENU;
                     // });
@@ -285,10 +285,10 @@ class _AddNewCardState extends State<AddNewCard> {
                 //     : Container(),
                 InkWell(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Transactions()));
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => Transactions()));
                   },
                   child: Container(
                     // margin: EdgeInsets.only(top: 15),
@@ -326,10 +326,10 @@ class _AddNewCardState extends State<AddNewCard> {
                         Spacer(),
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Transactions()));
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => Transactions()));
                           },
                           child: Container(
                             margin: EdgeInsets.only(right: 10),

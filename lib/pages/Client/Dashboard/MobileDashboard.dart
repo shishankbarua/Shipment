@@ -557,7 +557,7 @@ class _MobileDashboardState extends State<MobileDashboard> {
                 color: Color(0xffFFFFFF),
               ),
               margin: EdgeInsets.only(left: 20, top: 15, right: 10),
-              height: exp2 == index ? h * 0.40 : h * 0.22,
+              height: exp2 == index ? h * 0.42 : h * 0.24,
               width: w,
               child: Column(
                 children: [

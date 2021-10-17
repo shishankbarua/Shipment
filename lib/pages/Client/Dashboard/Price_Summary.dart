@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shipment/Element/Sidebar.dart';
 import 'package:shipment/Responsive.dart';
+import 'package:shipment/component/Made_Payment.dart';
 import '../../../constants.dart';
 
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -47,7 +48,7 @@ class _PriceSummaryState extends State<PriceSummary> {
                         ),
                       // if (Responsive.isDesktop(context)) SizedBox(width: 5),
                       Container(
-                        margin: EdgeInsets.fromLTRB(20, 20, 5, 0),
+                        margin: EdgeInsets.fromLTRB(10, 10, 5, 0),
                         child: Text(
                           ' < Payment',
                           style: TextStyle(
@@ -61,6 +62,7 @@ class _PriceSummaryState extends State<PriceSummary> {
                 ),
                 if (Responsive.isDesktop(context))
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                           // height:
@@ -78,22 +80,7 @@ class _PriceSummaryState extends State<PriceSummary> {
                   ),
                 if (Responsive.isMobile(context))
                   Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Container(
-                            width:
-                                MediaQuery.of(context).size.width * (80 / 100),
-                            child: orderDetails()),
-                      ),
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Container(
-                            width:
-                                MediaQuery.of(context).size.width * (80 / 100),
-                            child: priceSummary()),
-                      )
-                    ],
+                    children: [orderDetails(), priceSummary()],
                   ),
                 if (Responsive.isTablet(context))
                   Column(
@@ -121,226 +108,432 @@ class _PriceSummaryState extends State<PriceSummary> {
   Widget orderDetails() {
     return Column(
       children: [
-        Container(
-          margin: EdgeInsets.all(15),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            color: Color(0xffFFFFFF),
-          ),
-          height: MediaQuery.of(context).size.height * (51 / 100),
-          // height: 100,
-          width: MediaQuery.of(context).size.width * (38 / 100),
+        if (Responsive.isDesktop(context))
+          Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+              margin: EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                color: Color(0xffFFFFFF),
+              ),
+              height: MediaQuery.of(context).size.height * (51 / 100),
+              // height: 100,
+              width: MediaQuery.of(context).size.width * (38 / 100),
 
-          child: Column(
-            children: [
-              Row(
+              child: Column(
                 children: [
-                  Container(
-                    margin: EdgeInsets.only(top: 10, right: 10, left: 10),
-                    child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Text("Orders",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold))),
+                  Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 10, right: 10, left: 10),
+                        child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Text("Orders",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold))),
+                      ),
+                      Spacer(),
+                      Container(
+                        margin: EdgeInsets.only(top: 10, right: 10, left: 10),
+                        child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              String.fromCharCodes(new Runes('\u0024')) + "667",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            )),
+                      ),
+                    ],
                   ),
-                  Spacer(),
                   Container(
-                    margin: EdgeInsets.only(top: 10, right: 10, left: 10),
-                    child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          String.fromCharCodes(new Runes('\u0024')) + "667",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        )),
-                  ),
+                      margin: EdgeInsets.only(top: 10, right: 10, left: 10),
+                      child: Image.asset(
+                        'assets/images/Cars.png',
+                      ))
                 ],
               ),
-              Container(
-                  margin: EdgeInsets.only(top: 10, right: 10, left: 10),
-                  child: Image.asset(
-                    'assets/images/Cars.png',
-                  ))
-            ],
+            ),
           ),
-        ),
+        if (Responsive.isMobile(context))
+          Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+              margin: EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                color: Color(0xffFFFFFF),
+              ),
+              height: MediaQuery.of(context).size.height * (40 / 100),
+              // height: 100,
+              width: MediaQuery.of(context).size.width * (90 / 100),
+
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 10, right: 10, left: 10),
+                        child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Text("Orders",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold))),
+                      ),
+                      Spacer(),
+                      Container(
+                        margin: EdgeInsets.only(top: 10, right: 10, left: 10),
+                        child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              String.fromCharCodes(new Runes('\u0024')) + "667",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            )),
+                      ),
+                    ],
+                  ),
+                  Container(
+                      margin: EdgeInsets.only(top: 10, right: 10, left: 10),
+                      child: Image.asset(
+                        'assets/images/Cars.png',
+                      ))
+                ],
+              ),
+            ),
+          ),
+        if (Responsive.isTablet(context))
+          Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+              margin: EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                color: Color(0xffFFFFFF),
+              ),
+              height: MediaQuery.of(context).size.height * (40 / 100),
+              // height: 100,
+              width: MediaQuery.of(context).size.width * (90 / 100),
+
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 10, right: 10, left: 10),
+                        child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Text("Orders",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold))),
+                      ),
+                      Spacer(),
+                      Container(
+                        margin: EdgeInsets.only(top: 10, right: 10, left: 10),
+                        child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              String.fromCharCodes(new Runes('\u0024')) + "667",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            )),
+                      ),
+                    ],
+                  ),
+                  Container(
+                      margin: EdgeInsets.only(top: 10, right: 10, left: 10),
+                      child: Image.asset(
+                        'assets/images/Cars.png',
+                      ))
+                ],
+              ),
+            ),
+          ),
         Container(
             margin: EdgeInsets.only(top: 10, right: 10, left: 10),
             child: Text(
               "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
               style: TextStyle(color: Colors.grey),
             )),
-        Container(
-            margin: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              border: Border.all(color: Color(0xff4CAF50)),
-              borderRadius: BorderRadius.circular(10.0),
-              color: Color(0xffFFFFFF),
-            ),
-            height: MediaQuery.of(context).size.height * (15 / 100),
-            // height: 100,
-            width: MediaQuery.of(context).size.width * (38 / 100),
-            child: Column(children: [
-              Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(top: 10, right: 10, left: 15),
-                    child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          "Pick up",
-                          style: TextStyle(fontSize: 20),
-                        )),
-                  ),
-                  Spacer(),
-                  Container(
-                    margin: EdgeInsets.only(
-                      top: 15,
-                      right: 30,
-                    ),
-                    child: Align(
-                        child: Text(
-                      String.fromCharCodes(new Runes('\u0024')) + "50.00",
-                      style: TextStyle(
-                        fontSize: 14,
+        if (Responsive.isDesktop(context))
+          Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+                margin: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Color(0xff4CAF50)),
+                  borderRadius: BorderRadius.circular(10.0),
+                  color: Color(0xffFFFFFF),
+                ),
+                height: MediaQuery.of(context).size.height * (15 / 100),
+                // height: 100,
+                width: MediaQuery.of(context).size.width * (38 / 100),
+                child: Column(children: [
+                  Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 10, right: 10, left: 15),
+                        child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Pick up",
+                              style: TextStyle(fontSize: 20),
+                            )),
                       ),
-                    )),
-                  ),
-                ],
-              ),
-              Row(children: [
-                Container(
-                  margin: EdgeInsets.only(left: 30, top: 15),
-                  height: 15,
-                  width: 15,
-                  child: ImageIcon(
-                    AssetImage(
-                      'assets/images/car.png',
-                    ),
-                    size: 10,
-                  ),
-                ),
-                Container(
-                    margin: EdgeInsets.only(left: 5, top: 15),
-                    child: Text("Cars")),
-                Container(
-                    margin: EdgeInsets.only(left: 10, top: 15),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50.0),
-                        color: Color(0xffEFEFEF)),
-                    child: Text("3")),
-                Container(
-                  margin: EdgeInsets.only(left: 15, top: 15),
-                  height: 15,
-                  width: 15,
-                  child: ImageIcon(
-                    AssetImage(
-                      'assets/images/box.png',
-                    ),
-                    size: 10,
-                  ),
-                ),
-                Container(
-                    margin: EdgeInsets.only(left: 10, top: 15),
-                    child: Text("Boxes")),
-                Container(
-                    margin: EdgeInsets.only(left: 5, top: 15),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50.0),
-                        color: Color(0xffEFEFEF)),
-                    child: Text("5"))
-              ])
-            ])),
-        Container(
-            margin: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              border: Border.all(color: Color(0xff4CAF50)),
-              borderRadius: BorderRadius.circular(10.0),
-              color: Color(0xffFFFFFF),
-            ),
-            height: MediaQuery.of(context).size.height * (15 / 100),
-            // height: 100,
-            width: MediaQuery.of(context).size.width * (38 / 100),
-            child: Column(children: [
-              Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(
-                        top: 10, right: 10, left: 15, bottom: 20),
-                    child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          "Drop off",
-                          style: TextStyle(fontSize: 20),
+                      Spacer(),
+                      Container(
+                        margin: EdgeInsets.only(
+                          top: 15,
+                          right: 30,
+                        ),
+                        child: Align(
+                            child: Text(
+                          String.fromCharCodes(new Runes('\u0024')) + "50.00",
+                          style: TextStyle(
+                            fontSize: 14,
+                          ),
                         )),
-                  ),
-                  Spacer(),
-                  Container(
-                    margin: EdgeInsets.only(
-                      top: 15,
-                      right: 30,
-                    ),
-                    child: Align(
-                        child: Text(
-                      String.fromCharCodes(new Runes('\u0024')) + "50.00",
-                      style: TextStyle(
-                        fontSize: 14,
                       ),
-                    )),
+                    ],
                   ),
-                ],
-              ),
-              Row(children: [
-                Container(
-                  margin: EdgeInsets.only(left: 30, top: 15),
-                  height: 15,
-                  width: 15,
-                  child: ImageIcon(
-                    AssetImage(
-                      'assets/images/car.png',
+                  Row(children: [
+                    Container(
+                      margin: EdgeInsets.only(left: 30, top: 15),
+                      height: 15,
+                      width: 15,
+                      child: ImageIcon(
+                        AssetImage(
+                          'assets/images/car.png',
+                        ),
+                        size: 10,
+                      ),
                     ),
-                    size: 10,
-                  ),
-                ),
-                Container(
-                    margin: EdgeInsets.only(left: 5, top: 15),
-                    child: Text("Cars")),
-                Container(
-                    margin: EdgeInsets.only(left: 10, top: 15),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50.0),
-                        color: Color(0xffEFEFEF)),
-                    child: Text("3")),
-                Container(
-                  margin: EdgeInsets.only(left: 15, top: 15),
-                  height: 15,
-                  width: 15,
-                  child: ImageIcon(
-                    AssetImage(
-                      'assets/images/box.png',
+                    Container(
+                        margin: EdgeInsets.only(left: 5, top: 15),
+                        child: Text("Cars")),
+                    Container(
+                        margin: EdgeInsets.only(left: 10, top: 15),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50.0),
+                            color: Color(0xffEFEFEF)),
+                        child: Text("3")),
+                    Container(
+                      margin: EdgeInsets.only(left: 15, top: 15),
+                      height: 15,
+                      width: 15,
+                      child: ImageIcon(
+                        AssetImage(
+                          'assets/images/box.png',
+                        ),
+                        size: 10,
+                      ),
                     ),
-                    size: 10,
-                  ),
+                    Container(
+                        margin: EdgeInsets.only(left: 10, top: 15),
+                        child: Text("Boxes")),
+                    Container(
+                        margin: EdgeInsets.only(left: 5, top: 15),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50.0),
+                            color: Color(0xffEFEFEF)),
+                        child: Text("5"))
+                  ])
+                ])),
+          ),
+        if (Responsive.isMobile(context))
+          Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+                margin: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Color(0xff4CAF50)),
+                  borderRadius: BorderRadius.circular(10.0),
+                  color: Color(0xffFFFFFF),
                 ),
-                Container(
-                    margin: EdgeInsets.only(left: 10, top: 15),
-                    child: Text("Boxes")),
-                Container(
-                    margin: EdgeInsets.only(left: 5, top: 15),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50.0),
-                        color: Color(0xffEFEFEF)),
-                    child: Text("5"))
-              ])
-            ]))
+                height: MediaQuery.of(context).size.height * (15 / 100),
+                // height: 100,
+                width: MediaQuery.of(context).size.width * (90 / 100),
+                child: Column(children: [
+                  Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(
+                            top: 10, right: 10, left: 15, bottom: 20),
+                        child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Drop off",
+                              style: TextStyle(fontSize: 20),
+                            )),
+                      ),
+                      Spacer(),
+                      Container(
+                        margin: EdgeInsets.only(
+                          top: 15,
+                          right: 30,
+                        ),
+                        child: Align(
+                            child: Text(
+                          String.fromCharCodes(new Runes('\u0024')) + "50.00",
+                          style: TextStyle(
+                            fontSize: 14,
+                          ),
+                        )),
+                      ),
+                    ],
+                  ),
+                  Row(children: [
+                    Container(
+                      margin: EdgeInsets.only(left: 30, top: 15),
+                      height: 15,
+                      width: 15,
+                      child: ImageIcon(
+                        AssetImage(
+                          'assets/images/car.png',
+                        ),
+                        size: 10,
+                      ),
+                    ),
+                    Container(
+                        margin: EdgeInsets.only(left: 5, top: 15),
+                        child: Text("Cars")),
+                    Container(
+                        margin: EdgeInsets.only(left: 10, top: 15),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50.0),
+                            color: Color(0xffEFEFEF)),
+                        child: Text("3")),
+                    Container(
+                      margin: EdgeInsets.only(left: 15, top: 15),
+                      height: 15,
+                      width: 15,
+                      child: ImageIcon(
+                        AssetImage(
+                          'assets/images/box.png',
+                        ),
+                        size: 10,
+                      ),
+                    ),
+                    Container(
+                        margin: EdgeInsets.only(left: 10, top: 15),
+                        child: Text("Boxes")),
+                    Container(
+                        margin: EdgeInsets.only(left: 5, top: 15),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50.0),
+                            color: Color(0xffEFEFEF)),
+                        child: Text("5"))
+                  ])
+                ])),
+          ),
+        if (Responsive.isTablet(context))
+          Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+                margin: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Color(0xff4CAF50)),
+                  borderRadius: BorderRadius.circular(10.0),
+                  color: Color(0xffFFFFFF),
+                ),
+                height: MediaQuery.of(context).size.height * (15 / 100),
+                // height: 100,
+                width: MediaQuery.of(context).size.width * (80 / 100),
+                child: Column(children: [
+                  Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(
+                            top: 10, right: 10, left: 15, bottom: 20),
+                        child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Drop off",
+                              style: TextStyle(fontSize: 20),
+                            )),
+                      ),
+                      Spacer(),
+                      Container(
+                        margin: EdgeInsets.only(
+                          top: 15,
+                          right: 30,
+                        ),
+                        child: Align(
+                            child: Text(
+                          String.fromCharCodes(new Runes('\u0024')) + "50.00",
+                          style: TextStyle(
+                            fontSize: 14,
+                          ),
+                        )),
+                      ),
+                    ],
+                  ),
+                  Row(children: [
+                    Container(
+                      margin: EdgeInsets.only(left: 30, top: 15),
+                      height: 10,
+                      width: 10,
+                      child: ImageIcon(
+                        AssetImage(
+                          'assets/images/car.png',
+                        ),
+                        size: 10,
+                      ),
+                    ),
+                    Container(
+                        margin: EdgeInsets.only(left: 5, top: 15),
+                        child: Text("Cars")),
+                    Container(
+                        margin: EdgeInsets.only(left: 10, top: 15),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50.0),
+                            color: Color(0xffEFEFEF)),
+                        child: Text("3")),
+                    Container(
+                      margin: EdgeInsets.only(left: 15, top: 15),
+                      height: 15,
+                      width: 15,
+                      child: ImageIcon(
+                        AssetImage(
+                          'assets/images/box.png',
+                        ),
+                        size: 10,
+                      ),
+                    ),
+                    Container(
+                        margin: EdgeInsets.only(left: 10, top: 15),
+                        child: Text("Boxes")),
+                    Container(
+                        margin: EdgeInsets.only(left: 5, top: 15),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50.0),
+                            color: Color(0xffEFEFEF)),
+                        child: Text("5"))
+                  ])
+                ])),
+          )
       ],
     );
   }
 
   Widget priceSummary() {
-    return Column(
-      children: [
-        ListView(
+    return Align(
+      alignment: Alignment.topLeft,
+      child: Container(
+        margin: EdgeInsets.all(15),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          color: Color(0xffFFFFFF),
+        ),
+        height: MediaQuery.of(context).size.height * (80 / 100),
+        // height: 100,
+        width: (Responsive.isDesktop(context))
+            ? MediaQuery.of(context).size.width * (38 / 100)
+            : MediaQuery.of(context).size.width * (90 / 100),
+        child: ListView(
           children: [
             Container(
               margin: EdgeInsets.only(top: 10, right: 10, left: 15),
@@ -727,68 +920,61 @@ class _PriceSummaryState extends State<PriceSummary> {
                 ),
               ],
             ),
+            InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MakePayment()));
+              },
+              child: Container(
+                margin:
+                    EdgeInsets.only(top: 15, left: 15, right: 20, bottom: 50),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.0),
+                    color: Colors.black),
+                height: MediaQuery.of(context).size.height * (7 / 100),
+                width: 250,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(left: 20),
+                      child: Text(
+                        "Check Out",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(right: 10),
+                      height: 20,
+                      width: 20,
+                      child: Image.asset('assets/images/arrow-right.png'),
+                    )
+                  ],
+                ),
+              ),
+
+              // Container(
+              //   margin:
+              //       EdgeInsets.only(top: 15, bottom: 70),
+              //   decoration: BoxDecoration(
+              //       borderRadius:
+              //           BorderRadius.circular(20.0),
+              //       color: Colors.black),
+              //   height: 45,
+              //   width: 300,
+              //   child: Center(
+              //     child: Text("Check out",
+              //         style:
+              //             TextStyle(color: Colors.white)),
+              //   ),
+              // ),
+            ),
           ],
         ),
-        InkWell(
-          onTap: () {
-            // Navigator.push(context,
-            //     MaterialPageRoute(builder: (context) => CheckoutPayment()));
-          },
-          child: Container(
-            margin: EdgeInsets.only(top: 15, left: 15, right: 20, bottom: 50),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.0), color: Colors.black),
-            height: MediaQuery.of(context).size.height * (7 / 100),
-            width: 250,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(left: 20),
-                  child: Text(
-                    "Check Out",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) =>
-                    //             PaymentDash()));
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(right: 10),
-                    height: 20,
-                    width: 20,
-                    child: Image.asset('assets/images/arrow-right.png'),
-                  ),
-                )
-              ],
-            ),
-          ),
-
-          // Container(
-          //   margin:
-          //       EdgeInsets.only(top: 15, bottom: 70),
-          //   decoration: BoxDecoration(
-          //       borderRadius:
-          //           BorderRadius.circular(20.0),
-          //       color: Colors.black),
-          //   height: 45,
-          //   width: 300,
-          //   child: Center(
-          //     child: Text("Check out",
-          //         style:
-          //             TextStyle(color: Colors.white)),
-          //   ),
-          // ),
-        ),
-      ],
+      ),
     );
   }
 }

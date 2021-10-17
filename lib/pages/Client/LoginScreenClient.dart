@@ -305,12 +305,14 @@ class _LoginScreenClientState extends State<LoginScreenClient> {
                                     },
                                   ),
                                 ),
-                                Text(
-                                    "I’d like being informed about latest news and tips",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500)),
+                                Expanded(
+                                  child: Text(
+                                      "I’d like being informed about latest news and tips",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500)),
+                                ),
                               ],
                             ),
                           ),

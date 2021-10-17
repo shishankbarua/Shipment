@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shipment/component/DashboardHome.dart';
-import 'package:shipment/pages/Client/MarketPlace/MarketPlace.dart';
-import 'package:shipment/pages/Client/Profile.dart';
+import 'package:shipment/component/Res_Client_Profile.dart';
+import 'package:shipment/component/Res_Market_Place.dart';
+import 'package:shipment/component/Res_Transaction.dart';
 import 'package:shipment/pages/Client/Transactions/Transactions.dart';
 
 class SideBar extends StatefulWidget {
@@ -29,8 +30,10 @@ class _SideBarState extends State<SideBar> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Profile()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ResClientProfile()));
                   },
                   child: Container(
                       margin: EdgeInsets.only(top: 20),
@@ -158,8 +161,10 @@ class _SideBarState extends State<SideBar> {
                 //     : Container(),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MarketPlace()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ResMarketPlace()));
                     // setState(() {
                     //   openSUBMENU = !openSUBMENU;
                     // });
@@ -294,7 +299,7 @@ class _SideBarState extends State<SideBar> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Transactions()));
+                            builder: (context) => ResTransaction()));
                   },
                   child: Container(
                     // margin: EdgeInsets.only(top: 15),
@@ -332,10 +337,10 @@ class _SideBarState extends State<SideBar> {
                         Spacer(),
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Transactions()));
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => Transactions()));
                           },
                           child: Container(
                             margin: EdgeInsets.only(right: 10),
