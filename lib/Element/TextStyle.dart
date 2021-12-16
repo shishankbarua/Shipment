@@ -9,7 +9,7 @@ headingStyle16MBWhite() {
 
 headingStyle16MB() {
   return GoogleFonts.poppins(
-      color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500);
+      color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold);
 }
 
 headingStyle18MB() {
@@ -29,7 +29,7 @@ headingStyleAppColor18MB() {
 
 headingStyleAppColor14MB() {
   return GoogleFonts.poppins(
-      color: appColor, fontSize: 14, fontWeight: FontWeight.w500);
+      color: Colors.black, fontSize: 14, fontWeight: FontWeight.w400);
 }
 
 headingStyle18MBGrey() {
@@ -178,5 +178,144 @@ headingStyleOrange14() {
 
 headingStyle14MBBlack() {
   return GoogleFonts.poppins(
-      color: black, fontSize: 14, fontWeight: FontWeight.w500);
+      color: black, fontSize: 14, fontWeight: FontWeight.w400);
+}
+
+headingStyle25blackbold() {
+  return GoogleFonts.poppins(
+      color: Colors.black, fontSize: 25, fontWeight: FontWeight.w500);
+}
+
+headingStyle20blacknormal() {
+  return GoogleFonts.poppins(
+      color: Colors.black, fontSize: 20, fontWeight: FontWeight.normal);
+}
+
+headingStyle12greynormal() {
+  return GoogleFonts.poppins(
+      color: Colors.grey, fontSize: 12, fontWeight: FontWeight.normal);
+}
+
+headingStyle12blacknormal() {
+  return GoogleFonts.poppins(
+      color: Colors.black, fontSize: 12, fontWeight: FontWeight.w500);
+}
+
+headingStyle16blacknormal() {
+  return GoogleFonts.poppins(
+      color: Colors.black, fontSize: 16, fontWeight: FontWeight.normal);
+}
+
+headingStyle14blackw400() {
+  return GoogleFonts.poppins(
+      color: Colors.black, fontSize: 14, fontWeight: FontWeight.w400);
+}
+
+headingStyle16blackw400() {
+  return GoogleFonts.poppins(
+      color: Colors.black, fontSize: 16, fontWeight: FontWeight.w400);
+}
+
+headingStyle12whitew500() {
+  return GoogleFonts.poppins(
+      color: Colors.white, fontSize: 12, fontWeight: FontWeight.w500);
+}
+
+headingStyle16blackw600() {
+  return GoogleFonts.poppins(
+      color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600);
+}
+
+headingStyle12blackw500() {
+  return GoogleFonts.poppins(
+      color: Colors.black, fontSize: 12, fontWeight: FontWeight.w500);
+}
+
+headingStyle12greyw400() {
+  return GoogleFonts.poppins(
+      color: Color(0xff000000).withOpacity(0.6),
+      fontSize: 12,
+      fontWeight: FontWeight.w400);
+}
+
+headingStyle14greyw500() {
+  return GoogleFonts.poppins(
+      color: Color(0xffBCBEC0), fontSize: 14, fontWeight: FontWeight.w500);
+}
+
+headingStyle14blackw500() {
+  return GoogleFonts.poppins(
+      color: Colors.black, fontSize: 14, fontWeight: FontWeight.w500);
+}
+
+headingStyleinter14blackw500() {
+  return GoogleFonts.inter(
+      color: Colors.black,
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
+      decoration: TextDecoration.none);
+}
+
+headingStyleinter40blackw500() {
+  return GoogleFonts.inter(
+      color: Colors.black,
+      fontSize: 40,
+      fontWeight: FontWeight.w500,
+      decoration: TextDecoration.none);
+}
+
+headingStyleinter25blackw400() {
+  return GoogleFonts.inter(
+      color: Colors.black,
+      fontSize: 25,
+      fontWeight: FontWeight.w400,
+      decoration: TextDecoration.none);
+}
+
+headingStyle22blackw600() {
+  return GoogleFonts.poppins(
+      color: Colors.black, fontSize: 22, fontWeight: FontWeight.w600);
+}
+
+headingStyleinter14whitew500() {
+  return GoogleFonts.inter(
+      color: Colors.white,
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
+      decoration: TextDecoration.none);
+}
+
+headingStyle12blackw400() {
+  return GoogleFonts.poppins(
+      color: Color(0xff000000), fontSize: 12, fontWeight: FontWeight.w400);
+}
+
+headingStyle18blackw500() {
+  return GoogleFonts.poppins(
+      color: Colors.black, fontSize: 14, fontWeight: FontWeight.w500);
+}
+
+headingStyle8tealw400() {
+  return GoogleFonts.poppins(
+      color: Color(0xff1A494F), fontSize: 8, fontWeight: FontWeight.w400);
+}
+
+headingStyle14whitew500() {
+  return GoogleFonts.poppins(
+      color: Color(0xffFFFFFF), fontSize: 14, fontWeight: FontWeight.w500);
+}
+
+headingStyle24blackw500() {
+  return GoogleFonts.poppins(
+      color: Color(0xff000000), fontSize: 24, fontWeight: FontWeight.w500);
+}
+
+headingStyle14blackw600() {
+  return GoogleFonts.poppins(
+      color: Color(0xff000000), fontSize: 14, fontWeight: FontWeight.w600);
+}
+
+headingStyle14tealw500() {
+  return GoogleFonts.poppins(
+      color: Color(0xff1A494F), fontSize: 14, fontWeight: FontWeight.w500);
 }

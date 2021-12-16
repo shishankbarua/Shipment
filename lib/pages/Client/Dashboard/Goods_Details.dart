@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shipment/Element/Sidebar.dart';
-import 'package:shipment/Responsive.dart';
-import 'package:shipment/component/Payment_Summary.dart';
+import 'package:shipment/Element/Responsive.dart';
+import 'package:shipment/component/Res_Client/Payment_Summary.dart';
 import '../../../constants.dart';
 
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -52,6 +52,36 @@ class _GoodsDetailsState extends State<GoodsDetails> {
                     onTap: () {
                       setState(() {
                         item = _countries[index];
+                        Navigator.pop(context);
+                        // Navigator.of(context).push(MaterialPageRoute(
+                        //     builder: (BuildContext context) => HomePage()));
+                      });
+                    },
+                    child: ListTile(
+                      title: Text('${_countries[index]}'),
+                    ),
+                  );
+                }),
+          ),
+        ),
+      );
+
+  _showDialogOnButtonPressing2() => showDialog(
+        context: context,
+        builder: (context) => new Container(
+          width: w * .30,
+          height: MediaQuery.of(context).size.height - 60,
+          child: Dialog(
+            child: ListView.builder(
+                itemCount: _countries.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        item = _countries[index];
+                        // setState(() {
+                        _cardList.add(_card());
+                        // });
                         Navigator.pop(context);
                         // Navigator.of(context).push(MaterialPageRoute(
                         //     builder: (BuildContext context) => HomePage()));
@@ -173,9 +203,11 @@ class _GoodsDetailsState extends State<GoodsDetails> {
                       Spacer(),
                       GestureDetector(
                         onTap: () {
-                          setState(() {
-                            _cardList.add(_card());
-                          });
+                          _showDialogOnButtonPressing2();
+
+                          // setState(() {
+                          //   _cardList.add(_card());
+                          // });
                         },
                         child: Container(
                           margin: EdgeInsets.only(
@@ -215,9 +247,10 @@ class _GoodsDetailsState extends State<GoodsDetails> {
                     Column(children: [
                       GestureDetector(
                         onTap: () {
-                          setState(() {
-                            _cardList.add(_card());
-                          });
+                          _showDialogOnButtonPressing2();
+                          // setState(() {
+                          //   _cardList.add(_card());
+                          // });
                         },
                         child: Align(
                           alignment: Alignment.topLeft,
@@ -497,7 +530,7 @@ class _GoodsDetailsState extends State<GoodsDetails> {
           //     ?
           Align(
             alignment: Alignment.topLeft,
-            child: GestureDetector(
+            child: InkWell(
               onTap: () {
                 _openCamera(context);
               },

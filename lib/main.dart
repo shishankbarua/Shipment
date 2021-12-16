@@ -1,36 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:shipment/component/Select_Pickup_Dropoff.dart';
-import 'package:shipment/component/DashboardHome.dart';
-import 'package:shipment/pages/Client/Home.dart';
-import 'package:shipment/pages/Client/Homepage.dart';
-
-import 'package:shipment/pages/Client/LoginScreenClient.dart';
-import 'package:shipment/pages/Client/MarketPlace/CreateBooking.dart';
-import 'package:shipment/pages/Client/SignupScreenClient.dart';
-import 'package:shipment/pages/Client/Transactions/AddnewCard.dart';
-import 'package:shipment/pages/Shipment/SignupShipment.dart';
+import 'package:shipment/pages/Chhose%20Screen/ShipmentScreen.dart';
+import 'package:shipment/pages/Shipment/LoginSignUp/SignupShipmentfirst.dart';
 import 'package:shipment/pages/Splash.dart';
 
 void main() async {
-  runApp(MaterialApp(
+  runApp(
+    MaterialApp(
       theme: ThemeData(fontFamily: 'Poppins'),
       debugShowCheckedModeBanner: false,
-      home: MyApp()));
+      initialRoute: SplashScreen.route,
+      routes: {
+        // MyApp.route: (context) => MyApp(),
+        Shipment.route: (context) => Shipment(),
+        SplashScreen.route: (context) => SplashScreen(),
+        SignupScreenfirst.route: (context) => SignupScreenfirst(),
+      },
+      // home: SplashScreen(),
+    ),
+  );
 }
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
+// class MyApp extends StatefulWidget {
+//   static const route = '/';
+//   @override
+//   _MyAppState createState() => _MyAppState();
+// }
 
-class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-  }
+// class _MyAppState extends State<MyApp> {
+//   @override
+//   void initState() {
+//     super.initState();
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return SplashScreen();
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return SplashScreen();
+//   }
+// }

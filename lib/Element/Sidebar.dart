@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shipment/component/DashboardHome.dart';
-import 'package:shipment/component/Res_Client_Profile.dart';
-import 'package:shipment/component/Res_Market_Place.dart';
-import 'package:shipment/component/Res_Transaction.dart';
+import 'package:shipment/component/Res_Client/Booking_Dashboard.dart';
+import 'package:shipment/component/Res_Client/Chat_Screen.dart';
+import 'package:shipment/component/Res_Client/DashboardHome.dart';
+import 'package:shipment/component/Res_Client/ResMarketPlace/Res_Market_Place.dart';
+import 'package:shipment/component/Res_Client/Res_Client_Profile.dart';
+import 'package:shipment/component/Res_Client/Res_Setting.dart';
+import 'package:shipment/component/Res_Client/Res_Transaction.dart';
 
 class SideBar extends StatefulWidget {
   const SideBar({Key? key}) : super(key: key);
@@ -223,9 +226,10 @@ class _SideBarState extends State<SideBar> {
 
                 InkWell(
                   onTap: () {
-                    // setState(() {
-                    //   openSUBMENU = !openSUBMENU;
-                    // });
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => BookingDashboard()));
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -355,56 +359,128 @@ class _SideBarState extends State<SideBar> {
                     ),
                   ),
                 ),
-                Container(
-                  // margin: EdgeInsets.only(top: 15),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15.0),
-                      color: Color(0xffFFFFFF)),
-                  height: MediaQuery.of(context).size.height * (8 / 100),
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                          margin: EdgeInsets.only(left: 10),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),
-                              color: Color(0xffEEEEEE)),
-                          height: 15,
-                          width: 15,
-                          child: ImageIcon(
-                            AssetImage(
-                              'assets/images/dashboard.png',
-                            ),
-                            size: 10,
-                          )),
-                      Container(
-                        margin: EdgeInsets.only(left: 20),
-                        child: Text(
-                          'Messages',
-                          style: TextStyle(
-                              color: Color(0xff1A494F),
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                      Spacer(),
-                      GestureDetector(
-                        onTap: () {
-                          // Navigator.push(context,
-                          //     MaterialPageRoute(builder: (context) => Profile()));
-                        },
-                        child: Container(
-                          margin: EdgeInsets.only(right: 10),
-                          height: 15,
-                          width: 15,
-                          child: Image.asset(
-                            'assets/images/arrow-right.png',
-                            color: Color(0xff1A494F),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ChatScreen()));
+                  },
+                  child: Container(
+                    // margin: EdgeInsets.only(top: 15),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        color: Color(0xffFFFFFF)),
+                    height: MediaQuery.of(context).size.height * (8 / 100),
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                            margin: EdgeInsets.only(left: 10),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Color(0xffEEEEEE)),
+                            height: 15,
+                            width: 15,
+                            child: ImageIcon(
+                              AssetImage(
+                                'assets/images/dashboard.png',
+                              ),
+                              size: 10,
+                            )),
+                        Container(
+                          margin: EdgeInsets.only(left: 20),
+                          child: Text(
+                            'Messages',
+                            style: TextStyle(
+                                color: Color(0xff1A494F),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600),
                           ),
                         ),
-                      )
-                    ],
+                        Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            // Navigator.push(context,
+                            //     MaterialPageRoute(builder: (context) => Profile()));
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(right: 10),
+                            height: 15,
+                            width: 15,
+                            child: Image.asset(
+                              'assets/images/arrow-right.png',
+                              color: Color(0xff1A494F),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                    // margin: const EdgeInsets.only(left: 10.0, right: 20.0),
+                    child: Divider(
+                  color: Colors.grey,
+                  thickness: 2,
+                  height: 36,
+                )),
+
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ResSettings()));
+                  },
+                  child: Container(
+                    // margin: EdgeInsets.only(top: 15),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        color: Color(0xffFFFFFF)),
+                    height: MediaQuery.of(context).size.height * (8 / 100),
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                            margin: EdgeInsets.only(left: 10),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Color(0xffEEEEEE)),
+                            height: 15,
+                            width: 15,
+                            child: ImageIcon(
+                              AssetImage(
+                                'assets/images/dashboard.png',
+                              ),
+                              size: 10,
+                            )),
+                        Container(
+                          margin: EdgeInsets.only(left: 20),
+                          child: Text(
+                            'Settings',
+                            style: TextStyle(
+                                color: Color(0xff1A494F),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            // Navigator.push(context,
+                            //     MaterialPageRoute(builder: (context) => Profile()));
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(right: 10),
+                            height: 15,
+                            width: 15,
+                            child: Image.asset(
+                              'assets/images/arrow-right.png',
+                              color: Color(0xff1A494F),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],

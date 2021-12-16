@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shipment/Element/Sidebar.dart';
-import 'package:shipment/Responsive.dart';
-import 'package:shipment/component/Made_Payment.dart';
+import 'package:shipment/Element/Responsive.dart';
+import 'package:shipment/component/Res_Client/Made_Payment.dart';
 import '../../../constants.dart';
 
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -117,7 +117,7 @@ class _PriceSummaryState extends State<PriceSummary> {
                 borderRadius: BorderRadius.circular(10.0),
                 color: Color(0xffFFFFFF),
               ),
-              height: MediaQuery.of(context).size.height * (51 / 100),
+              height: MediaQuery.of(context).size.height * (58 / 100),
               // height: 100,
               width: MediaQuery.of(context).size.width * (38 / 100),
 
@@ -196,7 +196,8 @@ class _PriceSummaryState extends State<PriceSummary> {
                     ],
                   ),
                   Container(
-                      margin: EdgeInsets.only(top: 10, right: 10, left: 10),
+                      margin: EdgeInsets.only(
+                          top: 10, right: 10, left: 10, bottom: 10),
                       child: Image.asset(
                         'assets/images/Cars.png',
                       ))
@@ -213,7 +214,7 @@ class _PriceSummaryState extends State<PriceSummary> {
                 borderRadius: BorderRadius.circular(10.0),
                 color: Color(0xffFFFFFF),
               ),
-              height: MediaQuery.of(context).size.height * (40 / 100),
+              height: MediaQuery.of(context).size.height * (60 / 100),
               // height: 100,
               width: MediaQuery.of(context).size.width * (90 / 100),
 
@@ -244,7 +245,8 @@ class _PriceSummaryState extends State<PriceSummary> {
                     ],
                   ),
                   Container(
-                      margin: EdgeInsets.only(top: 10, right: 10, left: 10),
+                      margin: EdgeInsets.only(
+                          top: 10, right: 10, left: 10, bottom: 10),
                       child: Image.asset(
                         'assets/images/Cars.png',
                       ))

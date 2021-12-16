@@ -1,8 +1,15 @@
-import 'package:flutter/foundation.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:intl/intl.dart';
+
 import 'package:shipment/Element/Sidebar.dart';
-import 'package:shipment/Responsive.dart';
-import 'package:shipment/component/GoodsInfo.dart';
+import 'package:shipment/Element/Responsive.dart';
+import 'package:shipment/Provider/Provider.dart';
+import 'package:shipment/component/Res_Client/GoodsInfo.dart';
+
 import '../../../constants.dart';
 
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -17,10 +24,108 @@ class SelectReceptionist extends StatefulWidget {
 class _SelectReceptionistState extends State<SelectReceptionist> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   DateTime? selectedDate = DateTime.now();
+
+  final TextEditingController _datecontrollr = new TextEditingController();
+  final TextEditingController receptionistName = TextEditingController();
+  final TextEditingController _emails = TextEditingController();
+
+  final TextEditingController _contactnumber = TextEditingController();
+  final TextEditingController _address = TextEditingController();
+
+  final TextEditingController _timecontrollr = new TextEditingController();
+  TextEditingController pickUpTextEditingController = TextEditingController();
+
+  DateTime _startDate = DateTime.now();
+
   var h, w;
   var exp = true, openSUBMENU = false;
   var exp2 = -1;
-  int _selectedIndex = 0;
+
+  TimeOfDay initialTime = TimeOfDay.now();
+
+  _selectTime(BuildContext context) async {
+    final TimeOfDay? timeOfDay = await showTimePicker(
+      context: context,
+      initialTime: initialTime,
+      initialEntryMode: TimePickerEntryMode.dial,
+    );
+    if (timeOfDay != null && timeOfDay != initialTime) {
+      setState(() {
+        initialTime = timeOfDay;
+      });
+    }
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate!,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101));
+
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+      });
+    builder:
+    (context, child) {
+      return Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(top: 50.0),
+            child: Container(
+              height: 100,
+              width: 100,
+              child: child,
+            ),
+          ),
+        ],
+      );
+    };
+  }
+
+  List<String> itemList = [];
+
+  List getSuggestions(String query) {
+    List matches = [];
+    matches.addAll(itemList);
+    matches.retainWhere((s) => s.toLowerCase().contains(query.toLowerCase()));
+    return matches;
+  }
+
+  List<String> emailList = [];
+
+  List getSuggestions2(String query) {
+    List matches = [];
+    matches.addAll(emailList);
+    matches.retainWhere((s) => s.toLowerCase().contains(query.toLowerCase()));
+    return matches;
+  }
+
+  List<String> contactList = [];
+
+  List getSuggestions3(String query) {
+    List matches = [];
+    matches.addAll(contactList);
+    matches.retainWhere((s) => s.toLowerCase().contains(query.toLowerCase()));
+    return matches;
+  }
+
+  List<String> addressList = [];
+
+  List getSuggestions4(String query) {
+    List matches = [];
+    matches.addAll(addressList);
+    matches.retainWhere((s) => s.toLowerCase().contains(query.toLowerCase()));
+    return matches;
+  }
+
+  @override
+  void initState() {
+// TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     h = MediaQuery.of(context).size.height;
@@ -217,36 +322,44 @@ class _SelectReceptionistState extends State<SelectReceptionist> {
                       // pickupInfo(),
                     ],
                   ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => GoodsInfo()));
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(
-                        top: 15, left: 30, right: 30, bottom: 50),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50.0),
-                        color: Color(0xff1F2326)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                            margin: EdgeInsets.all(15),
-                            // color: Colors.lime,
-                            child: Text("Proceed to Goods",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                ))),
-                        Container(
-                          margin: EdgeInsets.only(top: 15, right: 10, left: 30),
-                          height: 30,
-                          // width: 300,
-                          child: Image.asset('assets/images/arrow-right.png'),
-                        ),
-                      ],
+                LimitedBox(
+                  maxWidth: 300,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => GoodsInfo()));
+                    },
+                    child: Container(
+                      width: 50,
+                      margin: EdgeInsets.only(
+                          top: 15, left: 15, right: 20, bottom: 50),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50.0),
+                          color: Color(0xff1F2326)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              margin: EdgeInsets.all(15),
+
+                              // width: MediaQuery.of(context).size.width * 0.8,
+                              // color: Colors.lime,
+                              child: Center(
+                                  child: Text("Proceed to Payment",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                      )))),
+                          Container(
+                            margin:
+                                EdgeInsets.only(top: 15, right: 10, left: 30),
+                            height: 30,
+                            // width: 300,
+                            child: Image.asset('assets/images/arrow-right.png'),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -287,35 +400,67 @@ class _SelectReceptionistState extends State<SelectReceptionist> {
         ),
         Container(
           margin: EdgeInsets.fromLTRB(15, 10, 15, 10),
-          child: TextFormField(
-            initialValue: "",
-            onChanged: (v) {
-              setState(() {
-                // userEmail = v.toLowerCase();
-              });
+          child: TypeAheadField(
+            hideSuggestionsOnKeyboardHide: false,
+            textFieldConfiguration: TextFieldConfiguration(
+              controller: this.receptionistName,
+              onChanged: (university) {
+                setState(() {
+                  // universityName = university;
+                });
+                // print("object $universityName");
+              },
+              decoration: InputDecoration(
+                  fillColor: Color(0xffF5F6FA),
+                  filled: true,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                  ),
+                  focusedBorder: new OutlineInputBorder(
+                    // borderRadius: new BorderRadius.circular(25.0),
+                    borderSide:
+                        BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                    borderSide:
+                        BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                    borderSide:
+                        BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                  ),
+                  // border: InputBorder.none,
+                  hintText: "Enter Name",
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
+            ),
+            suggestionsCallback: (v) {
+              return getSuggestions("$v");
             },
-            style: TextStyle(color: Colors.black54, fontSize: 17),
-            decoration: InputDecoration(
-                fillColor: Color(0xffF5F6FA),
-                filled: true,
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                ),
-                focusedBorder: new OutlineInputBorder(
-                  // borderRadius: new BorderRadius.circular(25.0),
-                  borderSide: BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                ),
-                errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(4)),
-                  borderSide: BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                ),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(4)),
-                  borderSide: BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                ),
-                // border: InputBorder.none,
-                hintText: "Shishank Barua",
-                hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
+            itemBuilder: (context, suggestion) {
+              return ListTile(
+                title: Text(suggestion.toString()),
+              );
+            },
+            transitionBuilder: (context, suggestionsBox, controller) {
+              return suggestionsBox;
+            },
+            // noItemsFoundBuilder: (context) => Container(
+            //   height: 100,
+            //   child: Center(
+            //     child: Text(
+            //       'Do you want to add this name',
+            //       style: TextStyle(fontSize: 18),
+            //     ),
+            //   ),
+            // ),
+            onSuggestionSelected: (suggestion) {
+              this.receptionistName.text = suggestion.toString();
+
+              // print("universityName $universityName");
+            },
           ),
         ),
         Container(
@@ -329,36 +474,62 @@ class _SelectReceptionistState extends State<SelectReceptionist> {
         ),
         Container(
           margin: EdgeInsets.fromLTRB(15, 10, 15, 10),
-          width: MediaQuery.of(context).size.width * (50 / 100),
-          child: TextFormField(
-            initialValue: "",
-            onChanged: (v) {
-              setState(() {
-                // userEmail = v.toLowerCase();
-              });
+          child: TypeAheadField(
+            hideSuggestionsOnKeyboardHide: false,
+            textFieldConfiguration: TextFieldConfiguration(
+              controller: this._emails,
+              onChanged: (value) {},
+              decoration: InputDecoration(
+                  fillColor: Color(0xffF5F6FA),
+                  filled: true,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                  ),
+                  focusedBorder: new OutlineInputBorder(
+                    // borderRadius: new BorderRadius.circular(25.0),
+                    borderSide:
+                        BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                    borderSide:
+                        BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                    borderSide:
+                        BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                  ),
+                  // border: InputBorder.none,
+                  hintText: "Enter email address",
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
+            ),
+            suggestionsCallback: (v) {
+              return getSuggestions2("$v");
             },
-            style: TextStyle(color: Colors.black54, fontSize: 17),
-            decoration: InputDecoration(
-                fillColor: Color(0xffF5F6FA),
-                filled: true,
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                ),
-                focusedBorder: new OutlineInputBorder(
-                  // borderRadius: new BorderRadius.circular(25.0),
-                  borderSide: BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                ),
-                errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(4)),
-                  borderSide: BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                ),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(4)),
-                  borderSide: BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                ),
-                // border: InputBorder.none,
-                hintText: "Shishank.Barua@gamil.com",
-                hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
+            itemBuilder: (context, suggestion) {
+              return ListTile(
+                title: Text(suggestion.toString()),
+              );
+            },
+            transitionBuilder: (context, suggestionsBox, controller) {
+              return suggestionsBox;
+            },
+            // noItemsFoundBuilder: (context) => Container(
+            //   height: 100,
+            //   child: Center(
+            //     child: Text(
+            //       'Do you want to add this name',
+            //       style: TextStyle(fontSize: 18),
+            //     ),
+            //   ),
+            // ),
+            onSuggestionSelected: (suggestion) {
+              this._emails.text = suggestion.toString();
+
+              // print("universityName $universityName");
+            },
           ),
         ),
         Container(
@@ -372,36 +543,62 @@ class _SelectReceptionistState extends State<SelectReceptionist> {
         ),
         Container(
           margin: EdgeInsets.fromLTRB(15, 10, 15, 10),
-          width: MediaQuery.of(context).size.width * (50 / 100),
-          child: TextFormField(
-            initialValue: "",
-            onChanged: (v) {
-              setState(() {
-                // userEmail = v.toLowerCase();
-              });
+          child: TypeAheadField(
+            hideSuggestionsOnKeyboardHide: false,
+            textFieldConfiguration: TextFieldConfiguration(
+              controller: this._contactnumber,
+              onChanged: (value) {},
+              decoration: InputDecoration(
+                  fillColor: Color(0xffF5F6FA),
+                  filled: true,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                  ),
+                  focusedBorder: new OutlineInputBorder(
+                    // borderRadius: new BorderRadius.circular(25.0),
+                    borderSide:
+                        BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                    borderSide:
+                        BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                    borderSide:
+                        BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                  ),
+                  // border: InputBorder.none,
+                  hintText: "Shishank Barua",
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
+            ),
+            suggestionsCallback: (v) {
+              return getSuggestions3("$v");
             },
-            style: TextStyle(color: Colors.black54, fontSize: 17),
-            decoration: InputDecoration(
-                fillColor: Color(0xffF5F6FA),
-                filled: true,
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                ),
-                focusedBorder: new OutlineInputBorder(
-                  // borderRadius: new BorderRadius.circular(25.0),
-                  borderSide: BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                ),
-                errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(4)),
-                  borderSide: BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                ),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(4)),
-                  borderSide: BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                ),
-                // border: InputBorder.none,
-                hintText: "+1 835 795 7981",
-                hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
+            itemBuilder: (context, suggestion) {
+              return ListTile(
+                title: Text(suggestion.toString()),
+              );
+            },
+            transitionBuilder: (context, suggestionsBox, controller) {
+              return suggestionsBox;
+            },
+            // noItemsFoundBuilder: (context) => Container(
+            //   height: 100,
+            //   child: Center(
+            //     child: Text(
+            //       'Do you want to add this name',
+            //       style: TextStyle(fontSize: 18),
+            //     ),
+            //   ),
+            // ),
+            onSuggestionSelected: (suggestion) {
+              this._contactnumber.text = suggestion.toString();
+
+              // print("universityName $universityName");
+            },
           ),
         ),
         Container(
@@ -415,36 +612,62 @@ class _SelectReceptionistState extends State<SelectReceptionist> {
         ),
         Container(
           margin: EdgeInsets.fromLTRB(15, 10, 15, 10),
-          width: MediaQuery.of(context).size.width * (50 / 100),
-          child: TextFormField(
-            initialValue: "",
-            onChanged: (v) {
-              setState(() {
-                // userEmail = v.toLowerCase();
-              });
+          child: TypeAheadField(
+            hideSuggestionsOnKeyboardHide: false,
+            textFieldConfiguration: TextFieldConfiguration(
+              controller: this._address,
+              onChanged: (value) {},
+              decoration: InputDecoration(
+                  fillColor: Color(0xffF5F6FA),
+                  filled: true,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                  ),
+                  focusedBorder: new OutlineInputBorder(
+                    // borderRadius: new BorderRadius.circular(25.0),
+                    borderSide:
+                        BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                    borderSide:
+                        BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                    borderSide:
+                        BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                  ),
+                  // border: InputBorder.none,
+                  hintText: "Shishank Barua",
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
+            ),
+            suggestionsCallback: (v) {
+              return getSuggestions4("$v");
             },
-            style: TextStyle(color: Colors.black54, fontSize: 17),
-            decoration: InputDecoration(
-                fillColor: Color(0xffF5F6FA),
-                filled: true,
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                ),
-                focusedBorder: new OutlineInputBorder(
-                  // borderRadius: new BorderRadius.circular(25.0),
-                  borderSide: BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                ),
-                errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(4)),
-                  borderSide: BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                ),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(4)),
-                  borderSide: BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                ),
-                // border: InputBorder.none,
-                hintText: "252 , Brooklyn ",
-                hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
+            itemBuilder: (context, suggestion) {
+              return ListTile(
+                title: Text(suggestion.toString()),
+              );
+            },
+            transitionBuilder: (context, suggestionsBox, controller) {
+              return suggestionsBox;
+            },
+            // noItemsFoundBuilder: (context) => Container(
+            //   height: 100,
+            //   child: Center(
+            //     child: Text(
+            //       'Do you want to add this name',
+            //       style: TextStyle(fontSize: 18),
+            //     ),
+            //   ),
+            // ),
+            onSuggestionSelected: (suggestion) {
+              this._address.text = suggestion.toString();
+
+              // print("universityName $universityName");
+            },
           ),
         ),
       ],
@@ -518,6 +741,7 @@ class _SelectReceptionistState extends State<SelectReceptionist> {
           child: TextFormField(
             initialValue: "",
             onChanged: (v) {
+              // findPlace(v);
               setState(() {
                 // userEmail = v.toLowerCase();
               });
@@ -542,6 +766,7 @@ class _SelectReceptionistState extends State<SelectReceptionist> {
                   borderSide: BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
                 ),
                 // border: InputBorder.none,
+
                 hintText:
                     "Fourwinds, Upper Campsfield Road, Woodstock, OX20 1QG",
                 hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
@@ -567,46 +792,104 @@ class _SelectReceptionistState extends State<SelectReceptionist> {
                           )),
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 10, right: 10, left: 15),
-                      width: MediaQuery.of(context).size.width * (15 / 100),
-                      child: TextFormField(
-                        initialValue: "",
-                        onChanged: (v) {
-                          setState(() {
-                            // userEmail = v.toLowerCase();
-                          });
-                        },
-                        style: TextStyle(color: Colors.black54, fontSize: 17),
-                        decoration: InputDecoration(
-                            fillColor: Color(0xffF5F6FA),
-                            filled: true,
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  width: 1.2, color: Color(0xffF5F6FA)),
-                            ),
-                            focusedBorder: new OutlineInputBorder(
-                              // borderRadius: new BorderRadius.circular(25.0),
-                              borderSide: BorderSide(
-                                  width: 1.2, color: Color(0xffF5F6FA)),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(4)),
-                              borderSide: BorderSide(
-                                  width: 1.2, color: Color(0xffF5F6FA)),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(4)),
-                              borderSide: BorderSide(
-                                  width: 1.2, color: Color(0xffF5F6FA)),
-                            ),
-                            // border: InputBorder.none,
-                            hintText: "10.08.2021",
-                            hintStyle:
-                                TextStyle(color: Colors.grey, fontSize: 15)),
+                      margin: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: Color(0xffFFFFFF),
+                        // border: Border.all(color:)
+                      ),
+                      child: Row(
+                        children: [
+                          new Expanded(
+                            child: new TextField(
+                                enabled: false,
+                                controller: _datecontrollr,
+                                decoration: InputDecoration(
+                                    fillColor: Color(0xffF5F6FA),
+                                    filled: true,
+                                    // prefixIcon: Icon(Icons.search),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          width: 1.2, color: Color(0xffF5F6FA)),
+                                    ),
+                                    focusedBorder: new OutlineInputBorder(
+                                      // borderRadius: new BorderRadius.circular(25.0),
+                                      borderSide: BorderSide(
+                                          width: 1.2, color: Color(0xffF5F6FA)),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(4)),
+                                      borderSide: BorderSide(
+                                          width: 1.2, color: Color(0xffF5F6FA)),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(4)),
+                                      borderSide: BorderSide(
+                                          width: 1.2, color: Color(0xffF5F6FA)),
+                                    ),
+                                    hintText: 'Enter Start Date',
+                                    hintStyle: TextStyle(
+                                        color: Colors.grey, fontSize: 15))),
+                          ),
+                          IconButton(
+                              onPressed: () async {
+                                await _selectDate(context);
+                                _datecontrollr.text = (DateFormat.yMd()
+                                    .format(_startDate)
+                                    .toString());
+                                // _startDate.toString();
+                              },
+                              icon: ImageIcon(
+                                AssetImage('assets/images/calendar.png'),
+                                color: Color(0xff1F2326),
+                                size: 65,
+                              )),
+                        ],
                       ),
                     ),
+                    // Container(
+                    //   margin: EdgeInsets.only(top: 10, right: 10, left: 15),
+                    //   width: MediaQuery.of(context).size.width * (15 / 100),
+                    //   child: TextFormField(
+                    //     initialValue: "",
+                    //     onChanged: (v) {
+                    //       setState(() {
+                    //         // userEmail = v.toLowerCase();
+                    //       });
+                    //     },
+                    //     style: TextStyle(color: Colors.black54, fontSize: 17),
+                    //     decoration: InputDecoration(
+                    //         fillColor: Color(0xffF5F6FA),
+                    //         filled: true,
+                    //         enabledBorder: OutlineInputBorder(
+                    //           borderSide: BorderSide(
+                    //               width: 1.2, color: Color(0xffF5F6FA)),
+                    //         ),
+                    //         focusedBorder: new OutlineInputBorder(
+                    //           // borderRadius: new BorderRadius.circular(25.0),
+                    //           borderSide: BorderSide(
+                    //               width: 1.2, color: Color(0xffF5F6FA)),
+                    //         ),
+                    //         errorBorder: OutlineInputBorder(
+                    //           borderRadius:
+                    //               BorderRadius.all(Radius.circular(4)),
+                    //           borderSide: BorderSide(
+                    //               width: 1.2, color: Color(0xffF5F6FA)),
+                    //         ),
+                    //         focusedErrorBorder: OutlineInputBorder(
+                    //           borderRadius:
+                    //               BorderRadius.all(Radius.circular(4)),
+                    //           borderSide: BorderSide(
+                    //               width: 1.2, color: Color(0xffF5F6FA)),
+                    //         ),
+                    //         // border: InputBorder.none,
+                    //         hintText: "10.08.2021",
+                    //         hintStyle:
+                    //             TextStyle(color: Colors.grey, fontSize: 15)),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -631,47 +914,105 @@ class _SelectReceptionistState extends State<SelectReceptionist> {
                         style: TextStyle(fontSize: 14),
                       )),
                     ),
+
                     Container(
-                      margin: EdgeInsets.only(top: 10, right: 10, left: 15),
-                      width: MediaQuery.of(context).size.width * (15 / 100),
-                      child: TextFormField(
-                        initialValue: "",
-                        onChanged: (v) {
-                          setState(() {
-                            // userEmail = v.toLowerCase();
-                          });
-                        },
-                        style: TextStyle(color: Colors.black54, fontSize: 17),
-                        decoration: InputDecoration(
-                            fillColor: Color(0xffF5F6FA),
-                            filled: true,
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  width: 1.2, color: Color(0xffF5F6FA)),
-                            ),
-                            focusedBorder: new OutlineInputBorder(
-                              // borderRadius: new BorderRadius.circular(25.0),
-                              borderSide: BorderSide(
-                                  width: 1.2, color: Color(0xffF5F6FA)),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(4)),
-                              borderSide: BorderSide(
-                                  width: 1.2, color: Color(0xffF5F6FA)),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(4)),
-                              borderSide: BorderSide(
-                                  width: 1.2, color: Color(0xffF5F6FA)),
-                            ),
-                            // border: InputBorder.none,
-                            hintText: "10 AM",
-                            hintStyle:
-                                TextStyle(color: Colors.grey, fontSize: 15)),
+                      margin: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: Color(0xffFFFFFF),
+                        // border: Border.all(color:)
+                      ),
+                      child: Row(
+                        children: [
+                          new Expanded(
+                            child: new TextField(
+                                enabled: false,
+                                controller: _timecontrollr,
+                                decoration: InputDecoration(
+                                    fillColor: Color(0xffF5F6FA),
+                                    filled: true,
+                                    // prefixIcon: Icon(Icons.search),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          width: 1.2, color: Color(0xffF5F6FA)),
+                                    ),
+                                    focusedBorder: new OutlineInputBorder(
+                                      // borderRadius: new BorderRadius.circular(25.0),
+                                      borderSide: BorderSide(
+                                          width: 1.2, color: Color(0xffF5F6FA)),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(4)),
+                                      borderSide: BorderSide(
+                                          width: 1.2, color: Color(0xffF5F6FA)),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(4)),
+                                      borderSide: BorderSide(
+                                          width: 1.2, color: Color(0xffF5F6FA)),
+                                    ),
+                                    hintText: 'Enter Time',
+                                    hintStyle: TextStyle(
+                                        color: Colors.grey, fontSize: 15))),
+                          ),
+                          IconButton(
+                            onPressed: () async {
+                              await _selectTime(context);
+                              _timecontrollr.text =
+                                  ("${initialTime.hour}:${initialTime.minute}")
+                                      .toString();
+                              // _startDate.toString();
+                            },
+                            icon: Icon(Icons.access_alarm, size: 30),
+                            color: Color(0xff1F2326),
+                          ),
+                        ],
                       ),
                     ),
+
+                    // Container(
+                    //   margin: EdgeInsets.only(top: 10, right: 10, left: 15),
+                    //   width: MediaQuery.of(context).size.width * (15 / 100),
+                    //   child: TextFormField(
+                    //     initialValue: "",
+                    //     onChanged: (v) {
+                    //       setState(() {
+                    //         // userEmail = v.toLowerCase();
+                    //       });
+                    //     },
+                    //     style: TextStyle(color: Colors.black54, fontSize: 17),
+                    //     decoration: InputDecoration(
+                    //         fillColor: Color(0xffF5F6FA),
+                    //         filled: true,
+                    //         enabledBorder: OutlineInputBorder(
+                    //           borderSide: BorderSide(
+                    //               width: 1.2, color: Color(0xffF5F6FA)),
+                    //         ),
+                    //         focusedBorder: new OutlineInputBorder(
+                    //           // borderRadius: new BorderRadius.circular(25.0),
+                    //           borderSide: BorderSide(
+                    //               width: 1.2, color: Color(0xffF5F6FA)),
+                    //         ),
+                    //         errorBorder: OutlineInputBorder(
+                    //           borderRadius:
+                    //               BorderRadius.all(Radius.circular(4)),
+                    //           borderSide: BorderSide(
+                    //               width: 1.2, color: Color(0xffF5F6FA)),
+                    //         ),
+                    //         focusedErrorBorder: OutlineInputBorder(
+                    //           borderRadius:
+                    //               BorderRadius.all(Radius.circular(4)),
+                    //           borderSide: BorderSide(
+                    //               width: 1.2, color: Color(0xffF5F6FA)),
+                    //         ),
+                    //         // border: InputBorder.none,
+                    //         hintText: "10 AM",
+                    //         hintStyle:
+                    //             TextStyle(color: Colors.grey, fontSize: 15)),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -690,41 +1031,60 @@ class _SelectReceptionistState extends State<SelectReceptionist> {
                     )),
               ),
               Container(
-                margin: EdgeInsets.only(top: 10, right: 15, left: 15),
-                // width: MediaQuery.of(context).size.width * (15 / 100),
-                child: TextFormField(
-                  initialValue: "",
-                  onChanged: (v) {
-                    setState(() {
-                      // userEmail = v.toLowerCase();
-                    });
-                  },
-                  style: TextStyle(color: Colors.black54, fontSize: 17),
-                  decoration: InputDecoration(
-                      fillColor: Color(0xffF5F6FA),
-                      filled: true,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                      ),
-                      focusedBorder: new OutlineInputBorder(
-                        // borderRadius: new BorderRadius.circular(25.0),
-                        borderSide:
-                            BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(4)),
-                        borderSide:
-                            BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(4)),
-                        borderSide:
-                            BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                      ),
-                      // border: InputBorder.none,
-                      hintText: "10.08.2021",
-                      hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
+                margin: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: Color(0xffFFFFFF),
+                  // border: Border.all(color:)
+                ),
+                child: Row(
+                  children: [
+                    new Expanded(
+                      child: new TextField(
+                          enabled: false,
+                          controller: _datecontrollr,
+                          decoration: InputDecoration(
+                              fillColor: Color(0xffF5F6FA),
+                              filled: true,
+                              // prefixIcon: Icon(Icons.search),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    width: 1.2, color: Color(0xffF5F6FA)),
+                              ),
+                              focusedBorder: new OutlineInputBorder(
+                                // borderRadius: new BorderRadius.circular(25.0),
+                                borderSide: BorderSide(
+                                    width: 1.2, color: Color(0xffF5F6FA)),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(4)),
+                                borderSide: BorderSide(
+                                    width: 1.2, color: Color(0xffF5F6FA)),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(4)),
+                                borderSide: BorderSide(
+                                    width: 1.2, color: Color(0xffF5F6FA)),
+                              ),
+                              hintText: 'Enter Start Date',
+                              hintStyle:
+                                  TextStyle(color: Colors.grey, fontSize: 15))),
+                    ),
+                    IconButton(
+                        onPressed: () async {
+                          await _selectDate(context);
+                          _datecontrollr.text =
+                              (DateFormat.yMd().format(_startDate).toString());
+                          // _startDate.toString();
+                        },
+                        icon: ImageIcon(
+                          AssetImage('assets/images/calendar.png'),
+                          color: Color(0xff1F2326),
+                          size: 65,
+                        )),
+                  ],
                 ),
               ),
               Container(
@@ -738,41 +1098,59 @@ class _SelectReceptionistState extends State<SelectReceptionist> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 10, right: 15, left: 15),
-                // width: MediaQuery.of(context).size.width * (15 / 100),
-                child: TextFormField(
-                  initialValue: "",
-                  onChanged: (v) {
-                    setState(() {
-                      // userEmail = v.toLowerCase();
-                    });
-                  },
-                  style: TextStyle(color: Colors.black54, fontSize: 17),
-                  decoration: InputDecoration(
-                      fillColor: Color(0xffF5F6FA),
-                      filled: true,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                      ),
-                      focusedBorder: new OutlineInputBorder(
-                        // borderRadius: new BorderRadius.circular(25.0),
-                        borderSide:
-                            BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(4)),
-                        borderSide:
-                            BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(4)),
-                        borderSide:
-                            BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                      ),
-                      // border: InputBorder.none,
-                      hintText: "10 AM",
-                      hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
+                margin: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: Color(0xffFFFFFF),
+                  // border: Border.all(color:)
+                ),
+                child: Row(
+                  children: [
+                    new Expanded(
+                      child: new TextField(
+                          enabled: false,
+                          controller: _timecontrollr,
+                          decoration: InputDecoration(
+                              fillColor: Color(0xffF5F6FA),
+                              filled: true,
+                              // prefixIcon: Icon(Icons.search),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    width: 1.2, color: Color(0xffF5F6FA)),
+                              ),
+                              focusedBorder: new OutlineInputBorder(
+                                // borderRadius: new BorderRadius.circular(25.0),
+                                borderSide: BorderSide(
+                                    width: 1.2, color: Color(0xffF5F6FA)),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(4)),
+                                borderSide: BorderSide(
+                                    width: 1.2, color: Color(0xffF5F6FA)),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(4)),
+                                borderSide: BorderSide(
+                                    width: 1.2, color: Color(0xffF5F6FA)),
+                              ),
+                              hintText: 'Enter Time',
+                              hintStyle:
+                                  TextStyle(color: Colors.grey, fontSize: 15))),
+                    ),
+                    IconButton(
+                      onPressed: () async {
+                        await _selectTime(context);
+                        _timecontrollr.text =
+                            ("${initialTime.hour}:${initialTime.minute}")
+                                .toString();
+                        // _startDate.toString();
+                      },
+                      icon: Icon(Icons.access_alarm, size: 30),
+                      color: Color(0xff1F2326),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -790,41 +1168,60 @@ class _SelectReceptionistState extends State<SelectReceptionist> {
                     )),
               ),
               Container(
-                margin: EdgeInsets.only(top: 10, right: 15, left: 15),
-                // width: MediaQuery.of(context).size.width * (15 / 100),
-                child: TextFormField(
-                  initialValue: "",
-                  onChanged: (v) {
-                    setState(() {
-                      // userEmail = v.toLowerCase();
-                    });
-                  },
-                  style: TextStyle(color: Colors.black54, fontSize: 17),
-                  decoration: InputDecoration(
-                      fillColor: Color(0xffF5F6FA),
-                      filled: true,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                      ),
-                      focusedBorder: new OutlineInputBorder(
-                        // borderRadius: new BorderRadius.circular(25.0),
-                        borderSide:
-                            BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(4)),
-                        borderSide:
-                            BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(4)),
-                        borderSide:
-                            BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                      ),
-                      // border: InputBorder.none,
-                      hintText: "10.08.2021",
-                      hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
+                margin: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: Color(0xffFFFFFF),
+                  // border: Border.all(color:)
+                ),
+                child: Row(
+                  children: [
+                    new Expanded(
+                      child: new TextField(
+                          enabled: false,
+                          controller: _datecontrollr,
+                          decoration: InputDecoration(
+                              fillColor: Color(0xffF5F6FA),
+                              filled: true,
+                              // prefixIcon: Icon(Icons.search),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    width: 1.2, color: Color(0xffF5F6FA)),
+                              ),
+                              focusedBorder: new OutlineInputBorder(
+                                // borderRadius: new BorderRadius.circular(25.0),
+                                borderSide: BorderSide(
+                                    width: 1.2, color: Color(0xffF5F6FA)),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(4)),
+                                borderSide: BorderSide(
+                                    width: 1.2, color: Color(0xffF5F6FA)),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(4)),
+                                borderSide: BorderSide(
+                                    width: 1.2, color: Color(0xffF5F6FA)),
+                              ),
+                              hintText: 'Enter Start Date',
+                              hintStyle:
+                                  TextStyle(color: Colors.grey, fontSize: 15))),
+                    ),
+                    IconButton(
+                        onPressed: () async {
+                          await _selectDate(context);
+                          _datecontrollr.text =
+                              (DateFormat.yMd().format(_startDate).toString());
+                          // _startDate.toString();
+                        },
+                        icon: ImageIcon(
+                          AssetImage('assets/images/calendar.png'),
+                          color: Color(0xff1F2326),
+                          size: 65,
+                        )),
+                  ],
                 ),
               ),
               Container(
@@ -838,41 +1235,59 @@ class _SelectReceptionistState extends State<SelectReceptionist> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 10, right: 15, left: 15),
-                // width: MediaQuery.of(context).size.width * (15 / 100),
-                child: TextFormField(
-                  initialValue: "",
-                  onChanged: (v) {
-                    setState(() {
-                      // userEmail = v.toLowerCase();
-                    });
-                  },
-                  style: TextStyle(color: Colors.black54, fontSize: 17),
-                  decoration: InputDecoration(
-                      fillColor: Color(0xffF5F6FA),
-                      filled: true,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                      ),
-                      focusedBorder: new OutlineInputBorder(
-                        // borderRadius: new BorderRadius.circular(25.0),
-                        borderSide:
-                            BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(4)),
-                        borderSide:
-                            BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(4)),
-                        borderSide:
-                            BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                      ),
-                      // border: InputBorder.none,
-                      hintText: "10 AM",
-                      hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
+                margin: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: Color(0xffFFFFFF),
+                  // border: Border.all(color:)
+                ),
+                child: Row(
+                  children: [
+                    new Expanded(
+                      child: new TextField(
+                          enabled: false,
+                          controller: _timecontrollr,
+                          decoration: InputDecoration(
+                              fillColor: Color(0xffF5F6FA),
+                              filled: true,
+                              // prefixIcon: Icon(Icons.search),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    width: 1.2, color: Color(0xffF5F6FA)),
+                              ),
+                              focusedBorder: new OutlineInputBorder(
+                                // borderRadius: new BorderRadius.circular(25.0),
+                                borderSide: BorderSide(
+                                    width: 1.2, color: Color(0xffF5F6FA)),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(4)),
+                                borderSide: BorderSide(
+                                    width: 1.2, color: Color(0xffF5F6FA)),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(4)),
+                                borderSide: BorderSide(
+                                    width: 1.2, color: Color(0xffF5F6FA)),
+                              ),
+                              hintText: 'Enter Time',
+                              hintStyle:
+                                  TextStyle(color: Colors.grey, fontSize: 15))),
+                    ),
+                    IconButton(
+                      onPressed: () async {
+                        await _selectTime(context);
+                        _timecontrollr.text =
+                            ("${initialTime.hour}:${initialTime.minute}")
+                                .toString();
+                        // _startDate.toString();
+                      },
+                      icon: Icon(Icons.access_alarm, size: 30),
+                      color: Color(0xff1F2326),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -1332,44 +1747,65 @@ class _SelectReceptionistState extends State<SelectReceptionist> {
                             )),
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: 10, right: 10, left: 15),
-                        width: MediaQuery.of(context).size.width * (15 / 100),
-                        child: TextFormField(
-                          initialValue: "",
-                          onChanged: (v) {
-                            setState(() {
-                              // userEmail = v.toLowerCase();
-                            });
-                          },
-                          style: TextStyle(color: Colors.black54, fontSize: 17),
-                          decoration: InputDecoration(
-                              fillColor: Color(0xffF5F6FA),
-                              filled: true,
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    width: 1.2, color: Color(0xffF5F6FA)),
-                              ),
-                              focusedBorder: new OutlineInputBorder(
-                                // borderRadius: new BorderRadius.circular(25.0),
-                                borderSide: BorderSide(
-                                    width: 1.2, color: Color(0xffF5F6FA)),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(4)),
-                                borderSide: BorderSide(
-                                    width: 1.2, color: Color(0xffF5F6FA)),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(4)),
-                                borderSide: BorderSide(
-                                    width: 1.2, color: Color(0xffF5F6FA)),
-                              ),
-                              // border: InputBorder.none,
-                              hintText: "10.08.2021",
-                              hintStyle:
-                                  TextStyle(color: Colors.grey, fontSize: 15)),
+                        margin: EdgeInsets.all(15),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: Color(0xffFFFFFF),
+                          // border: Border.all(color:)
+                        ),
+                        child: Row(
+                          children: [
+                            new Expanded(
+                              child: new TextField(
+                                  enabled: false,
+                                  controller: _datecontrollr,
+                                  decoration: InputDecoration(
+                                      fillColor: Color(0xffF5F6FA),
+                                      filled: true,
+                                      // prefixIcon: Icon(Icons.search),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            width: 1.2,
+                                            color: Color(0xffF5F6FA)),
+                                      ),
+                                      focusedBorder: new OutlineInputBorder(
+                                        // borderRadius: new BorderRadius.circular(25.0),
+                                        borderSide: BorderSide(
+                                            width: 1.2,
+                                            color: Color(0xffF5F6FA)),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(4)),
+                                        borderSide: BorderSide(
+                                            width: 1.2,
+                                            color: Color(0xffF5F6FA)),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(4)),
+                                        borderSide: BorderSide(
+                                            width: 1.2,
+                                            color: Color(0xffF5F6FA)),
+                                      ),
+                                      hintText: 'Enter Start Date',
+                                      hintStyle: TextStyle(
+                                          color: Colors.grey, fontSize: 15))),
+                            ),
+                            IconButton(
+                                onPressed: () async {
+                                  await _selectDate(context);
+                                  _datecontrollr.text = (DateFormat.yMd()
+                                      .format(_startDate)
+                                      .toString());
+                                  // _startDate.toString();
+                                },
+                                icon: ImageIcon(
+                                  AssetImage('assets/images/calendar.png'),
+                                  color: Color(0xff1F2326),
+                                  size: 65,
+                                )),
+                          ],
                         ),
                       ),
                     ],
@@ -1397,44 +1833,63 @@ class _SelectReceptionistState extends State<SelectReceptionist> {
                         )),
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: 10, right: 10, left: 15),
-                        width: MediaQuery.of(context).size.width * (15 / 100),
-                        child: TextFormField(
-                          initialValue: "",
-                          onChanged: (v) {
-                            setState(() {
-                              // userEmail = v.toLowerCase();
-                            });
-                          },
-                          style: TextStyle(color: Colors.black54, fontSize: 17),
-                          decoration: InputDecoration(
-                              fillColor: Color(0xffF5F6FA),
-                              filled: true,
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    width: 1.2, color: Color(0xffF5F6FA)),
-                              ),
-                              focusedBorder: new OutlineInputBorder(
-                                // borderRadius: new BorderRadius.circular(25.0),
-                                borderSide: BorderSide(
-                                    width: 1.2, color: Color(0xffF5F6FA)),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(4)),
-                                borderSide: BorderSide(
-                                    width: 1.2, color: Color(0xffF5F6FA)),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(4)),
-                                borderSide: BorderSide(
-                                    width: 1.2, color: Color(0xffF5F6FA)),
-                              ),
-                              // border: InputBorder.none,
-                              hintText: "10 AM",
-                              hintStyle:
-                                  TextStyle(color: Colors.grey, fontSize: 15)),
+                        margin: EdgeInsets.all(15),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: Color(0xffFFFFFF),
+                          // border: Border.all(color:)
+                        ),
+                        child: Row(
+                          children: [
+                            new Expanded(
+                              child: new TextField(
+                                  enabled: false,
+                                  controller: _timecontrollr,
+                                  decoration: InputDecoration(
+                                      fillColor: Color(0xffF5F6FA),
+                                      filled: true,
+                                      // prefixIcon: Icon(Icons.search),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            width: 1.2,
+                                            color: Color(0xffF5F6FA)),
+                                      ),
+                                      focusedBorder: new OutlineInputBorder(
+                                        // borderRadius: new BorderRadius.circular(25.0),
+                                        borderSide: BorderSide(
+                                            width: 1.2,
+                                            color: Color(0xffF5F6FA)),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(4)),
+                                        borderSide: BorderSide(
+                                            width: 1.2,
+                                            color: Color(0xffF5F6FA)),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(4)),
+                                        borderSide: BorderSide(
+                                            width: 1.2,
+                                            color: Color(0xffF5F6FA)),
+                                      ),
+                                      hintText: 'Enter Time',
+                                      hintStyle: TextStyle(
+                                          color: Colors.grey, fontSize: 15))),
+                            ),
+                            IconButton(
+                              onPressed: () async {
+                                await _selectTime(context);
+                                _timecontrollr.text =
+                                    ("${initialTime.hour}:${initialTime.minute}")
+                                        .toString();
+                                // _startDate.toString();
+                              },
+                              icon: Icon(Icons.access_alarm, size: 30),
+                              color: Color(0xff1F2326),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -1455,41 +1910,61 @@ class _SelectReceptionistState extends State<SelectReceptionist> {
                       )),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 10, right: 15, left: 15),
-                  // width: MediaQuery.of(context).size.width * (15 / 100),
-                  child: TextFormField(
-                    initialValue: "",
-                    onChanged: (v) {
-                      setState(() {
-                        // userEmail = v.toLowerCase();
-                      });
-                    },
-                    style: TextStyle(color: Colors.black54, fontSize: 17),
-                    decoration: InputDecoration(
-                        fillColor: Color(0xffF5F6FA),
-                        filled: true,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                        ),
-                        focusedBorder: new OutlineInputBorder(
-                          // borderRadius: new BorderRadius.circular(25.0),
-                          borderSide:
-                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(4)),
-                          borderSide:
-                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(4)),
-                          borderSide:
-                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                        ),
-                        // border: InputBorder.none,
-                        hintText: "10.08.2021",
-                        hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
+                  margin: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Color(0xffFFFFFF),
+                    // border: Border.all(color:)
+                  ),
+                  child: Row(
+                    children: [
+                      new Expanded(
+                        child: new TextField(
+                            enabled: false,
+                            controller: _datecontrollr,
+                            decoration: InputDecoration(
+                                fillColor: Color(0xffF5F6FA),
+                                filled: true,
+                                // prefixIcon: Icon(Icons.search),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 1.2, color: Color(0xffF5F6FA)),
+                                ),
+                                focusedBorder: new OutlineInputBorder(
+                                  // borderRadius: new BorderRadius.circular(25.0),
+                                  borderSide: BorderSide(
+                                      width: 1.2, color: Color(0xffF5F6FA)),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(4)),
+                                  borderSide: BorderSide(
+                                      width: 1.2, color: Color(0xffF5F6FA)),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(4)),
+                                  borderSide: BorderSide(
+                                      width: 1.2, color: Color(0xffF5F6FA)),
+                                ),
+                                hintText: 'Enter Start Date',
+                                hintStyle: TextStyle(
+                                    color: Colors.grey, fontSize: 15))),
+                      ),
+                      IconButton(
+                          onPressed: () async {
+                            await _selectDate(context);
+                            _datecontrollr.text = (DateFormat.yMd()
+                                .format(_startDate)
+                                .toString());
+                            // _startDate.toString();
+                          },
+                          icon: ImageIcon(
+                            AssetImage('assets/images/calendar.png'),
+                            color: Color(0xff1F2326),
+                            size: 65,
+                          )),
+                    ],
                   ),
                 ),
                 Container(
@@ -1503,41 +1978,59 @@ class _SelectReceptionistState extends State<SelectReceptionist> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 10, right: 15, left: 15),
-                  // width: MediaQuery.of(context).size.width * (15 / 100),
-                  child: TextFormField(
-                    initialValue: "",
-                    onChanged: (v) {
-                      setState(() {
-                        // userEmail = v.toLowerCase();
-                      });
-                    },
-                    style: TextStyle(color: Colors.black54, fontSize: 17),
-                    decoration: InputDecoration(
-                        fillColor: Color(0xffF5F6FA),
-                        filled: true,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                        ),
-                        focusedBorder: new OutlineInputBorder(
-                          // borderRadius: new BorderRadius.circular(25.0),
-                          borderSide:
-                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(4)),
-                          borderSide:
-                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(4)),
-                          borderSide:
-                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                        ),
-                        // border: InputBorder.none,
-                        hintText: "10 AM",
-                        hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
+                  margin: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Color(0xffFFFFFF),
+                    // border: Border.all(color:)
+                  ),
+                  child: Row(
+                    children: [
+                      new Expanded(
+                        child: new TextField(
+                            enabled: false,
+                            controller: _timecontrollr,
+                            decoration: InputDecoration(
+                                fillColor: Color(0xffF5F6FA),
+                                filled: true,
+                                // prefixIcon: Icon(Icons.search),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 1.2, color: Color(0xffF5F6FA)),
+                                ),
+                                focusedBorder: new OutlineInputBorder(
+                                  // borderRadius: new BorderRadius.circular(25.0),
+                                  borderSide: BorderSide(
+                                      width: 1.2, color: Color(0xffF5F6FA)),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(4)),
+                                  borderSide: BorderSide(
+                                      width: 1.2, color: Color(0xffF5F6FA)),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(4)),
+                                  borderSide: BorderSide(
+                                      width: 1.2, color: Color(0xffF5F6FA)),
+                                ),
+                                hintText: 'Enter Time',
+                                hintStyle: TextStyle(
+                                    color: Colors.grey, fontSize: 15))),
+                      ),
+                      IconButton(
+                        onPressed: () async {
+                          await _selectTime(context);
+                          _timecontrollr.text =
+                              ("${initialTime.hour}:${initialTime.minute}")
+                                  .toString();
+                          // _startDate.toString();
+                        },
+                        icon: Icon(Icons.access_alarm, size: 30),
+                        color: Color(0xff1F2326),
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -1555,41 +2048,61 @@ class _SelectReceptionistState extends State<SelectReceptionist> {
                       )),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 10, right: 15, left: 15),
-                  // width: MediaQuery.of(context).size.width * (15 / 100),
-                  child: TextFormField(
-                    initialValue: "",
-                    onChanged: (v) {
-                      setState(() {
-                        // userEmail = v.toLowerCase();
-                      });
-                    },
-                    style: TextStyle(color: Colors.black54, fontSize: 17),
-                    decoration: InputDecoration(
-                        fillColor: Color(0xffF5F6FA),
-                        filled: true,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                        ),
-                        focusedBorder: new OutlineInputBorder(
-                          // borderRadius: new BorderRadius.circular(25.0),
-                          borderSide:
-                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(4)),
-                          borderSide:
-                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(4)),
-                          borderSide:
-                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                        ),
-                        // border: InputBorder.none,
-                        hintText: "10.08.2021",
-                        hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
+                  margin: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Color(0xffFFFFFF),
+                    // border: Border.all(color:)
+                  ),
+                  child: Row(
+                    children: [
+                      new Expanded(
+                        child: new TextField(
+                            enabled: false,
+                            controller: _datecontrollr,
+                            decoration: InputDecoration(
+                                fillColor: Color(0xffF5F6FA),
+                                filled: true,
+                                // prefixIcon: Icon(Icons.search),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 1.2, color: Color(0xffF5F6FA)),
+                                ),
+                                focusedBorder: new OutlineInputBorder(
+                                  // borderRadius: new BorderRadius.circular(25.0),
+                                  borderSide: BorderSide(
+                                      width: 1.2, color: Color(0xffF5F6FA)),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(4)),
+                                  borderSide: BorderSide(
+                                      width: 1.2, color: Color(0xffF5F6FA)),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(4)),
+                                  borderSide: BorderSide(
+                                      width: 1.2, color: Color(0xffF5F6FA)),
+                                ),
+                                hintText: 'Enter Start Date',
+                                hintStyle: TextStyle(
+                                    color: Colors.grey, fontSize: 15))),
+                      ),
+                      IconButton(
+                          onPressed: () async {
+                            await _selectDate(context);
+                            _datecontrollr.text = (DateFormat.yMd()
+                                .format(_startDate)
+                                .toString());
+                            // _startDate.toString();
+                          },
+                          icon: ImageIcon(
+                            AssetImage('assets/images/calendar.png'),
+                            color: Color(0xff1F2326),
+                            size: 65,
+                          )),
+                    ],
                   ),
                 ),
                 Container(
@@ -1603,41 +2116,59 @@ class _SelectReceptionistState extends State<SelectReceptionist> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 10, right: 15, left: 15),
-                  // width: MediaQuery.of(context).size.width * (15 / 100),
-                  child: TextFormField(
-                    initialValue: "",
-                    onChanged: (v) {
-                      setState(() {
-                        // userEmail = v.toLowerCase();
-                      });
-                    },
-                    style: TextStyle(color: Colors.black54, fontSize: 17),
-                    decoration: InputDecoration(
-                        fillColor: Color(0xffF5F6FA),
-                        filled: true,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                        ),
-                        focusedBorder: new OutlineInputBorder(
-                          // borderRadius: new BorderRadius.circular(25.0),
-                          borderSide:
-                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(4)),
-                          borderSide:
-                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(4)),
-                          borderSide:
-                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
-                        ),
-                        // border: InputBorder.none,
-                        hintText: "10 AM",
-                        hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
+                  margin: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Color(0xffFFFFFF),
+                    // border: Border.all(color:)
+                  ),
+                  child: Row(
+                    children: [
+                      new Expanded(
+                        child: new TextField(
+                            enabled: false,
+                            controller: _timecontrollr,
+                            decoration: InputDecoration(
+                                fillColor: Color(0xffF5F6FA),
+                                filled: true,
+                                // prefixIcon: Icon(Icons.search),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 1.2, color: Color(0xffF5F6FA)),
+                                ),
+                                focusedBorder: new OutlineInputBorder(
+                                  // borderRadius: new BorderRadius.circular(25.0),
+                                  borderSide: BorderSide(
+                                      width: 1.2, color: Color(0xffF5F6FA)),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(4)),
+                                  borderSide: BorderSide(
+                                      width: 1.2, color: Color(0xffF5F6FA)),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(4)),
+                                  borderSide: BorderSide(
+                                      width: 1.2, color: Color(0xffF5F6FA)),
+                                ),
+                                hintText: 'Enter Time',
+                                hintStyle: TextStyle(
+                                    color: Colors.grey, fontSize: 15))),
+                      ),
+                      IconButton(
+                        onPressed: () async {
+                          await _selectTime(context);
+                          _timecontrollr.text =
+                              ("${initialTime.hour}:${initialTime.minute}")
+                                  .toString();
+                          // _startDate.toString();
+                        },
+                        icon: Icon(Icons.access_alarm, size: 30),
+                        color: Color(0xff1F2326),
+                      ),
+                    ],
                   ),
                 ),
               ],

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shipment/Element/Sidebar.dart';
 import 'package:shipment/Element/TextStyle.dart';
-import 'package:shipment/Responsive.dart';
+import 'package:shipment/Element/Responsive.dart';
+import 'package:shipment/component/Res_Client/ResMarketPlace/Res_BookingOverView.dart';
 
 import '../../../constants.dart';
 
@@ -66,21 +67,21 @@ class _MarketPlaceState extends State<MarketPlace> {
                   Column(
                     children: [
                       booking(),
-                      // workingFlow(),
+                      workingFlow(),
                     ],
                   ),
                 if (Responsive.isMobile(context))
                   Column(
                     children: [
                       booking(),
-                      // workingFlow(),
+                      workingFlow(),
                     ],
                   ),
                 if (Responsive.isTablet(context))
                   Column(
                     children: [
                       booking(),
-                      // workingFlow(),
+                      workingFlow(),
                     ],
                   ),
               ])),
@@ -114,35 +115,43 @@ class _MarketPlaceState extends State<MarketPlace> {
                       )),
                 ),
                 Spacer(),
-                Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5.0),
-                        color: Color(0xff1A494F)),
-                    margin: EdgeInsets.only(top: 15, right: 15),
-                    height: MediaQuery.of(context).size.height * (6 / 100),
-                    // width: MediaQuery.of(context)
-                    //         .size
-                    //         .width *
-                    //     (11 / 100),
-                    child: Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                          child: Text(
-                            "Create Booking",
-                            style: headingStylewhite14(),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ResBookingOverView()));
+                  },
+                  child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.0),
+                          color: Color(0xff1A494F)),
+                      margin: EdgeInsets.only(top: 15, right: 15),
+                      height: MediaQuery.of(context).size.height * (6 / 100),
+                      // width: MediaQuery.of(context)
+                      //         .size
+                      //         .width *
+                      //     (11 / 100),
+                      child: Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                            child: Text(
+                              "Create Booking",
+                              style: headingStylewhite14(),
+                            ),
                           ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                          child: Icon(
-                            Icons.add_box,
-                            color: Colors.white,
-                            size: 20,
-                          ),
-                        )
-                      ],
-                    )),
+                          Container(
+                            margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                            child: Icon(
+                              Icons.add_box,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          )
+                        ],
+                      )),
+                ),
               ],
             ),
             Row(
@@ -189,27 +198,35 @@ class _MarketPlaceState extends State<MarketPlace> {
                           fontWeight: FontWeight.bold,
                           color: Color(0xff1A494F)))),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(left: 15, top: 15, bottom: 30),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.0),
-                      color: Colors.black),
-                  height: 45,
-                  width: 300,
-                  child: Center(
-                    child: Text("Create your booking",
-                        style: TextStyle(color: Colors.white)),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ResBookingOverView()));
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(left: 15, top: 15, bottom: 30),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20.0),
+                        color: Colors.black),
+                    height: 45,
+                    width: 300,
+                    child: Center(
+                      child: Text("Create your booking",
+                          style: TextStyle(color: Colors.white)),
+                    ),
                   ),
-                ),
-                Container(
-                    margin: EdgeInsets.only(right: 10),
-                    height: 20,
-                    width: 20,
-                    child: Icon(Icons.arrow_right, color: Colors.white)),
-              ],
+                  Container(
+                      margin: EdgeInsets.only(right: 10),
+                      height: 20,
+                      width: 20,
+                      child: Icon(Icons.arrow_right, color: Colors.white)),
+                ],
+              ),
             ),
           ],
         ));
@@ -217,7 +234,7 @@ class _MarketPlaceState extends State<MarketPlace> {
 
   Widget workingFlow() {
     return Container(
-        height: MediaQuery.of(context).size.height * (45 / 100),
+        height: MediaQuery.of(context).size.height * (55 / 100),
         // height: 100,
         width: MediaQuery.of(context).size.width * (80 / 100),
         margin: EdgeInsets.fromLTRB(15, 15, 15, 30),
@@ -233,12 +250,12 @@ class _MarketPlaceState extends State<MarketPlace> {
                   alignment: Alignment.topLeft,
                   child: Text(
                     "How Booking Market Place worksg",
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   )),
             ),
             Container(
-              height: MediaQuery.of(context).size.height * (7 / 100),
-              width: MediaQuery.of(context).size.width * (7 / 100),
+              // height: MediaQuery.of(context).size.height * (7 / 100),
+              // width: MediaQuery.of(context).size.width * (7 / 100),
               margin: EdgeInsets.only(left: 10, right: 10),
               child: Divider(
                 height: 30,
@@ -246,18 +263,133 @@ class _MarketPlaceState extends State<MarketPlace> {
                 thickness: 2,
               ),
             ),
-            Container(
-                child: Column(
+            Row(
               children: [
                 Container(
-                  height: MediaQuery.of(context).size.height * (5 / 100),
-                  width: MediaQuery.of(context).size.width * (5 / 100),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15.0),
-                      color: Color(0xffA9CCD0)),
-                )
+                    height: MediaQuery.of(context).size.height * (15 / 100),
+                    width: MediaQuery.of(context).size.width * (10 / 100),
+                    margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          height:
+                              MediaQuery.of(context).size.height * (15 / 100),
+                          width: MediaQuery.of(context).size.width * (10 / 100),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              // borderRadius: BorderRadius.circular(50.0),
+                              color: Color(0xffA9CCD0)),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 15),
+                          child: Text("1. Get an order"),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 10, left: 35),
+                          // width: MediaQuery.of(context).size.width * (10 / 100),
+                          child: Text(
+                              "You can start communicating via Shipment Messages."),
+                        )
+                      ],
+                    )),
+                Spacer(),
+                Container(
+                    height: MediaQuery.of(context).size.height * (15 / 100),
+                    width: MediaQuery.of(context).size.width * (10 / 100),
+                    margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                    child: Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Container(
+                            height:
+                                MediaQuery.of(context).size.height * (15 / 100),
+                            width:
+                                MediaQuery.of(context).size.width * (10 / 100),
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                // borderRadius: BorderRadius.circular(50.0),
+                                color: Color(0xffA9CCD0)),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 10, left: 35),
+                          child: Text("2. Wait for requirements"),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 10, left: 35),
+                          width: MediaQuery.of(context).size.width * (10 / 100),
+                          child: Text(
+                              "The client has 48 hours to send these, or the project is canceled."),
+                        )
+                      ],
+                    )),
+                Spacer(),
+                Container(
+                    height: MediaQuery.of(context).size.height * (15 / 100),
+                    width: MediaQuery.of(context).size.width * (10 / 100),
+                    margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                    child: Column(
+                      children: [
+                        Container(
+                          height:
+                              MediaQuery.of(context).size.height * (15 / 100),
+                          width: MediaQuery.of(context).size.width * (10 / 100),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              // borderRadius: BorderRadius.circular(50.0),
+                              color: Color(0xffA9CCD0)),
+                        ),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Container(
+                            margin: EdgeInsets.only(top: 10, left: 35),
+                            child: Text("3. Send work by deadline"),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 10, left: 35),
+                          width: MediaQuery.of(context).size.width * (10 / 100),
+                          child: Text(
+                              "The clock starts once you receive the requirements."),
+                        )
+                      ],
+                    )),
+                Spacer(),
+                Container(
+                    height: MediaQuery.of(context).size.height * (15 / 100),
+                    width: MediaQuery.of(context).size.width * (10 / 100),
+                    margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                    child: Column(
+                      children: [
+                        Container(
+                          height:
+                              MediaQuery.of(context).size.height * (15 / 100),
+                          width: MediaQuery.of(context).size.width * (10 / 100),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              // borderRadius: BorderRadius.circular(50.0),
+                              color: Color(0xffA9CCD0)),
+                        ),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Container(
+                            margin: EdgeInsets.only(top: 10, left: 35),
+                            child: Text("4. Get Paid"),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 10, left: 35),
+                          width: MediaQuery.of(context).size.width * (10 / 100),
+                          child: Text(
+                              "Complete revisions for final approval. You receive payment and the contract ends."),
+                        )
+                      ],
+                    )),
               ],
-            ))
+            )
           ],
         ));
   }

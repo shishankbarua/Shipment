@@ -1,7 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shipment/Element/Sidebar.dart';
-import 'package:shipment/Responsive.dart';
+import 'package:shipment/Element/Responsive.dart';
 import '../../../constants.dart';
 
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -18,6 +19,16 @@ class _CheckoutOrderState extends State<CheckoutOrder> {
   DateTime? selectedDate = DateTime.now();
   var h, w;
   int? _radioValue = 0;
+  String? category;
+
+  var amount;
+  var item = [
+    "1234-4568-7898-4568",
+    "4353-7600-5475-0603",
+    "5089-2501-0663-1504",
+  ];
+  final TextEditingController _controllr = new TextEditingController();
+
   void _handleRadioValueChange(value) {
     setState(() {
       _radioValue = value;
@@ -99,19 +110,17 @@ class _CheckoutOrderState extends State<CheckoutOrder> {
                         new Text(
                           'Stripe',
                           style: new TextStyle(
-                              fontSize: 16.0, color: Color(0xff6461FC)),
+                              fontSize: 16.0,
+                              color: Color(0xff6461FC),
+                              fontWeight: FontWeight.bold),
                         ),
                         new Radio(
                           value: 1,
                           groupValue: _radioValue,
                           onChanged: _handleRadioValueChange,
                         ),
-                        new Text(
-                          'PayPal',
-                          style: new TextStyle(
-                            fontSize: 16.0,
-                          ),
-                        ),
+                        Container(
+                            child: Image.asset("assets/images/paypal.png")),
                         new Radio(
                           value: 2,
                           groupValue: _radioValue,
@@ -119,7 +128,19 @@ class _CheckoutOrderState extends State<CheckoutOrder> {
                         ),
                         new Text(
                           'Cash',
-                          style: new TextStyle(fontSize: 16.0),
+                          style: new TextStyle(
+                              fontSize: 16.0,
+                              color: Color(0xff2E724F),
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Spacer(),
+                        Container(
+                          margin: EdgeInsets.only(right: 10),
+                          child: Text(
+                            '667.0',
+                            style: new TextStyle(
+                                fontSize: 16.0, color: Colors.black),
+                          ),
                         ),
                       ],
                     ),
@@ -128,10 +149,10 @@ class _CheckoutOrderState extends State<CheckoutOrder> {
                 Align(
                   alignment: Alignment.topLeft,
                   child: Container(
-                      height: MediaQuery.of(context).size.height * (45 / 100),
+                      height: MediaQuery.of(context).size.height * (60 / 100),
                       // height: 100,
                       width: (Responsive.isDesktop(context))
-                          ? MediaQuery.of(context).size.width * (30 / 100)
+                          ? MediaQuery.of(context).size.width * (40 / 100)
                           : MediaQuery.of(context).size.width * (90 / 100),
                       margin: EdgeInsets.all(15),
                       decoration: BoxDecoration(
@@ -151,6 +172,63 @@ class _CheckoutOrderState extends State<CheckoutOrder> {
                                       fontSize: 14,
                                       fontWeight: FontWeight.bold),
                                 )),
+                          ),
+                          Container(
+                            margin:
+                                EdgeInsets.only(top: 15, right: 10, left: 15),
+                            child: Align(
+                                alignment: Alignment.topLeft,
+                                child: Text("Used Saved Card",
+                                    style: TextStyle(
+                                        fontSize: 14, color: Colors.grey))),
+                          ),
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Container(
+                              width: 500,
+                              margin: EdgeInsets.only(left: 16, right: 10),
+                              decoration: BoxDecoration(
+                                  border: Border(
+                                      bottom: BorderSide(color: Colors.grey))),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      new Expanded(
+                                        child: new TextField(
+                                          enabled: false,
+                                          controller: _controllr,
+                                        ),
+                                      ),
+                                      new PopupMenuButton<String>(
+                                        icon: const Icon(Icons.arrow_drop_down),
+                                        onSelected: (String value) {
+                                          category = value;
+                                          _controllr.text = value;
+                                        },
+                                        itemBuilder: (BuildContext context) {
+                                          return item
+                                              .map<PopupMenuItem<String>>(
+                                                  (String value) {
+                                            return new PopupMenuItem(
+                                                child: Container(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            (90 / 100),
+                                                    child: new Text(value)),
+                                                value: value);
+                                          }).toList();
+                                        },
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
                           ),
                           Container(
                             margin:

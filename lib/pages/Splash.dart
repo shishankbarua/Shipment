@@ -1,10 +1,10 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:shipment/pages/Client/LoginScreenClient.dart';
-import 'package:shipment/pages/Client/SignupScreenClient.dart';
-import 'package:shipment/pages/Shipment/SignupShipment.dart';
-import 'package:shipment/pages/Shipment/SignupShipmentfirst.dart';
+import 'package:shipment/pages/Chhose%20Screen/ClientScreen.dart';
+import 'package:shipment/pages/Chhose%20Screen/ShipmentScreen.dart';
 
 class SplashScreen extends StatefulWidget {
+  static const String route = '/';
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -59,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SignupScreenClient()));
+                              builder: (context) => ClientScreen()));
                     },
                     child: Container(
                       margin: EdgeInsets.only(top: 59),
@@ -93,10 +93,14 @@ class _SplashScreenState extends State<SplashScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SignupScreenfirst()));
+                      log("\n\n\nTAPPED ON SHIPMENT\n\n\n");
+                      Navigator.of(
+                        context,
+                      ).pushNamed(
+                        Shipment.route,
+                      );
+                      // Navigator.push(context,
+                      //     MaterialPageRoute(builder: (context) => Shipment()));
                     },
                     child: Container(
                       margin: EdgeInsets.only(top: 30),

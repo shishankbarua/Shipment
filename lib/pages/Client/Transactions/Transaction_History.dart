@@ -3,7 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shipment/Element/Sidebar.dart';
 import 'package:shipment/Element/TextStyle.dart';
-import 'package:shipment/Responsive.dart';
+import 'package:shipment/Element/Responsive.dart';
+import 'package:shipment/component/Res_Client/Res_AddNewCard.dart';
+import 'package:shipment/pages/Client/Transactions/AddnewCard.dart';
 import '../../../constants.dart';
 
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -83,11 +85,10 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                     Spacer(),
                     GestureDetector(
                       onTap: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) =>
-                        //             AddNewCard()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ResAddNewCard()));
                       },
                       child: Container(
                           decoration: BoxDecoration(
@@ -123,7 +124,7 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                   ],
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height * (15 / 100),
+                  height: MediaQuery.of(context).size.height * (30 / 100),
                   width: MediaQuery.of(context).size.width * (80 / 100),
                   child: CupertinoScrollbar(
                     child: ListView.builder(
@@ -145,8 +146,8 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                               // width:
                               //     MediaQuery.of(context).size.width *
                               //         (20 / 100),
-                              child: Image.asset('assets/images/card.png',
-                                  height: 350, width: 250));
+                              child: Image.asset('assets/images/card (1).png',
+                                  fit: BoxFit.cover, width: 300));
                         }),
                   ),
                 ),
@@ -176,128 +177,256 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                     ),
                   ),
                 ),
-                // Row(
-                //   children: [
-                //     Container(
-                //         margin: EdgeInsets.only(left: 15, top: 20, right: 15),
-                //         // decoration: BoxDecoration(
-                //         //     borderRadius:
-                //         //         BorderRadius.circular(15),
-                //         //     color: Color(0xffFFFFFF)),
-                //         height: MediaQuery.of(context).size.height * (5 / 100),
-                //         width: MediaQuery.of(context).size.width * (2 / 100),
-                //         child: Image.asset('assets/images/cardPayment.png')),
-                //     Container(
-                //       margin: EdgeInsets.fromLTRB(20, 20, 5, 0),
-                //       child: Text(
-                //         'Order #12456 Payment',
-                //         style: TextStyle(
-                //             color: Colors.black,
-                //             fontSize: 16,
-                //             fontWeight: FontWeight.w400),
-                //       ),
-                //     ),
-                //     Spacer(),
-                //     Container(
-                //       margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                //       child: Text(
-                //         'Debit card',
-                //         style: TextStyle(
-                //           color: Colors.grey,
-                //           fontSize: 16,
-                //         ),
-                //       ),
-                //     ),
-                //     Spacer(),
-                //     Container(
-                //       margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                //       child: Text(
-                //         'October 30, 2017',
-                //         style: TextStyle(
-                //           color: Colors.grey,
-                //           fontSize: 16,
-                //         ),
-                //       ),
-                //     ),
-                //     Spacer(),
-                //     Container(
-                //       margin: EdgeInsets.fromLTRB(0, 20, 20, 0),
-                //       child: Text(
-                //         '-667.00',
-                //         style: TextStyle(
-                //             color: Colors.black,
-                //             fontSize: 16,
-                //             fontWeight: FontWeight.w400),
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                // Row(
-                //   children: [
-                //     Container(
-                //         margin: EdgeInsets.only(left: 15, top: 20, right: 15),
-                //         // decoration: BoxDecoration(
-                //         //     borderRadius:
-                //         //         BorderRadius.circular(15),
-                //         //     color: Color(0xffFFFFFF)),
-                //         height: MediaQuery.of(context).size.height * (5 / 100),
-                //         width: MediaQuery.of(context).size.width * (2 / 100),
-                //         child: Image.asset('assets/images/cardPayment.png')),
-                //     Container(
-                //       margin: EdgeInsets.fromLTRB(20, 20, 5, 0),
-                //       child: Text(
-                //         'Order #12456 Payment',
-                //         style: TextStyle(
-                //             color: Colors.black,
-                //             fontSize: 16,
-                //             fontWeight: FontWeight.w400),
-                //       ),
-                //     ),
-                //     Spacer(),
-                //     Container(
-                //       margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                //       child: Text(
-                //         'Debit card',
-                //         style: TextStyle(
-                //           color: Colors.grey,
-                //           fontSize: 16,
-                //         ),
-                //       ),
-                //     ),
-                //     Spacer(),
-                //     Container(
-                //       margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                //       child: Text(
-                //         'October 30, 2017',
-                //         style: TextStyle(
-                //           color: Colors.grey,
-                //           fontSize: 16,
-                //         ),
-                //       ),
-                //     ),
-                //     Spacer(),
-                //     Container(
-                //       margin: EdgeInsets.fromLTRB(0, 20, 20, 0),
-                //       child: Text(
-                //         '-667.00',
-                //         style: TextStyle(
-                //             color: Colors.black,
-                //             fontSize: 16,
-                //             fontWeight: FontWeight.w400),
-                //       ),
-                //     ),
-                //   ],
-                // ),
 
-                Container(
-                  margin: EdgeInsets.only(left: 10, right: 10),
-                  child: Divider(
-                    height: 30,
-                    color: Colors.grey,
-                    thickness: 2,
+                if (Responsive.isDesktop(context))
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                              margin:
+                                  EdgeInsets.only(left: 15, top: 20, right: 15),
+                              // decoration: BoxDecoration(
+                              //     borderRadius:
+                              //         BorderRadius.circular(15),
+                              //     color: Color(0xffFFFFFF)),
+                              height: MediaQuery.of(context).size.height *
+                                  (5 / 100),
+                              width:
+                                  MediaQuery.of(context).size.width * (2 / 100),
+                              child:
+                                  Image.asset('assets/images/cardPayment.png')),
+                          Container(
+                            margin: EdgeInsets.fromLTRB(20, 20, 5, 0),
+                            child: Text(
+                              'Order #12456 Payment',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                          Spacer(),
+                          Container(
+                            margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                            child: Text(
+                              'Debit card',
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                          Spacer(),
+                          Container(
+                            margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                            child: Text(
+                              'October 30, 2017',
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                          Spacer(),
+                          Container(
+                            margin: EdgeInsets.fromLTRB(0, 20, 20, 0),
+                            child: Text(
+                              '-667.00',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 10, right: 10),
+                        child: Divider(
+                          height: 30,
+                          color: Colors.grey,
+                          thickness: 2,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                              margin:
+                                  EdgeInsets.only(left: 15, top: 20, right: 15),
+                              // decoration: BoxDecoration(
+                              //     borderRadius:
+                              //         BorderRadius.circular(15),
+                              //     color: Color(0xffFFFFFF)),
+                              height: MediaQuery.of(context).size.height *
+                                  (5 / 100),
+                              width:
+                                  MediaQuery.of(context).size.width * (2 / 100),
+                              child:
+                                  Image.asset('assets/images/cardPayment.png')),
+                          Container(
+                            margin: EdgeInsets.fromLTRB(20, 20, 5, 0),
+                            child: Text(
+                              'Order #12456 Payment',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                          Spacer(),
+                          Container(
+                            margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                            child: Text(
+                              'Debit card',
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                          Spacer(),
+                          Container(
+                            margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                            child: Text(
+                              'October 30, 2017',
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                          Spacer(),
+                          Container(
+                            margin: EdgeInsets.fromLTRB(0, 20, 20, 0),
+                            child: Text(
+                              '-667.00',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 10, right: 10),
+                        child: Divider(
+                          height: 30,
+                          color: Colors.grey,
+                          thickness: 2,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
+
+                if (!Responsive.isDesktop(context)) MobileVieworderTemplate()
               ])),
         ));
+  }
+
+  Widget MobileVieworderTemplate() {
+    return ListView.builder(
+        itemCount: 2,
+        shrinkWrap: true,
+        itemBuilder: (context, index) {
+          return Container(
+            // height: (!Responsive.isDesktop(context))
+            //     ? MediaQuery.of(context).size.height * (10 / 100)
+            //     : MediaQuery.of(context).size.height * (45 / 100),
+            height: MediaQuery.of(context).size.height * (40 / 100),
+            width: w,
+            margin: EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
+              color: Color(0xffFFFFFF),
+            ),
+
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  // crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                        width: MediaQuery.of(context).size.width * (40 / 100),
+                        margin: EdgeInsets.only(left: 15, top: 15),
+                        child: Text(
+                          "Order ID",
+                          style: TextStyle(fontWeight: FontWeight.w500),
+                        )),
+                    Container(
+                        width: MediaQuery.of(context).size.width * (40 / 100),
+                        margin: EdgeInsets.only(top: 15, right: 20),
+                        child: Text(
+                          "Card",
+                          style: TextStyle(fontWeight: FontWeight.w500),
+                        )),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Container(
+                        width: MediaQuery.of(context).size.width * (40 / 100),
+                        margin: EdgeInsets.only(left: 15, top: 10),
+                        child: Text(
+                          "123456 ",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )),
+                    Container(
+                        width: MediaQuery.of(context).size.width * (40 / 100),
+                        margin: EdgeInsets.only(top: 10, right: 20),
+                        child: Text("Debit Card",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ))),
+                  ],
+                ),
+                Container(
+                    // margin: const EdgeInsets.only(left: 10.0, right: 20.0),
+                    child: Divider(
+                  color: Colors.grey,
+                  height: 36,
+                )),
+                Row(
+                  children: [
+                    Container(
+                        width: MediaQuery.of(context).size.width * (40 / 100),
+                        margin: EdgeInsets.only(left: 15, top: 10),
+                        child: Text(
+                          "Date",
+                          style: TextStyle(fontWeight: FontWeight.w500),
+                        )),
+                    Container(
+                        width: MediaQuery.of(context).size.width * (40 / 100),
+                        margin: EdgeInsets.only(top: 10, right: 20),
+                        child: Text("Amount",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black))),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Container(
+                        width: MediaQuery.of(context).size.width * (40 / 100),
+                        margin: EdgeInsets.only(left: 15, top: 10),
+                        child: Text(
+                          "Oct 30, 2017",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )),
+                    Container(
+                        width: MediaQuery.of(context).size.width * (40 / 100),
+                        margin: EdgeInsets.only(top: 10, right: 20),
+                        child: Text("-667.00",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black))),
+                  ],
+                ),
+              ],
+            ),
+          );
+        });
   }
 }

@@ -1,9 +1,14 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:shipment/Element/Sidebar.dart';
 import 'package:shipment/Element/TextStyle.dart';
 import 'package:shipment/Element/indicator.dart';
-import 'package:shipment/Responsive.dart';
+import 'package:shipment/Element/Responsive.dart';
+import 'package:shipment/Provider/Provider.dart';
 
 import '../../../constants.dart';
 
@@ -22,6 +27,17 @@ class _ClientProfileState extends State<ClientProfile> {
   var h, w;
   var exp = true, openSUBMENU = false;
   int touchedIndex = -1;
+
+  var name, email, mobileNumber, languages, country;
+
+  var updatedNumber,
+      updatedName,
+      updatedLastName,
+      updatedPhone,
+      updatedCountry,
+      updatedAddress,
+      updatedAboutMe,
+      updateLanguauge;
 
   Widget pieChart() {
     return AspectRatio(
@@ -184,6 +200,508 @@ class _ClientProfileState extends State<ClientProfile> {
     );
   }
 
+  bool onEdit = false;
+  final TextEditingController controller = TextEditingController();
+  final TextEditingController languagectrl = TextEditingController();
+
+  Future getProfile() async {
+    var response = await Providers().getClientProfile();
+    if (response.status == true) {
+      setState(() {
+        name = response.data[0].name;
+        print("Name $name");
+        email = response.data[0].email;
+        mobileNumber = response.data[0].phone;
+        languages = response.data[0].language;
+        country = response.data[0].country;
+      });
+
+      log("REPONSE" + jsonEncode(response.data));
+    }
+
+    // id =   response.user[universityList.indexOf(name)].id
+  }
+
+  Future updateProfileApi() async {
+    var udpateData = {
+      "name": "$updatedName",
+      "lname": "barua",
+      "email": "$email",
+      "phone": updatedNumber,
+      "country": "$updatedCountry",
+      "address": " ",
+      "about_me": "  ",
+      "language": "$updateLanguauge"
+    };
+    var response = await Providers().updateClient(udpateData);
+    if (response.status == true) {
+      setState(() {
+        name = response.data[0].name;
+        print("Name $name");
+        email = response.data[0].email;
+        mobileNumber = response.data[0].phone;
+        languages = response.data[0].language;
+        country = response.data[0].country;
+      });
+
+      log("REPONSE" + jsonEncode(response.data));
+    }
+
+    // id =   response.user[universityList.indexOf(name)].id
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getProfile();
+  }
+
+  List<String> _countries = [
+    'India',
+    'Japan',
+    'China',
+    'USA',
+    'France',
+    'Egypt',
+    'Norway',
+    'Nigeria',
+    'Colombia',
+    'Australia',
+    'South Korea',
+    'Bangladesh',
+    'Mozambique',
+    'Canada',
+    'Germany',
+    'Belgium',
+    'Vietnam',
+    'Bhutan',
+    'Israel',
+    'Brazil'
+  ];
+
+  List getSuggestions(String query) {
+    List matches = [];
+    matches.addAll(_countries);
+    matches.retainWhere((s) => s.toLowerCase().contains(query.toLowerCase()));
+    return matches;
+  }
+
+  List<String> language = [
+    'English',
+    'Chinese',
+    'Spanish',
+    'Arabic',
+    'Hindi',
+    'Bengali',
+    'Portuguese',
+    'Russian',
+    'German',
+    'Japanese',
+    'Javanese',
+    'Lahnda',
+    'Vietnamese',
+    'Urdu',
+    'Germany',
+    'Urdu',
+    'Urdu',
+  ];
+
+  List getSuggestions2(String query) {
+    List matches = [];
+    matches.addAll(language);
+    matches.retainWhere((s) => s.toLowerCase().contains(query.toLowerCase()));
+    return matches;
+  }
+
+  Widget container_client() {
+    return Container(
+      height: h,
+      width: w * 0.72,
+      child: Container(
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: [
+                Color(0xffFFFFFF).withOpacity(0.6),
+                Color(0xffF3F3F3).withOpacity(0.36),
+              ],
+            ),
+            // color: Colors.red,
+          ),
+          child: ListView(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            // crossAxisAlignment: CrossAxisAlignment.center,
+
+            children: [
+              Row(
+                children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                        margin: EdgeInsets.only(left: 15, top: 10),
+                        child: Text("Update Profile",
+                            style: headingStyle18SBblack())),
+                  ),
+                  Spacer(),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(right: 20),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 30),
+                        child: Icon(
+                          Icons.close,
+                          color: Color(0xffC4C4C4),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                    margin: EdgeInsets.only(left: 15, top: 10),
+                    child: Text("Name", style: headingStyle16SB())),
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                  margin: EdgeInsets.only(left: 15),
+                  // width: 500,
+                  child: TextFormField(
+                    initialValue: "$name", // autofocus: false,
+                    // maxLines: 3,
+                    onChanged: (v) {
+                      updatedName = v;
+                    },
+                    style: TextStyle(color: Colors.black54, fontSize: 17),
+                    decoration: InputDecoration(
+                        fillColor: Color(0xffF5F6FA),
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                        ),
+                        focusedBorder: new OutlineInputBorder(
+                          // borderRadius: new BorderRadius.circular(25.0),
+                          borderSide:
+                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          borderSide:
+                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          borderSide:
+                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                        ),
+                        // border: InputBorder.none,
+                        hintText: "Name",
+                        hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                    margin: EdgeInsets.only(left: 15, top: 10),
+                    child: Text("Profile", style: headingStyle16SB())),
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                  margin: EdgeInsets.only(left: 15),
+                  // width: 500,
+                  child: TextFormField(
+                    initialValue: "", // autofocus: false,
+                    // maxLines: 3,
+                    onChanged: (v) {},
+                    style: TextStyle(color: Colors.black54, fontSize: 17),
+                    decoration: InputDecoration(
+                        fillColor: Color(0xffF5F6FA),
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                        ),
+                        focusedBorder: new OutlineInputBorder(
+                          // borderRadius: new BorderRadius.circular(25.0),
+                          borderSide:
+                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          borderSide:
+                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          borderSide:
+                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                        ),
+                        // border: InputBorder.none,
+                        hintText: "Profile",
+                        hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                    margin: EdgeInsets.only(left: 15, top: 10),
+                    child: Text("Mobile Number", style: headingStyle16SB())),
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                  margin: EdgeInsets.only(left: 15),
+                  // width: 500,
+                  child: TextFormField(
+                    initialValue: "$mobileNumber", // autofocus: false,
+                    // maxLines: 3,
+                    onChanged: (v) {
+                      updatedNumber = v;
+                    },
+                    style: TextStyle(color: Colors.black54, fontSize: 17),
+                    decoration: InputDecoration(
+                        fillColor: Color(0xffF5F6FA),
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                        ),
+                        focusedBorder: new OutlineInputBorder(
+                          // borderRadius: new BorderRadius.circular(25.0),
+                          borderSide:
+                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          borderSide:
+                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          borderSide:
+                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                        ),
+                        // border: InputBorder.none,
+                        hintText: "Mobile Number",
+                        hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                    margin: EdgeInsets.only(left: 15, top: 10),
+                    child: Text("Email", style: headingStyle16SB())),
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                  margin: EdgeInsets.only(left: 15),
+                  // width: 500,
+                  child: TextFormField(
+                    enabled: false,
+
+                    initialValue: "$email", // autofocus: false,
+                    // maxLines: 3,
+                    onChanged: (v) {},
+                    style: TextStyle(color: Colors.black54, fontSize: 17),
+                    decoration: InputDecoration(
+                        fillColor: Color(0xffF5F6FA),
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                        ),
+                        focusedBorder: new OutlineInputBorder(
+                          // borderRadius: new BorderRadius.circular(25.0),
+                          borderSide:
+                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          borderSide:
+                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          borderSide:
+                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                        ),
+                        // border: InputBorder.none,
+                        hintText: "Shishank.barua@gmail.com",
+                        hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                  child: Text(
+                    "Country",
+                    style: headingStyle16SB(),
+                  ),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(15),
+                child: TypeAheadField(
+                  hideSuggestionsOnKeyboardHide: false,
+                  textFieldConfiguration: TextFieldConfiguration(
+                    controller: this.controller,
+                    onChanged: (university) {},
+                    decoration: InputDecoration(
+                        fillColor: Color(0xffF5F6FA),
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                        ),
+                        focusedBorder: new OutlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          borderSide:
+                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          borderSide:
+                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                        ),
+                        hintText: 'Select Country',
+                        hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
+                  ),
+                  suggestionsCallback: (v) {
+                    return getSuggestions("$v");
+                  },
+                  itemBuilder: (context, suggestion) {
+                    return ListTile(
+                      title: Text(suggestion.toString()),
+                    );
+                  },
+                  transitionBuilder: (context, suggestionsBox, controller) {
+                    return suggestionsBox;
+                  },
+                  // noItemsFoundBuilder: (context) => Container(
+                  //   height: 100,
+                  //   child: Center(
+                  //     child: Text(
+                  //       'Do you want to add this name',
+                  //       style: TextStyle(fontSize: 18),
+                  //     ),
+                  //   ),
+                  // ),
+                  onSuggestionSelected: (suggestion) {
+                    this.controller.text = suggestion.toString();
+                    updatedCountry = this.controller.text;
+                  },
+                ),
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                  child: Text("Language", style: headingStyle16SB()),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(15),
+                child: TypeAheadField(
+                  hideSuggestionsOnKeyboardHide: false,
+                  textFieldConfiguration: TextFieldConfiguration(
+                    controller: this.languagectrl,
+                    onChanged: (university) {},
+                    decoration: InputDecoration(
+                        fillColor: Color(0xffF5F6FA),
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                        ),
+                        focusedBorder: new OutlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          borderSide:
+                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          borderSide:
+                              BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                        ),
+                        hintText: 'Select Country',
+                        hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
+                  ),
+                  suggestionsCallback: (v) {
+                    return getSuggestions2("$v");
+                  },
+                  itemBuilder: (context, suggestion) {
+                    return ListTile(
+                      title: Text(suggestion.toString()),
+                    );
+                  },
+                  transitionBuilder: (context, suggestionsBox, controller) {
+                    return suggestionsBox;
+                  },
+                  // noItemsFoundBuilder: (context) => Container(
+                  //   height: 100,
+                  //   child: Center(
+                  //     child: Text(
+                  //       'Do you want to add this name',
+                  //       style: TextStyle(fontSize: 18),
+                  //     ),
+                  //   ),
+                  // ),
+                  onSuggestionSelected: (suggestion) {
+                    this.languagectrl.text = suggestion.toString();
+                    updateLanguauge = this.languagectrl.text;
+                  },
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  updateProfileApi();
+                },
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                      height: 40,
+                      width: 200,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: Color(0xff1A494F)),
+                      margin: EdgeInsets.only(left: 15, top: 15),
+                      child: Center(
+                        child: Text(
+                          "Update",
+                          style: TextStyle(
+                              color: Color(0xffFFFFFF),
+                              fontWeight: FontWeight.bold),
+                        ),
+                      )),
+                ),
+              ),
+            ],
+          )),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     h = MediaQuery.of(context).size.height;
@@ -288,7 +806,7 @@ class _ClientProfileState extends State<ClientProfile> {
                     children: [
                       Container(
                         margin: EdgeInsets.only(top: 50, left: 10),
-                        child: Text("Shishank",
+                        child: Text("$name",
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -297,7 +815,7 @@ class _ClientProfileState extends State<ClientProfile> {
                       ),
                       Container(
                         margin: EdgeInsets.only(right: 10, left: 10),
-                        child: Text("Shishank.barua@gmail.com",
+                        child: Text("$email",
                             style: TextStyle(
                               color: Color(0xff90A0B7),
                               fontWeight: FontWeight.bold,
@@ -352,14 +870,54 @@ class _ClientProfileState extends State<ClientProfile> {
         ),
         child: ListView(
           children: [
-            Container(
-              margin: EdgeInsets.only(top: 20, right: 10, left: 15),
-              child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    "Shishank Barua",
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                  )),
+            Row(
+              children: [
+                // MainAxisAlignment:main
+                Container(
+                  margin: EdgeInsets.only(top: 20, right: 10, left: 15),
+                  child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        "$name",
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
+                      )),
+                ),
+                Spacer(),
+
+                InkWell(
+                  onTap: () {
+                    // setState(() {
+                    //   onEdit = true;
+                    // });
+                    showDialog(
+                        barrierColor: Colors.transparent,
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Container(
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
+                            margin: EdgeInsets.only(
+                                left: 100,
+                                // top: 250,
+                                top: 80),
+                            child: AlertDialog(
+                              backgroundColor: Colors.white,
+                              content: container_client(),
+                            ),
+                          );
+                        });
+                  },
+                  child: Container(
+                      margin: EdgeInsets.only(left: 10, right: 10),
+                      child: Icon(
+                        Icons.edit,
+                        size: 18,
+                        color: Colors.grey,
+                      )),
+                ),
+              ],
             ),
             Row(
               children: [
@@ -392,7 +950,7 @@ class _ClientProfileState extends State<ClientProfile> {
                   margin: EdgeInsets.only(top: 10, left: 5),
                   child: Align(
                       alignment: Alignment.topLeft,
-                      child: Text("+1 835 7957 981",
+                      child: Text("$mobileNumber",
                           style: TextStyle(fontSize: 14, color: Colors.black))),
                 ),
               ],
@@ -410,7 +968,7 @@ class _ClientProfileState extends State<ClientProfile> {
                   margin: EdgeInsets.only(top: 10, left: 5),
                   child: Align(
                       alignment: Alignment.topLeft,
-                      child: Text("Shishank.barau@gmail.com",
+                      child: Text("$email",
                           style: TextStyle(fontSize: 14, color: Colors.black))),
                 ),
               ],
@@ -428,7 +986,7 @@ class _ClientProfileState extends State<ClientProfile> {
                   margin: EdgeInsets.only(top: 10, left: 5),
                   child: Align(
                       alignment: Alignment.topLeft,
-                      child: Text("English ",
+                      child: Text("$languages",
                           style: TextStyle(fontSize: 14, color: Colors.black))),
                 ),
               ],
@@ -446,7 +1004,7 @@ class _ClientProfileState extends State<ClientProfile> {
                   margin: EdgeInsets.only(top: 10, left: 5),
                   child: Align(
                       alignment: Alignment.topLeft,
-                      child: Text("United States",
+                      child: Text("$country",
                           style: TextStyle(fontSize: 14, color: Colors.black))),
                 ),
               ],
@@ -493,6 +1051,169 @@ class _ClientProfileState extends State<ClientProfile> {
                 )),
           ),
           pieChart(),
+        ]));
+  }
+
+  Widget updateProfile() {
+    return Container(
+        height: MediaQuery.of(context).size.height * (50 / 100),
+        // height: 100,
+        width: (!Responsive.isDesktop(context))
+            ? MediaQuery.of(context).size.width * (90 / 100)
+            : MediaQuery.of(context).size.width * (32 / 100),
+        margin: EdgeInsets.all(15),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          color: Color(0xffFFFFFF),
+        ),
+        child: ListView(children: [
+          Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+                margin: EdgeInsets.only(left: 15, top: 10),
+                child: Text("Name", style: headingStyle16NBLightGrey())),
+          ),
+          Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+              margin: EdgeInsets.only(left: 15),
+              // width: 500,
+              child: TextFormField(
+                initialValue: "", // autofocus: false,
+                // maxLines: 3,
+                onChanged: (v) {},
+                style: TextStyle(color: Colors.black54, fontSize: 17),
+                decoration: InputDecoration(
+                    fillColor: Color(0xffF5F6FA),
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                    ),
+                    focusedBorder: new OutlineInputBorder(
+                      // borderRadius: new BorderRadius.circular(25.0),
+                      borderSide:
+                          BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      borderSide:
+                          BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      borderSide:
+                          BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                    ),
+                    // border: InputBorder.none,
+                    hintText: "Name",
+                    hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+                margin: EdgeInsets.only(left: 15, top: 10),
+                child: Text("Profile", style: headingStyle16NBLightGrey())),
+          ),
+          Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+              margin: EdgeInsets.only(left: 15),
+              // width: 500,
+              child: TextFormField(
+                initialValue: "", // autofocus: false,
+                // maxLines: 3,
+                onChanged: (v) {},
+                style: TextStyle(color: Colors.black54, fontSize: 17),
+                decoration: InputDecoration(
+                    fillColor: Color(0xffF5F6FA),
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                    ),
+                    focusedBorder: new OutlineInputBorder(
+                      // borderRadius: new BorderRadius.circular(25.0),
+                      borderSide:
+                          BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      borderSide:
+                          BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      borderSide:
+                          BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                    ),
+                    // border: InputBorder.none,
+                    hintText: "Profile",
+                    hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+                margin: EdgeInsets.only(left: 15, top: 10),
+                child:
+                    Text("Mobile Number", style: headingStyle16NBLightGrey())),
+          ),
+          Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+              margin: EdgeInsets.only(left: 15),
+              // width: 500,
+              child: TextFormField(
+                initialValue: "", // autofocus: false,
+                // maxLines: 3,
+                onChanged: (v) {},
+                style: TextStyle(color: Colors.black54, fontSize: 17),
+                decoration: InputDecoration(
+                    fillColor: Color(0xffF5F6FA),
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                    ),
+                    focusedBorder: new OutlineInputBorder(
+                      // borderRadius: new BorderRadius.circular(25.0),
+                      borderSide:
+                          BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      borderSide:
+                          BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      borderSide:
+                          BorderSide(width: 1.2, color: Color(0xffF5F6FA)),
+                    ),
+                    // border: InputBorder.none,
+                    hintText: "Mobile Number",
+                    hintStyle: TextStyle(color: Colors.grey, fontSize: 15)),
+              ),
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              setState(() {
+                onEdit = false;
+              });
+            },
+            child: Container(
+                margin: EdgeInsets.only(left: 10, right: 10),
+                child: Icon(
+                  Icons.edit,
+                  size: 18,
+                  color: Colors.grey,
+                )),
+          ),
         ]));
   }
 }
