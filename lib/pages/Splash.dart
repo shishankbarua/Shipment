@@ -1,7 +1,9 @@
 import 'dart:developer';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:shipment/pages/Chhose%20Screen/ClientScreen.dart';
 import 'package:shipment/pages/Chhose%20Screen/ShipmentScreen.dart';
+import 'package:file_picker/file_picker.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String route = '/';
@@ -12,6 +14,18 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  _openCamera(BuildContext context) async {
+    FilePickerResult? result =
+        await FilePicker.platform.pickFiles(allowMultiple: true);
+
+    if (result != null) {
+      List<File> files = result.paths.map((path) => File(path!)).toList();
+    } else {
+      // User canceled the picker
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -56,10 +70,12 @@ class _SplashScreenState extends State<SplashScreen> {
                           ))),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ClientScreen()));
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => ClientScreen()));
+
+                      _openCamera(context);
                     },
                     child: Container(
                       margin: EdgeInsets.only(top: 59),
